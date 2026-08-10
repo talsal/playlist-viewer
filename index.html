@@ -139,6 +139,26 @@
     padding:2px 6px;
     border-radius:4px;
   }
+  .fav-btn{
+    position:absolute;
+    top:8px;
+    left:8px;
+    width:32px;
+    height:32px;
+    background:rgba(0,0,0,0.55);
+    border:none;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:2;
+    transition:background .15s ease, transform .1s ease;
+  }
+  .fav-btn:hover{background:rgba(0,0,0,0.75); transform:scale(1.08);}
+  .fav-btn svg{width:17px;height:17px;}
+  .fav-btn svg path{fill:none;stroke:#fff;stroke-width:1.6;stroke-linejoin:round;}
+  .fav-btn.active svg path{fill:var(--accent2);stroke:var(--accent2);}
   .song-info{padding:12px 14px 16px;}
   .song-info h3{
     margin:0 0 4px;
@@ -340,6 +360,41 @@ const playlists = [
 
 let currentPlaylistId = playlists[0].id;
 
+const FAVORITES_ID = "__favorites__";
+const FAVORITES_KEY = "playlist-viewer-favorites";
+
+function loadFavorites(){
+  try{
+    const raw = localStorage.getItem(FAVORITES_KEY);
+    return new Set(raw ? JSON.parse(raw) : []);
+  } catch(e){
+    return new Set();
+  }
+}
+function saveFavorites(){
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites]));
+}
+function toggleFavorite(videoId){
+  if(favorites.has(videoId)) favorites.delete(videoId);
+  else favorites.add(videoId);
+  saveFavorites();
+  renderTabs();
+  renderGrid();
+}
+function getFavoriteSongs(){
+  const result = [];
+  playlists.forEach(pl => {
+    pl.songs.forEach(song => {
+      if(favorites.has(song.videoId)){
+        result.push({ ...song, channel: pl.channel });
+      }
+    });
+  });
+  return result;
+}
+
+const favorites = loadFavorites();
+
 const tabsEl = document.getElementById("tabs");
 const gridEl = document.getElementById("grid");
 const titleEl = document.getElementById("playlistTitle");
@@ -347,6 +402,13 @@ const searchEl = document.getElementById("search");
 
 function renderTabs(){
   tabsEl.innerHTML = "";
+
+  const favBtn = document.createElement("button");
+  favBtn.className = "tab" + (currentPlaylistId === FAVORITES_ID ? " active" : "");
+  favBtn.textContent = `⭐ מועדפים (${favorites.size})`;
+  favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; searchEl.value=""; renderTabs(); renderGrid(); };
+  tabsEl.appendChild(favBtn);
+
   playlists.forEach(pl => {
     const btn = document.createElement("button");
     btn.className = "tab" + (pl.id === currentPlaylistId ? " active" : "");
@@ -357,26 +419,41 @@ function renderTabs(){
 }
 
 function renderGrid(){
-  const pl = playlists.find(p => p.id === currentPlaylistId);
-  titleEl.textContent = pl ? `${pl.channel} · ${pl.songs.length} שירים` : "";
   gridEl.innerHTML = "";
-  if(!pl){ return; }
+
+  let songs;
+  if(currentPlaylistId === FAVORITES_ID){
+    songs = getFavoriteSongs();
+    titleEl.textContent = `${songs.length} שירים מועדפים`;
+  } else {
+    const pl = playlists.find(p => p.id === currentPlaylistId);
+    if(!pl){ titleEl.textContent = ""; return; }
+    songs = pl.songs.map(s => ({ ...s, channel: pl.channel }));
+    titleEl.textContent = `${pl.channel} · ${pl.songs.length} שירים`;
+  }
 
   const q = searchEl.value.trim();
-  const songs = pl.songs.filter(s => s.title.includes(q));
+  songs = songs.filter(s => s.title.includes(q));
 
   if(songs.length === 0){
-    gridEl.innerHTML = '<div class="empty">לא נמצאו שירים תואמים</div>';
+    const msg = currentPlaylistId === FAVORITES_ID
+      ? "עדיין אין שירים מועדפים - לחצו על ⭐ בכרטיס של שיר כדי להוסיף אותו לכאן"
+      : "לא נמצאו שירים תואמים";
+    gridEl.innerHTML = `<div class="empty">${msg}</div>`;
     return;
   }
 
   songs.forEach(song => {
+    const isFav = favorites.has(song.videoId);
     const card = document.createElement("div");
     card.className = "song-card";
     card.onclick = () => openModal(song);
     card.innerHTML = `
       <div class="thumb-wrap">
         <img loading="lazy" src="https://img.youtube.com/vi/${song.videoId}/hqdefault.jpg" alt="${song.title}">
+        <button class="fav-btn${isFav ? " active" : ""}" title="הוסף/הסר ממועדפים">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6L12 2z"/></svg>
+        </button>
         <div class="play-badge">
           <svg viewBox="0 0 68 48"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#e11d48"></path><path d="M 45,24 27,14 27,34" fill="#fff"></path></svg>
         </div>
@@ -384,9 +461,13 @@ function renderGrid(){
       </div>
       <div class="song-info">
         <h3>${song.title}</h3>
-        <p>${pl.channel}</p>
+        <p>${song.channel}</p>
       </div>
     `;
+    card.querySelector(".fav-btn").onclick = (e) => {
+      e.stopPropagation();
+      toggleFavorite(song.videoId);
+    };
     gridEl.appendChild(card);
   });
 }
