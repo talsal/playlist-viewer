@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הפלייליסטים שלי</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#181b22;
+    --card-hover:#20242e;
+    --accent:#e11d48;
+    --accent2:#f59e0b;
+    --text:#f1f1f3;
+    --muted:#9aa0ab;
+    --border:#262a33;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:linear-gradient(180deg,#0f1115 0%,#14161c 100%);
+    color:var(--text);
+    min-height:100vh;
+  }
+  header{
+    padding:32px 24px 16px;
+    text-align:center;
+  }
+  header h1{
+    margin:0 0 6px;
+    font-size:2rem;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  header p{color:var(--muted);margin:0;}
+
+  .tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    padding:20px 16px;
+  }
+  .tab{
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:10px 18px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:0.95rem;
+    transition:all .15s ease;
+  }
+  .tab:hover{background:var(--card-hover);}
+  .tab.active{
+    background:var(--accent);
+    border-color:var(--accent);
+    font-weight:600;
+  }
+
+  .search-bar{
+    max-width:480px;
+    margin:0 auto 24px;
+    padding:0 16px;
+  }
+  .search-bar input{
+    width:100%;
+    padding:12px 16px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    font-size:1rem;
+  }
+  .search-bar input::placeholder{color:var(--muted);}
+
+  .playlist-title{
+    text-align:center;
+    color:var(--muted);
+    font-size:0.95rem;
+    margin-bottom:18px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:18px;
+    padding:0 24px 60px;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  .song-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .song-card:hover{
+    transform:translateY(-4px);
+    background:var(--card-hover);
+    box-shadow:0 10px 24px rgba(0,0,0,.35);
+  }
+  .thumb-wrap{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+  }
+  .thumb-wrap img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .play-badge{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,0.15);
+    opacity:0;
+    transition:opacity .15s ease;
+  }
+  .song-card:hover .play-badge{opacity:1;}
+  .play-badge svg{width:52px;height:52px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));}
+  .duration{
+    position:absolute;
+    bottom:6px;
+    left:6px;
+    background:rgba(0,0,0,0.8);
+    color:#fff;
+    font-size:0.75rem;
+    padding:2px 6px;
+    border-radius:4px;
+  }
+  .song-info{padding:12px 14px 16px;}
+  .song-info h3{
+    margin:0 0 4px;
+    font-size:0.98rem;
+    line-height:1.35;
+    font-weight:600;
+  }
+  .song-info p{
+    margin:0;
+    color:var(--muted);
+    font-size:0.82rem;
+  }
+
+  .empty{
+    text-align:center;
+    color:var(--muted);
+    padding:60px 16px;
+  }
+
+  /* Modal */
+  .modal-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+    padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    width:100%;
+    max-width:800px;
+    background:var(--card);
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid var(--border);
+  }
+  .modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+  }
+  .modal-header h3{margin:0;font-size:1rem;}
+  .modal-close{
+    background:none;
+    border:none;
+    color:var(--muted);
+    font-size:1.4rem;
+    cursor:pointer;
+    line-height:1;
+  }
+  .modal-close:hover{color:var(--text);}
+  .video-frame-wrap{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+  }
+  .video-frame-wrap iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+  }
+  .modal-footer{
+    padding:14px 18px 18px;
+  }
+  .modal-footer a{
+    color:var(--accent2);
+    text-decoration:none;
+    font-size:0.9rem;
+  }
+  .modal-footer a:hover{text-decoration:underline;}
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:0.8rem;
+    padding:20px;
+  }
+  .add-note{
+    max-width:600px;
+    margin:0 auto 30px;
+    text-align:center;
+    color:var(--muted);
+    font-size:0.85rem;
+    padding:0 16px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎵 הפלייליסטים שלי</h1>
+  <p>כל השירים במקום אחד</p>
+</header>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="search-bar">
+  <input type="text" id="search" placeholder="חיפוש שיר...">
+</div>
+
+<div class="playlist-title" id="playlistTitle"></div>
+
+<div class="grid" id="grid"></div>
+
+<p class="add-note">רוצה להוסיף פלייליסט נוסף? שלח לקלוד את הקישור ליוטיוב והוא יוסיף אותו לכאן.</p>
+
+<footer>נבנה עבורך ✦ עדכון אחרון: אוגוסט 2026</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="modalTitle"></h3>
+      <button class="modal-close" id="modalClose">&times;</button>
+    </div>
+    <div class="video-frame-wrap">
+      <iframe id="modalFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="modal-footer">
+      <a id="modalLink" href="#" target="_blank" rel="noopener">פתח ביוטיוב ↗</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- Playlist data ----
+// Each playlist has: id (label), name, channel, songs: [{title, videoId, duration}]
+const playlists = [
+  {
+    id: "rosh-chodesh",
+    name: "שירי ראש חודש - חיים סלמן",
+    channel: "חיים סלמן",
+    sourceUrl: "https://www.youtube.com/playlist?list=PLS0KZQAGE9hc",
+    songs: [
+      { title: "שיר לכבוד חודש תשרי", videoId: "3So30xbRPwg", duration: "4:48" },
+      { title: "שיר לכבוד חודש חשון בביצוע חיים סלמן", videoId: "DBzYXX7YPMY", duration: "2:48" },
+      { title: 'שיר לכבוד ר"ח טבת כתב ובצע חיים סלמן', videoId: "ZsaaxY8jpUE", duration: "3:35" },
+      { title: "שיר לכבוד ראש חודש שבט כתב ומבצע חיים סלמן", videoId: "ZtniohITKdQ", duration: "3:51" },
+      { title: "ראש חודש לישראל - שיר לכבוד חודש אדר בביצוע חיים סלמן", videoId: "FvM-TCccw_Q", duration: "3:52" },
+      { title: "שיר לכבוד חודש ניסן - המחבר והמבצע: חיים סלמן", videoId: "ujAZ8G8Jyt4", duration: "4:07" },
+      { title: "שיר לכבוד חודש אייר כתב ומבצע חיים סלמן", videoId: "c_p_HCCpHJA", duration: "4:19" },
+      { title: "שיר לכבוד ראש חודש סיון כתב ומבצע חיים סלמן", videoId: "JzJ0FHGUTKU", duration: "3:34" },
+      { title: "שיר לכבוד חודש תמוז בביצוע חיים סלמן", videoId: "EcuvcIiC4r0", duration: "2:48" },
+      { title: "שיר לכבוד חודש מנחם אב - בביצוע חיים סלמן", videoId: "jodPl2_pDAA", duration: "2:47" },
+      { title: "שיר לכבוד חודש אלול. כתב ומבצע חיים סלמן", videoId: "NZuYgdMKuvg", duration: "3:31" },
+      { title: "שיר לכבוד ראש חודש כסלו - כתב ומבצע חיים סלמן", videoId: "5qS4wFr5_gM", duration: "3:49" }
+    ]
+  }
+];
+
+let currentPlaylistId = playlists[0].id;
+
+const tabsEl = document.getElementById("tabs");
+const gridEl = document.getElementById("grid");
+const titleEl = document.getElementById("playlistTitle");
+const searchEl = document.getElementById("search");
+
+function renderTabs(){
+  tabsEl.innerHTML = "";
+  playlists.forEach(pl => {
+    const btn = document.createElement("button");
+    btn.className = "tab" + (pl.id === currentPlaylistId ? " active" : "");
+    btn.textContent = pl.name;
+    btn.onclick = () => { currentPlaylistId = pl.id; searchEl.value=""; renderTabs(); renderGrid(); };
+    tabsEl.appendChild(btn);
+  });
+}
+
+function renderGrid(){
+  const pl = playlists.find(p => p.id === currentPlaylistId);
+  titleEl.textContent = pl ? `${pl.channel} · ${pl.songs.length} שירים` : "";
+  gridEl.innerHTML = "";
+  if(!pl){ return; }
+
+  const q = searchEl.value.trim();
+  const songs = pl.songs.filter(s => s.title.includes(q));
+
+  if(songs.length === 0){
+    gridEl.innerHTML = '<div class="empty">לא נמצאו שירים תואמים</div>';
+    return;
+  }
+
+  songs.forEach(song => {
+    const card = document.createElement("div");
+    card.className = "song-card";
+    card.onclick = () => openModal(song);
+    card.innerHTML = `
+      <div class="thumb-wrap">
+        <img loading="lazy" src="https://img.youtube.com/vi/${song.videoId}/hqdefault.jpg" alt="${song.title}">
+        <div class="play-badge">
+          <svg viewBox="0 0 68 48"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#e11d48"></path><path d="M 45,24 27,14 27,34" fill="#fff"></path></svg>
+        </div>
+        <span class="duration">${song.duration || ""}</span>
+      </div>
+      <div class="song-info">
+        <h3>${song.title}</h3>
+        <p>${pl.channel}</p>
+      </div>
+    `;
+    gridEl.appendChild(card);
+  });
+}
+
+// ---- Modal ----
+const overlay = document.getElementById("modalOverlay");
+const modalTitle = document.getElementById("modalTitle");
+const modalFrame = document.getElementById("modalFrame");
+const modalLink = document.getElementById("modalLink");
+const modalClose = document.getElementById("modalClose");
+
+function openModal(song){
+  modalTitle.textContent = song.title;
+  modalFrame.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1`;
+  modalLink.href = `https://www.youtube.com/watch?v=${song.videoId}`;
+  overlay.classList.add("open");
+}
+function closeModal(){
+  overlay.classList.remove("open");
+  modalFrame.src = "";
+}
+modalClose.onclick = closeModal;
+overlay.onclick = (e) => { if(e.target === overlay) closeModal(); };
+document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+
+searchEl.addEventListener("input", renderGrid);
+
+renderTabs();
+renderGrid();
+</script>
+
+</body>
+</html>
