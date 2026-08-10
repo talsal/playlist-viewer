@@ -4,9 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>הפלייליסטים שלי</title>
+<script>
+  (function(){
+    try{
+      if(localStorage.getItem("playlist-viewer-theme") === "light"){
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    } catch(e){}
+  })();
+</script>
 <style>
   :root{
     --bg:#0f1115;
+    --bg2:#14161c;
     --card:#181b22;
     --card-hover:#20242e;
     --accent:#e11d48;
@@ -15,18 +25,49 @@
     --muted:#9aa0ab;
     --border:#262a33;
   }
+  :root[data-theme="light"]{
+    --bg:#f7f7f9;
+    --bg2:#eceef2;
+    --card:#ffffff;
+    --card-hover:#f1f2f5;
+    --accent:#e11d48;
+    --accent2:#c2740a;
+    --text:#1a1c22;
+    --muted:#6b7280;
+    --border:#e2e4ea;
+  }
   *{box-sizing:border-box;}
   body{
     margin:0;
     font-family:"Segoe UI", Arial, sans-serif;
-    background:linear-gradient(180deg,#0f1115 0%,#14161c 100%);
+    background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
     color:var(--text);
     min-height:100vh;
+    transition:background .2s ease, color .2s ease;
   }
   header{
+    position:relative;
     padding:32px 24px 16px;
     text-align:center;
   }
+  .theme-toggle{
+    position:absolute;
+    top:24px;
+    left:20px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    font-size:1.1rem;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .theme-toggle:hover{background:var(--card-hover); transform:scale(1.06);}
   header h1{
     margin:0 0 6px;
     font-size:2rem;
@@ -304,6 +345,7 @@
 <body>
 
 <header>
+  <button id="themeToggle" class="theme-toggle" title="החלף מצב תצוגה"></button>
   <h1>🎵 הפלייליסטים שלי</h1>
   <p>כל השירים במקום אחד</p>
 </header>
@@ -662,6 +704,29 @@ document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(
 
 searchEl.addEventListener("input", () => { renderTabs(); renderGrid(); });
 sortEl.addEventListener("change", renderGrid);
+
+// ---- Theme toggle ----
+const THEME_KEY = "playlist-viewer-theme";
+const themeToggleBtn = document.getElementById("themeToggle");
+
+function applyTheme(theme){
+  if(theme === "light"){
+    document.documentElement.setAttribute("data-theme", "light");
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+  }
+  themeToggleBtn.textContent = theme === "light" ? "🌙" : "☀️";
+  themeToggleBtn.title = theme === "light" ? "עבור למצב כהה" : "עבור למצב בהיר";
+}
+
+let currentTheme = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+applyTheme(currentTheme);
+
+themeToggleBtn.onclick = () => {
+  currentTheme = currentTheme === "light" ? "dark" : "light";
+  applyTheme(currentTheme);
+  try { localStorage.setItem(THEME_KEY, currentTheme); } catch(e){}
+};
 
 renderTabs();
 renderGrid();
