@@ -300,6 +300,11 @@
     font-size:0.9rem;
   }
   .modal-footer a:hover{text-decoration:underline;}
+  .kbd-hint{
+    margin:10px 0 0;
+    color:var(--muted);
+    font-size:0.75rem;
+  }
   .modal-nav{
     display:flex;
     align-items:center;
@@ -390,6 +395,7 @@
         <button id="nextBtn" class="nav-btn">הבא ⏭</button>
       </div>
       <a id="modalLink" href="#" target="_blank" rel="noopener">פתח ביוטיוב ↗</a>
+      <p class="kbd-hint">קיצורי מקלדת: Space להשהיה/נגינה · ← → למעבר בין שירים · Esc לסגירה</p>
     </div>
   </div>
 </div>
@@ -690,6 +696,15 @@ function playRelative(delta){
   }
   openModal(currentSongList[nextIndex], nextIndex, currentSongList);
 }
+function togglePlayPause(){
+  if(!playerReady || !ytPlayer || !ytPlayer.getPlayerState) return;
+  const state = ytPlayer.getPlayerState();
+  if(state === YT.PlayerState.PLAYING){
+    ytPlayer.pauseVideo();
+  } else {
+    ytPlayer.playVideo();
+  }
+}
 function closeModal(){
   overlay.classList.remove("open");
   if(playerReady && ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
@@ -700,7 +715,25 @@ modalClose.onclick = closeModal;
 prevBtn.onclick = () => playRelative(-1);
 nextBtn.onclick = () => playRelative(1);
 overlay.onclick = (e) => { if(e.target === overlay) closeModal(); };
-document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+document.addEventListener("keydown", (e) => {
+  const tag = (e.target.tagName || "").toLowerCase();
+  if(tag === "input" || tag === "select" || tag === "textarea") return;
+
+  if(e.key === "Escape"){ closeModal(); return; }
+
+  if(!overlay.classList.contains("open")) return;
+
+  if(e.key === " " || e.code === "Space"){
+    e.preventDefault();
+    togglePlayPause();
+  } else if(e.key === "ArrowRight"){
+    e.preventDefault();
+    playRelative(1);
+  } else if(e.key === "ArrowLeft"){
+    e.preventDefault();
+    playRelative(-1);
+  }
+});
 
 searchEl.addEventListener("input", () => { renderTabs(); renderGrid(); });
 sortEl.addEventListener("change", renderGrid);
