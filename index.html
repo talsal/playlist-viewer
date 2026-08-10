@@ -288,7 +288,7 @@
 <div class="tabs" id="tabs"></div>
 
 <div class="search-bar">
-  <input type="text" id="search" placeholder="חיפוש שיר...">
+  <input type="text" id="search" placeholder="חיפוש בכל הפלייליסטים...">
 </div>
 
 <div class="playlist-title" id="playlistTitle"></div>
@@ -416,8 +416,18 @@ function getFavoriteSongs(){
   playlists.forEach(pl => {
     pl.songs.forEach(song => {
       if(favorites.has(song.videoId)){
-        result.push({ ...song, channel: pl.channel });
+        result.push({ ...song, channel: pl.channel, playlistName: pl.name });
       }
+    });
+  });
+  return result;
+}
+
+function getAllSongs(){
+  const result = [];
+  playlists.forEach(pl => {
+    pl.songs.forEach(song => {
+      result.push({ ...song, channel: pl.channel, playlistName: pl.name });
     });
   });
   return result;
@@ -430,18 +440,23 @@ const gridEl = document.getElementById("grid");
 const titleEl = document.getElementById("playlistTitle");
 const searchEl = document.getElementById("search");
 
+function isSearching(){
+  return searchEl.value.trim().length > 0;
+}
+
 function renderTabs(){
   tabsEl.innerHTML = "";
+  const searching = isSearching();
 
   const favBtn = document.createElement("button");
-  favBtn.className = "tab" + (currentPlaylistId === FAVORITES_ID ? " active" : "");
+  favBtn.className = "tab" + (!searching && currentPlaylistId === FAVORITES_ID ? " active" : "");
   favBtn.textContent = `⭐ מועדפים (${favorites.size})`;
   favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; searchEl.value=""; renderTabs(); renderGrid(); };
   tabsEl.appendChild(favBtn);
 
   playlists.forEach(pl => {
     const btn = document.createElement("button");
-    btn.className = "tab" + (pl.id === currentPlaylistId ? " active" : "");
+    btn.className = "tab" + (!searching && pl.id === currentPlaylistId ? " active" : "");
     btn.textContent = pl.name;
     btn.onclick = () => { currentPlaylistId = pl.id; searchEl.value=""; renderTabs(); renderGrid(); };
     tabsEl.appendChild(btn);
@@ -451,8 +466,14 @@ function renderTabs(){
 function renderGrid(){
   gridEl.innerHTML = "";
 
+  const q = searchEl.value.trim();
+  const searching = q.length > 0;
+
   let songs;
-  if(currentPlaylistId === FAVORITES_ID){
+  if(searching){
+    songs = getAllSongs().filter(s => s.title.includes(q));
+    titleEl.textContent = `${songs.length} תוצאות עבור "${q}" · בכל הפלייליסטים`;
+  } else if(currentPlaylistId === FAVORITES_ID){
     songs = getFavoriteSongs();
     titleEl.textContent = `${songs.length} שירים מועדפים`;
   } else {
@@ -462,13 +483,12 @@ function renderGrid(){
     titleEl.textContent = `${pl.channel} · ${pl.songs.length} שירים`;
   }
 
-  const q = searchEl.value.trim();
-  songs = songs.filter(s => s.title.includes(q));
-
   if(songs.length === 0){
-    const msg = currentPlaylistId === FAVORITES_ID
-      ? "עדיין אין שירים מועדפים - לחצו על ⭐ בכרטיס של שיר כדי להוסיף אותו לכאן"
-      : "לא נמצאו שירים תואמים";
+    const msg = searching
+      ? `לא נמצאו תוצאות עבור "${q}"`
+      : currentPlaylistId === FAVORITES_ID
+        ? "עדיין אין שירים מועדפים - לחצו על ⭐ בכרטיס של שיר כדי להוסיף אותו לכאן"
+        : "לא נמצאו שירים תואמים";
     gridEl.innerHTML = `<div class="empty">${msg}</div>`;
     return;
   }
@@ -491,7 +511,7 @@ function renderGrid(){
       </div>
       <div class="song-info">
         <h3>${song.title}</h3>
-        <p>${song.channel}</p>
+        <p>${song.playlistName || song.channel}</p>
       </div>
     `;
     card.querySelector(".fav-btn").onclick = (e) => {
@@ -583,7 +603,7 @@ nextBtn.onclick = () => playRelative(1);
 overlay.onclick = (e) => { if(e.target === overlay) closeModal(); };
 document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
 
-searchEl.addEventListener("input", renderGrid);
+searchEl.addEventListener("input", () => { renderTabs(); renderGrid(); });
 
 renderTabs();
 renderGrid();
