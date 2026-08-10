@@ -236,6 +236,31 @@
     font-size:0.9rem;
   }
   .modal-footer a:hover{text-decoration:underline;}
+  .modal-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .nav-btn{
+    background:var(--card-hover);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:0.88rem;
+  }
+  .nav-btn:hover{background:var(--border);}
+  .nav-btn:disabled{opacity:0.4;cursor:default;}
+  .nav-btn:disabled:hover{background:var(--card-hover);}
+  .autoplay-status{
+    color:var(--muted);
+    font-size:0.82rem;
+    flex:1;
+    text-align:center;
+  }
 
   footer{
     text-align:center;
@@ -281,9 +306,14 @@
       <button class="modal-close" id="modalClose">&times;</button>
     </div>
     <div class="video-frame-wrap">
-      <iframe id="modalFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div id="modalFrame"></div>
     </div>
     <div class="modal-footer">
+      <div class="modal-nav">
+        <button id="prevBtn" class="nav-btn">⏮ הקודם</button>
+        <span id="autoplayStatus" class="autoplay-status"></span>
+        <button id="nextBtn" class="nav-btn">הבא ⏭</button>
+      </div>
       <a id="modalLink" href="#" target="_blank" rel="noopener">פתח ביוטיוב ↗</a>
     </div>
   </div>
@@ -443,11 +473,11 @@ function renderGrid(){
     return;
   }
 
-  songs.forEach(song => {
+  songs.forEach((song, idx) => {
     const isFav = favorites.has(song.videoId);
     const card = document.createElement("div");
     card.className = "song-card";
-    card.onclick = () => openModal(song);
+    card.onclick = () => openModal(song, idx, songs);
     card.innerHTML = `
       <div class="thumb-wrap">
         <img loading="lazy" src="https://img.youtube.com/vi/${song.videoId}/hqdefault.jpg" alt="${song.title}">
@@ -472,24 +502,84 @@ function renderGrid(){
   });
 }
 
-// ---- Modal ----
+// ---- Modal & player ----
 const overlay = document.getElementById("modalOverlay");
 const modalTitle = document.getElementById("modalTitle");
-const modalFrame = document.getElementById("modalFrame");
 const modalLink = document.getElementById("modalLink");
 const modalClose = document.getElementById("modalClose");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const autoplayStatus = document.getElementById("autoplayStatus");
 
-function openModal(song){
+let currentSongList = [];
+let currentSongIndex = -1;
+let ytPlayer = null;
+let playerReady = false;
+let pendingVideoId = null;
+
+function onYouTubeIframeAPIReady(){
+  ytPlayer = new YT.Player("modalFrame", {
+    height: "100%",
+    width: "100%",
+    playerVars: { autoplay: 1, rel: 0 },
+    events: {
+      onReady: () => {
+        playerReady = true;
+        if(pendingVideoId){
+          ytPlayer.loadVideoById(pendingVideoId);
+          pendingVideoId = null;
+        }
+      },
+      onStateChange: (e) => {
+        if(e.data === YT.PlayerState.ENDED && overlay.classList.contains("open")){
+          playRelative(1);
+        }
+      }
+    }
+  });
+}
+
+function loadVideo(videoId){
+  if(playerReady && ytPlayer && ytPlayer.loadVideoById){
+    ytPlayer.loadVideoById(videoId);
+  } else {
+    pendingVideoId = videoId;
+  }
+}
+
+function updateNavButtons(){
+  const hasList = currentSongList.length > 0;
+  prevBtn.disabled = !hasList || currentSongIndex <= 0;
+  nextBtn.disabled = !hasList || currentSongIndex >= currentSongList.length - 1;
+  autoplayStatus.textContent = hasList ? `${currentSongIndex + 1} מתוך ${currentSongList.length}` : "";
+}
+
+function openModal(song, index = 0, list = [song]){
+  currentSongList = list;
+  currentSongIndex = index;
   modalTitle.textContent = song.title;
-  modalFrame.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1`;
   modalLink.href = `https://www.youtube.com/watch?v=${song.videoId}`;
   overlay.classList.add("open");
+  loadVideo(song.videoId);
+  updateNavButtons();
+}
+function playRelative(delta){
+  const nextIndex = currentSongIndex + delta;
+  if(nextIndex < 0 || nextIndex >= currentSongList.length){
+    if(delta > 0) closeModal();
+    return;
+  }
+  openModal(currentSongList[nextIndex], nextIndex, currentSongList);
 }
 function closeModal(){
   overlay.classList.remove("open");
-  modalFrame.src = "";
+  if(playerReady && ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
+  currentSongIndex = -1;
+  currentSongList = [];
 }
 modalClose.onclick = closeModal;
+prevBtn.onclick = () => playRelative(-1);
+nextBtn.onclick = () => playRelative(1);
 overlay.onclick = (e) => { if(e.target === overlay) closeModal(); };
 document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
 
@@ -498,6 +588,7 @@ searchEl.addEventListener("input", renderGrid);
 renderTabs();
 renderGrid();
 </script>
+<script src="https://www.youtube.com/iframe_api"></script>
 
 </body>
 </html>
