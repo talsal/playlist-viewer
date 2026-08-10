@@ -63,7 +63,7 @@
 
   .search-bar{
     max-width:480px;
-    margin:0 auto 24px;
+    margin:0 auto 14px;
     padding:0 16px;
   }
   .search-bar input{
@@ -76,6 +76,29 @@
     font-size:1rem;
   }
   .search-bar input::placeholder{color:var(--muted);}
+
+  .sort-bar{
+    max-width:480px;
+    margin:0 auto 24px;
+    padding:0 16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  .sort-bar label{
+    color:var(--muted);
+    font-size:0.85rem;
+  }
+  .sort-bar select{
+    padding:8px 12px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    font-size:0.9rem;
+    cursor:pointer;
+  }
 
   .playlist-title{
     text-align:center;
@@ -291,6 +314,16 @@
   <input type="text" id="search" placeholder="חיפוש בכל הפלייליסטים...">
 </div>
 
+<div class="sort-bar">
+  <label for="sortSelect">מיון:</label>
+  <select id="sortSelect">
+    <option value="default">לפי סדר הפלייליסט</option>
+    <option value="title-asc">לפי א-ב</option>
+    <option value="duration-asc">לפי אורך (מהקצר לארוך)</option>
+    <option value="duration-desc">לפי אורך (מהארוך לקצר)</option>
+  </select>
+</div>
+
 <div class="playlist-title" id="playlistTitle"></div>
 
 <div class="grid" id="grid"></div>
@@ -439,9 +472,31 @@ const tabsEl = document.getElementById("tabs");
 const gridEl = document.getElementById("grid");
 const titleEl = document.getElementById("playlistTitle");
 const searchEl = document.getElementById("search");
+const sortEl = document.getElementById("sortSelect");
 
 function isSearching(){
   return searchEl.value.trim().length > 0;
+}
+
+function durationToSeconds(d){
+  if(!d) return 0;
+  const parts = d.split(":").map(Number);
+  if(parts.length === 3) return parts[0]*3600 + parts[1]*60 + parts[2];
+  if(parts.length === 2) return parts[0]*60 + parts[1];
+  return parts[0] || 0;
+}
+
+function applySort(songs){
+  const mode = sortEl.value;
+  const arr = songs.slice();
+  if(mode === "title-asc"){
+    arr.sort((a, b) => a.title.localeCompare(b.title, "he"));
+  } else if(mode === "duration-asc"){
+    arr.sort((a, b) => durationToSeconds(a.duration) - durationToSeconds(b.duration));
+  } else if(mode === "duration-desc"){
+    arr.sort((a, b) => durationToSeconds(b.duration) - durationToSeconds(a.duration));
+  }
+  return arr;
 }
 
 function renderTabs(){
@@ -482,6 +537,8 @@ function renderGrid(){
     songs = pl.songs.map(s => ({ ...s, channel: pl.channel }));
     titleEl.textContent = `${pl.channel} · ${pl.songs.length} שירים`;
   }
+
+  songs = applySort(songs);
 
   if(songs.length === 0){
     const msg = searching
@@ -604,6 +661,7 @@ overlay.onclick = (e) => { if(e.target === overlay) closeModal(); };
 document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
 
 searchEl.addEventListener("input", () => { renderTabs(); renderGrid(); });
+sortEl.addEventListener("change", renderGrid);
 
 renderTabs();
 renderGrid();
