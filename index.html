@@ -86,6 +86,7 @@
     color:transparent;
   }
   header p{color:var(--muted);margin:0;}
+  header p.stats{margin-top:6px;font-size:.9rem;opacity:.85;}
 
   .tabs{
     display:flex;
@@ -410,6 +411,7 @@
   <button id="themeToggle" class="theme-toggle" title="החלף מצב תצוגה"></button>
   <h1>🎵 הפלייליסטים של חיים סלמן</h1>
   <p>כל השירים במקום אחד</p>
+  <p class="stats" id="statsLine"></p>
 </header>
 
 <div class="tabs" id="tabs"></div>
@@ -5448,8 +5450,15 @@ themeToggleBtn.onclick = () => {
   try { localStorage.setItem(THEME_KEY, currentTheme); } catch(e){}
 };
 
+function renderStats(){
+  const totalSongs = playlists.reduce((sum, pl) => sum + pl.songs.length, 0);
+  document.getElementById("statsLine").textContent =
+    `${playlists.length} פלייליסטים · ${totalSongs} שירים`;
+}
+
 renderTabs();
 renderGrid();
+renderStats();
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
 
