@@ -88,6 +88,37 @@
   header p{color:var(--muted);margin:0;}
   header p.stats{margin-top:6px;font-size:.9rem;opacity:.85;}
 
+  .intro{
+    max-width:640px;
+    margin:0 auto;
+    padding:0 24px;
+    text-align:center;
+  }
+  .intro p{
+    color:var(--muted);
+    font-size:0.95rem;
+    line-height:1.7;
+    margin:0;
+  }
+  .intro-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-top:16px;
+  }
+  .intro-link{
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:8px 18px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:0.9rem;
+    transition:background .15s ease, transform .1s ease;
+  }
+  .intro-link:hover{background:var(--card-hover); transform:translateY(-1px);}
+
   .fav-row{
     display:flex;
     justify-content:center;
@@ -490,6 +521,15 @@
   <p>כל השירים במקום אחד</p>
   <p class="stats" id="statsLine"></p>
 </header>
+
+<div class="intro">
+  <p>
+    כאן תמצאו את כל ההקלטות שחיים סלמן העלה ליוטיוב לאורך השנים —
+    קריאת פרשיות התורה, תפילות לחגים ולשבת, שיעורי תורה וקבלה, שירה ופיוט, ועוד.
+    השתמשו בקטגוריות למטה כדי למצוא את מה שמחפשים, או חפשו שיר ספציפי בתיבת החיפוש.
+  </p>
+  <div class="intro-links" id="introLinks"></div>
+</div>
 
 <div class="fav-row" id="favRow"></div>
 <div class="categories" id="categories"></div>
@@ -10199,11 +10239,37 @@ function renderStats(){
     `${playlists.length} פלייליסטים · ${totalSongs} שירים`;
 }
 
+const QUICK_START_IDS = ["parashiyot-hatorah", "rosh-chodesh", "shevachot-piyutim"];
+function renderIntroLinks(){
+  const introLinksEl = document.getElementById("introLinks");
+  introLinksEl.innerHTML = "";
+  QUICK_START_IDS.forEach(id => {
+    const pl = playlists.find(p => p.id === id);
+    if(!pl) return;
+    const link = document.createElement("button");
+    link.className = "intro-link";
+    link.textContent = pl.name;
+    link.onclick = () => {
+      currentCategory = categoryOf(pl);
+      currentPlaylistId = pl.id;
+      searchEl.value = "";
+      visibleLimit = PAGE_SIZE;
+      renderFavRow();
+      renderCategories();
+      renderTabs();
+      renderGrid();
+      document.getElementById("playlistTitle").scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    introLinksEl.appendChild(link);
+  });
+}
+
 renderFavRow();
 renderCategories();
 renderTabs();
 renderGrid();
 renderStats();
+renderIntroLinks();
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
 
