@@ -56,13 +56,13 @@
   }
   header{
     position:relative;
-    padding:32px 24px 16px;
+    padding:64px 24px 16px;
     text-align:center;
   }
   .theme-toggle{
     position:absolute;
-    top:24px;
-    left:20px;
+    top:16px;
+    left:16px;
     width:40px;
     height:40px;
     border-radius:50%;
@@ -80,12 +80,20 @@
   header h1{
     margin:0 0 6px;
     font-size:2rem;
+  }
+  header h1 .emoji-plain{font-size:1.7rem;}
+  header h1 .gradient-text{
     background:linear-gradient(90deg,var(--accent),var(--accent2));
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
   }
   header p{color:var(--muted);margin:0;}
+  @media (max-width:480px){
+    header{padding:60px 16px 16px;}
+    header h1{font-size:1.4rem;}
+    header h1 .emoji-plain{font-size:1.2rem;}
+  }
   header p.stats{margin-top:6px;font-size:.9rem;opacity:.85;}
 
   .intro{
@@ -498,7 +506,7 @@
 
 <header>
   <button id="themeToggle" class="theme-toggle" title="החלף מצב תצוגה"></button>
-  <h1>🎵 הפלייליסטים של חיים סלמן</h1>
+  <h1><span class="emoji-plain">🎵</span> <span class="gradient-text">הפלייליסטים של חיים סלמן</span></h1>
   <p>כל השירים במקום אחד</p>
   <p class="stats" id="statsLine"></p>
 </header>
@@ -513,7 +521,6 @@
 
 <div class="fav-row" id="favRow"></div>
 <div class="categories" id="categories"></div>
-<div class="tabs" id="tabs"></div>
 
 <div class="search-bar">
   <input type="text" id="search" placeholder="חיפוש בכל הפלייליסטים...">
@@ -532,6 +539,8 @@
     <button id="viewListBtn" class="view-btn" title="תצוגת רשימה">☰</button>
   </div>
 </div>
+
+<div class="tabs" id="tabs"></div>
 
 <div class="playlist-title" id="playlistTitle"></div>
 
