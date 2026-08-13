@@ -88,12 +88,37 @@
   header p{color:var(--muted);margin:0;}
   header p.stats{margin-top:6px;font-size:.9rem;opacity:.85;}
 
+  .fav-row{
+    display:flex;
+    justify-content:center;
+    padding:20px 16px 0;
+  }
+  .fav-btn-standalone{
+    background:var(--card);
+    border:2px solid var(--accent2);
+    color:var(--accent2);
+    padding:9px 22px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:0.95rem;
+    font-weight:600;
+    transition:transform .1s ease, box-shadow .1s ease, background .15s ease, color .15s ease;
+    box-shadow:0 3px 0 color-mix(in srgb, var(--accent2) 60%, black), 0 4px 6px rgba(0,0,0,.15);
+  }
+  .fav-btn-standalone:hover{background:var(--card-hover); transform:translateY(-1px); box-shadow:0 4px 0 color-mix(in srgb, var(--accent2) 60%, black), 0 6px 8px rgba(0,0,0,.18);}
+  .fav-btn-standalone:active{transform:translateY(3px); box-shadow:0 0 0 color-mix(in srgb, var(--accent2) 60%, black), 0 1px 2px rgba(0,0,0,.15);}
+  .fav-btn-standalone.active{
+    background:var(--accent2);
+    color:#fff;
+    box-shadow:0 3px 0 color-mix(in srgb, var(--accent2) 60%, black), 0 4px 6px rgba(0,0,0,.2);
+  }
+
   .categories{
     display:flex;
     flex-wrap:wrap;
     gap:8px;
     justify-content:center;
-    padding:20px 16px 0;
+    padding:14px 16px 0;
   }
   .category-chip{
     background:var(--card);
@@ -463,6 +488,7 @@
   <p class="stats" id="statsLine"></p>
 </header>
 
+<div class="fav-row" id="favRow"></div>
 <div class="categories" id="categories"></div>
 <div class="tabs" id="tabs"></div>
 
@@ -9825,6 +9851,7 @@ function toggleFavorite(videoId){
   if(favorites.has(videoId)) favorites.delete(videoId);
   else favorites.add(videoId);
   saveFavorites();
+  renderFavRow();
   renderTabs();
   renderGrid();
 }
@@ -9853,6 +9880,7 @@ function getAllSongs(){
 const favorites = loadFavorites();
 
 const tabsEl = document.getElementById("tabs");
+const favRowEl = document.getElementById("favRow");
 const gridEl = document.getElementById("grid");
 const titleEl = document.getElementById("playlistTitle");
 const searchEl = document.getElementById("search");
@@ -9925,6 +9953,7 @@ function renderCategories(){
       }
       searchEl.value = "";
       visibleLimit = PAGE_SIZE;
+      renderFavRow();
       renderCategories();
       renderTabs();
       renderGrid();
@@ -9933,16 +9962,20 @@ function renderCategories(){
   });
 }
 
+function renderFavRow(){
+  favRowEl.innerHTML = "";
+  const searching = isSearching();
+  const favBtn = document.createElement("button");
+  favBtn.className = "fav-btn-standalone" + (!searching && currentPlaylistId === FAVORITES_ID ? " active" : "");
+  favBtn.textContent = `⭐ מועדפים (${favorites.size})`;
+  favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; searchEl.value=""; visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); };
+  favRowEl.appendChild(favBtn);
+}
+
 function renderTabs(){
   tabsEl.innerHTML = "";
   const searching = isSearching();
   const visiblePlaylists = playlists.filter(pl => currentCategory === "all" || categoryOf(pl) === currentCategory);
-
-  const favBtn = document.createElement("button");
-  favBtn.className = "tab" + (!searching && currentPlaylistId === FAVORITES_ID ? " active" : "");
-  favBtn.textContent = `⭐ מועדפים (${favorites.size})`;
-  favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; searchEl.value=""; visibleLimit = PAGE_SIZE; renderTabs(); renderGrid(); };
-  tabsEl.appendChild(favBtn);
 
   visiblePlaylists.forEach(pl => {
     const btn = document.createElement("button");
@@ -10131,7 +10164,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-searchEl.addEventListener("input", () => { visibleLimit = PAGE_SIZE; renderTabs(); renderGrid(); });
+searchEl.addEventListener("input", () => { visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); });
 sortEl.addEventListener("change", () => { visibleLimit = PAGE_SIZE; renderGrid(); });
 
 // ---- Theme toggle ----
@@ -10163,6 +10196,7 @@ function renderStats(){
     `${playlists.length} פלייליסטים · ${totalSongs} שירים`;
 }
 
+renderFavRow();
 renderCategories();
 renderTabs();
 renderGrid();
