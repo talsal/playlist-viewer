@@ -479,171 +479,1003 @@
 // ---- Playlist data ----
 // Each playlist has: id (label), name, channel, songs: [{title, videoId, duration}]
 const playlists = [
-  {
-    id: "rosh-chodesh",
-    name: "שירי ראש חודש - חיים סלמן",
-    channel: "חיים סלמן",
-    sourceUrl: "https://www.youtube.com/playlist?list=PLS0KZQAGE9hc",
-    songs: [
-      { title: "שיר לכבוד חודש תשרי", videoId: "3So30xbRPwg", duration: "4:48" },
-      { title: "שיר לכבוד חודש חשון בביצוע חיים סלמן", videoId: "DBzYXX7YPMY", duration: "2:48" },
-      { title: 'שיר לכבוד ר"ח טבת כתב ובצע חיים סלמן', videoId: "ZsaaxY8jpUE", duration: "3:35" },
-      { title: "שיר לכבוד ראש חודש שבט כתב ומבצע חיים סלמן", videoId: "ZtniohITKdQ", duration: "3:51" },
-      { title: "ראש חודש לישראל - שיר לכבוד חודש אדר בביצוע חיים סלמן", videoId: "FvM-TCccw_Q", duration: "3:52" },
-      { title: "שיר לכבוד חודש ניסן - המחבר והמבצע: חיים סלמן", videoId: "ujAZ8G8Jyt4", duration: "4:07" },
-      { title: "שיר לכבוד חודש אייר כתב ומבצע חיים סלמן", videoId: "c_p_HCCpHJA", duration: "4:19" },
-      { title: "שיר לכבוד ראש חודש סיון כתב ומבצע חיים סלמן", videoId: "JzJ0FHGUTKU", duration: "3:34" },
-      { title: "שיר לכבוד חודש תמוז בביצוע חיים סלמן", videoId: "EcuvcIiC4r0", duration: "2:48" },
-      { title: "שיר לכבוד חודש מנחם אב - בביצוע חיים סלמן", videoId: "jodPl2_pDAA", duration: "2:47" },
-      { title: "שיר לכבוד חודש אלול. כתב ומבצע חיים סלמן", videoId: "NZuYgdMKuvg", duration: "3:31" },
-      { title: "שיר לכבוד ראש חודש כסלו - כתב ומבצע חיים סלמן", videoId: "5qS4wFr5_gM", duration: "3:49" }
-    ]
-  },
-  {
-    id: "taamei-hamikra",
-    name: "טעמי המקרא - חיים סלמן",
-    channel: "חיים סלמן",
-    sourceUrl: "https://www.youtube.com/playlist?list=PLbIBGdyDfPSE",
-    songs: [
-      { title: "טעמי הנביאים", videoId: "xn3LcQaNyVI", duration: "1:07" },
-      { title: 'טעמי הכתובים נוסח בבלי חכם חיים סלמן שליט"א', videoId: "uxSS7JJta4w", duration: "1:06" },
-      { title: "מגילת אסתר פרק א-כמנהג יהודי עירק קורא: חיים סלמן", videoId: "MuCqn5iQu8o", duration: "6:29" },
-      { title: "1.תהלים - לימוד הטעמים - חיים סלמן", videoId: "VOc299t3O9w", duration: "8:55" },
-      { title: "11.תהלים טעמים", videoId: "M7QqNgUrAgA", duration: "46:10" },
-      { title: 'טעמי הנביאים חכם חיים סלמן שליט"א', videoId: "9FMo2kXqmHE", duration: "1:28" },
-      { title: "טעמי הכתובים", videoId: "u5r87QCYmQU", duration: "1:03" },
-      { title: "ב. אותיות א-ג - מבטא האותיות בלשון הקודש - חיים סלמן", videoId: "_iFTb60GqV0", duration: "6:03" },
-      { title: 'לימוד לשון הקודש טעמי הנביאים חכם חיים סלמן שליט"א', videoId: "68eALZGnMvA", duration: "1:06:16" },
-      { title: 'לימוד לשון הקודש טעמי הנביאים חכם חיים סלמן שליט"א', videoId: "BqOHHrNdAUI", duration: "1:03:33" },
-      { title: "2.תהלים לימוד הטעמים", videoId: "X90zrhwEFes", duration: "44:25" },
-      { title: 'לימוד לשון הקודש טעמי הכתובים חכם חיים סלמן שליט"א', videoId: "titfLTTm1OM", duration: "55:32" },
-      { title: 'לימוד טעמי הנביאים שיעור 1 חכם חיים סלמן שליט"א', videoId: "EBK51a2r7sk", duration: "55:12" },
-      { title: 'לימוד לשון הקודש טעמי איוב חכם חיים סלמן שליט"א', videoId: "hs_QQAIeZ3Y", duration: "57:08" },
-      { title: 'לימוד לשון הקודש טעמי הכתובים חכם חיים סלמן שליט"א', videoId: "QQardplNTJ0", duration: "1:00:58" },
-      { title: 'לימוד לשון הקודש טעמי הנביאים חכם חיים סלמן שליט"א', videoId: "6DBNq5r4Xdg", duration: "59:26" },
-      { title: "טעמי המקרא", videoId: "D-O92h05cxA", duration: "1:36" }
-    ]
-  },
-  {
-    id: "rosh-hashana-tefilot",
-    name: "תפילות לראש השנה וכיפור - חיים סלמן",
-    channel: "חיים סלמן",
-    sourceUrl: "https://www.youtube.com/playlist?list=PLFM8u8mx1c80",
-    songs: [
-      { title: "Rosh Hashana - תפילת העמידה לראש השנה - חיים סלמן", videoId: "0yX79FDQ6ks", duration: "10:18" },
-      { title: "Rosh Hashana - חיים סלמן - תפלה על הפרנסה", videoId: "Oox5qqLR3cQ", duration: "2:56" },
-      { title: "אוחילה לאל פתיחה לפני חזרת המוסף של ראש השנה", videoId: "-NXPSSzifGA", duration: "0:51" },
-      { title: "קדיש לראש השנה וכיפור-כמנהג יהודי עירק בביצוע חיים סלמן", videoId: "W_aWMTdAvdA", duration: "2:20" },
-      { title: "Rosh Hashana - חיים סלמן - מזמור לראש השנה", videoId: "sEFRg-Cz-nw", duration: "2:25" },
-      { title: "המבורך-מתוך תפלת שחרית של ראש השנה כמנהג יהודי עירק בביצוע הרב אייל סלמן", videoId: "HELVV0WpE6I", duration: "3:10" },
-      { title: "אשרי העם יודעי תרועה אחרי תקיעת שופר", videoId: "NvN3qHAxLXQ", duration: "0:55" },
-      { title: "Havdala תפילות כמנהג יהודי עירק - הבדלה - בביצוע חיים סלמן", videoId: "TX0CWR1SYa8", duration: "3:03" },
-      { title: "חון תחון-פיוט לראש השנה וכיפור של יהודי עירק בביצוע הרב אייל וחיים סלמן", videoId: "6WJ4Magho20", duration: "2:21" },
-      { title: "תזכורת לראש השנה", videoId: "Cc-YUthA2Eo", duration: "0:47" },
-      { title: "שמע קולי-פתיחה לתפילת ערבית של יום כיפור בנעימת יהודי עירק בביצוע חיים סלמן", videoId: "sOqxvckVU6s", duration: "3:57" }
-    ]
-  },
-  {
-    id: "parashiyot-hatorah",
-    name: "קריאת פרשיות התורה - חיים סלמן",
-    channel: "חיים סלמן",
-    sourceUrl: "https://www.youtube.com/playlist?list=PLCaysuk-lh9U",
-    songs: [
-      { title: "קריאת פרשת בראשית חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "yvPoB28etQs", duration: "14:31" },
-      { title: "קריאת פרשת בראשית חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "cpThw4jquno", duration: "5:30" },
-      { title: "Tora - פרשיות התורה - נח - בטעמי יהודי עירק- חיים סלמן", videoId: "nq3KnKvK3AA", duration: "3:17" },
-      { title: "קריאת פרשת לך לך חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "W2vdjbgzaKc", duration: "14:31" },
-      { title: "Tora - פרשיות התורה - וירא - בטעמי יהודי עירק- חיים סלמן", videoId: "5hyCz9cYv-I", duration: "3:01" },
-      { title: "פרשת העקדה", videoId: "UXY9f56JuZg", duration: "5:00" },
-      { title: "קריאת פרשת העקדה כמנהג יהודי עירק בביצוע: חיים סלמן", videoId: "tKBy5-lyF6s", duration: "3:51" },
-      { title: 'קריאת פרשת חיי שרה בטעמי יהודי עירק ע"י חיים סלמן', videoId: "o1H3Fnq6EgQ", duration: "14:00" },
-      { title: "Tora - פרשיות התורה - תולדות - בטעמי יהודי עירק- חיים סלמן", videoId: "pEamGL-mXpo", duration: "3:24" },
-      { title: "קריאת פרשת תולדות חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "TaYHj5XBwkI", duration: "14:31" },
-      { title: "קריאת פרשת תולדות חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "6qKZx9UqvjQ", duration: "1:27" },
-      { title: "קריאת פרשת ויצא חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "7XstCzz5E2U", duration: "14:31" },
-      { title: "קריאת פרשת ויצא חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "bAPDN_5Wg6I", duration: "6:39" },
-      { title: "Tora - פרשיות התורה - וישלח- בטעמי יהודי עירק- חיים סלמן", videoId: "JthfH2JQFLU", duration: "2:21" },
-      { title: "קריאת פרשת וישלח חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "7KzMRQN6wnU", duration: "14:31" },
-      { title: "קריאת פרשת וישלח חלק ב' בטעמי יהודי עירק ע\"י חים סלמן", videoId: "LEZro1OnSRA", duration: "9:23" },
-      { title: "Tora - פרשיות התורה - וישב - בטעמי יהודי עירק- חיים סלמן", videoId: "iMk69-3hFDw", duration: "2:45" },
-      { title: "קריאת פרשת וישב חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "Bbp7xNS7NkE", duration: "14:31" },
-      { title: "קריאת פרשת וישב חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "kVFkzLJQqlA", duration: "6:12" },
-      { title: "קריאת פרשת מקץ חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "bf2CWfKax8M", duration: "14:31" },
-      { title: "קריאת פרשת מקץ חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "a3pdIV-Y8Ss", duration: "6:29" },
-      { title: "קריאת פרשת ויגש חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "U2WsZeOOWZY", duration: "14:31" },
-      { title: "קריאת פרשת ויגש חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "pXmqTEM4aOk", duration: "2:54" },
-      { title: "קריאת פרשת ויחי חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "DH8pttF59b4", duration: "14:31" },
-      { title: "קריאת פרשת ויחי חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "EqKD0uqOhDM", duration: "0:26" },
-      { title: "קריאת פרשת שמות חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "-xzdJZLUhjA", duration: "14:30" },
-      { title: "קריאת פרשת שמות חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "xmTkHGdSusg", duration: "7:03" },
-      { title: "קריאת פרשת וארא חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "kQ768DRCTns", duration: "14:31" },
-      { title: "קריאת פרשת וארא חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "ekpUabCHCNU", duration: "3:19" },
-      { title: "קריאת פרשת בא חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "zUHjTDZKH6E", duration: "14:31" },
-      { title: "קריאת פרשת בא חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "69wvgx744oU", duration: "1:39" },
-      { title: "קריאת פרשת בשלח חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "7D2jGJagmXM", duration: "14:31" },
-      { title: "קריאת פרשת בשלח חלק ב' בטעמי עירק ע\"י חיים סלמן", videoId: "u_xQ68j7EMI", duration: "5:37" },
-      { title: "קריאת פרשת יתרו בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "lPC8Rl11oSo", duration: "11:24" },
-      { title: "קריאת פרשת משפטים חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "YlzVEwEvj8I", duration: "14:31" },
-      { title: "קריאת פרשת משפטים חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "6wz1bN4wTkw", duration: "1:54" },
-      { title: "קריאת פרשת תצוה חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "Obd-GGjKMUI", duration: "14:31" },
-      { title: "קריאת פרשת תצוה חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "Fm5Lew39HKI", duration: "0:39" },
-      { title: "קריאת פרשת כי תשא חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "7xxzK5p1r-Y", duration: "14:31" },
-      { title: "קריאת פרשת כי תשא חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "TUhqFNLMqzw", duration: "9:52" },
-      { title: "קריאת פרשת ויקהל חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "9olfyE91MRc", duration: "14:31" },
-      { title: "קריאת פרשת ויקהל חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "HBRZi9ihEAI", duration: "5:28" },
-      { title: "קריאת פרשת פקודי בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "r7O3H6zidwo", duration: "11:54" },
-      { title: "קריאת פרשת ויקרא חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "rX4royTZ1BU", duration: "14:31" },
-      { title: "קריאת פרשת ויקרא חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "HnLCPRqb_7s", duration: "2:01" },
-      { title: "קריאת פרשת צו בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "vIBX7CDtncI", duration: "14:15" },
-      { title: "קריאת פרשת שמיני חלק א' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "CHDOAehQCbw", duration: "14:31" },
-      { title: "קריאת פרשת שמיני חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "J9Rhttj_WAk", duration: "0:20" },
-      { title: "תזריע", videoId: "04mQ8_K2TIY", duration: "11:22" },
-      { title: "מצורע", videoId: "_Nki3lqYqiM", duration: "13:14" },
-      { title: "אחרי מות", videoId: "f1HWIBuvK9k", duration: "12:59" },
-      { title: "קדושים", videoId: "1uqkfsxqvu4", duration: "8:49" },
-      { title: 'קריאת פרשת אמור בטעמי יהודי עירק ע"י חיים סלמן', videoId: "rZT0MUZI_xs", duration: "14:31" },
-      { title: "בהר סיני", videoId: "wjvtiBXdHvY", duration: "9:00" },
-      { title: "בחוקותי", videoId: "PUv_54WanaA", duration: "10:05" },
-      { title: 'קריאה בתורה לשני וחמישי פרשת בחוקותי חכם חיים סלמן שליט"א', videoId: "DTRwYO2cm-A", duration: "58:14" },
-      { title: "במדבר Part 1", videoId: "isfGDzS3ung", duration: "14:30" },
-      { title: "במדבר Part 2", videoId: "JmOjgQQrvyQ", duration: "4:16" },
-      { title: "נשא Part 1", videoId: "1jTI3mtZzz4", duration: "14:30" },
-      { title: "נשא Part 2", videoId: "yDk0Lj0Qvus", duration: "6:34" },
-      { title: "ב הפטרה לפרשת נשא", videoId: "DPs5hlU0RFA", duration: "4:22" },
-      { title: "בהעלותך Part 1", videoId: "3zo64sjfIGA", duration: "14:30" },
-      { title: "בהעלותך Part 2", videoId: "EYJJqUynufQ", duration: "4:23" },
-      { title: "שלח לך Part 1", videoId: "nTHyID6DLxo", duration: "14:30" },
-      { title: "שלח לך Part 2", videoId: "91lTChXXyjU", duration: "1:14" },
-      { title: "חוקת", videoId: "y137BznWjzw", duration: "12:59" },
-      { title: "בלק Part 1", videoId: "8WZfY2T_Ybw", duration: "14:31" },
-      { title: "בלק Part 2", videoId: "wuPomC7XHt8", duration: "1:03" },
-      { title: "פינחס Part 1", videoId: "1YfcJcEoLYA", duration: "14:31" },
-      { title: "פינחס Part 2", videoId: "ah-I1vAk3JY", duration: "5:38" },
-      { title: "מטות Part 1", videoId: "HYKMhycyOJM", duration: "14:31" },
-      { title: "מטות Part 2", videoId: "iqwLUpzcqFs", duration: "1:57" },
-      { title: "מסעי Part 1", videoId: "27vKQdGKUcw", duration: "14:31" },
-      { title: "מסעי Part 2", videoId: "nk6Y6T5UU3k", duration: "2:11" },
-      { title: "דברים Part 1", videoId: "sR2rRCQPTRc", duration: "14:31" },
-      { title: "דברים Part 2", videoId: "tApEWtxtLDQ", duration: "0:53" },
-      { title: "ואתחנן Part 1", videoId: "ng6lmTBbrrI", duration: "14:31" },
-      { title: "ואתחנן Part 2", videoId: "cEEkU_gg0as", duration: "5:46" },
-      { title: "עקב Part 1", videoId: "rDvJntixrSk", duration: "14:31" },
-      { title: "עקב Part 2", videoId: "08bjwm0n4Lw", duration: "4:47" },
-      { title: "ראה Part 1", videoId: "92oRrXkNOa0", duration: "14:31" },
-      { title: "ראה Part 2", videoId: "T4tugp0CSeM", duration: "6:46" },
-      { title: "שופטים Part 1", videoId: "nVIZfbDD4l4", duration: "14:31" },
-      { title: "כי תצא Part 1", videoId: "IubyKiKQ5xE", duration: "14:31" },
-      { title: "כי תצא Part 2", videoId: "KHFDJVEmUpU", duration: "1:31" },
-      { title: "כי תבוא Part 1", videoId: "xu3G6S9w8-M", duration: "14:31" },
-      { title: "כי תבוא Part 2", videoId: "9de5N8O3fDg", duration: "0:37" },
-      { title: "נצבים", videoId: "09L_62bb2PA", duration: "7:28" },
-      { title: "וילך", videoId: "Xs79FPjGqKI", duration: "5:58" },
-      { title: "קריאת פרשת האזינו בטעמי יהודי עירק ע\"י חיים סלמן", videoId: "pKOil0plKX4", duration: "6:31" },
-      { title: "וזאת הברכה", videoId: "_2TyEDF1Ctw", duration: "9:25" },
-      { title: "קריאת שמע", videoId: "umaKfN1wjGA", duration: "5:10" },
-      { title: "הדרן עלך אוריתא קדישתא-לסיום התורה", videoId: "kub9DPezv0Q", duration: "0:20" }
-    ]
-  },
+{
+  "id": "rosh-chodesh",
+  "name": "שירי ראש חודש - חיים סלמן",
+  "channel": "חיים סלמן",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLS0KZQAGE9hc",
+  "songs": [
+    {
+      "title": "שיר לכבוד חודש תשרי",
+      "videoId": "3So30xbRPwg",
+      "duration": "4:48"
+    },
+    {
+      "title": "שיר לכבוד חודש חשון בביצוע חיים סלמן",
+      "videoId": "DBzYXX7YPMY",
+      "duration": "2:48"
+    },
+    {
+      "title": "שיר לכבוד ר\"ח טבת כתב ובצע חיים סלמן",
+      "videoId": "ZsaaxY8jpUE",
+      "duration": "3:35"
+    },
+    {
+      "title": "שיר לכבוד ראש חודש שבט כתב ומבצע חיים סלמן",
+      "videoId": "ZtniohITKdQ",
+      "duration": "3:51"
+    },
+    {
+      "title": "ראש חודש לישראל - שיר לכבוד חודש אדר בביצוע חיים סלמן",
+      "videoId": "FvM-TCccw_Q",
+      "duration": "3:52"
+    },
+    {
+      "title": "שיר לכבוד חודש ניסן - המחבר והמבצע: חיים סלמן",
+      "videoId": "ujAZ8G8Jyt4",
+      "duration": "4:07"
+    },
+    {
+      "title": "שיר לכבוד חודש אייר כתב ומבצע חיים סלמן",
+      "videoId": "c_p_HCCpHJA",
+      "duration": "4:19"
+    },
+    {
+      "title": "שיר לכבוד ראש חודש סיון כתב ומבצע חיים סלמן",
+      "videoId": "JzJ0FHGUTKU",
+      "duration": "3:34"
+    },
+    {
+      "title": "שיר לכבוד חודש תמוז בביצוע חיים סלמן",
+      "videoId": "EcuvcIiC4r0",
+      "duration": "2:48"
+    },
+    {
+      "title": "שיר לכבוד חודש מנחם אב - בביצוע חיים סלמן",
+      "videoId": "jodPl2_pDAA",
+      "duration": "2:47"
+    },
+    {
+      "title": "שיר לכבוד חודש אלול. כתב ומבצע חיים סלמן",
+      "videoId": "NZuYgdMKuvg",
+      "duration": "3:31"
+    },
+    {
+      "title": "שיר לכבוד ראש חודש כסלו - כתב ומבצע חיים סלמן",
+      "videoId": "5qS4wFr5_gM",
+      "duration": "3:49"
+    },
+    {
+      "title": "שיר לכבוד ראש חודש אייר - חיים סלמן",
+      "videoId": "RIs_KQ7jFf8",
+      "duration": "3:32"
+    },
+    {
+      "title": "שיר לכבוד ראש חודש ניסן - חיים סלמן",
+      "videoId": "4tRM4MjKGAs",
+      "duration": "5:02"
+    },
+    {
+      "title": "שיר לכבוד ראש חודש אדר ב' כתב ומבצע: חיים סלמן",
+      "videoId": "QF4QoGB_IKo",
+      "duration": "1:38"
+    },
+    {
+      "title": "שיר לכבוד ראש חודש אדר שכתב ומבצע: חיים סלמן",
+      "videoId": "FLTjEj-DQ2E",
+      "duration": "3:58"
+    },
+    {
+      "title": "שיר לכבוד ראש חודש סיוון כתב ומבצע חיים סלמן",
+      "videoId": "63Iqb7vrusc",
+      "duration": "3:45"
+    },
+    {
+      "title": "ראש חודש לישראל - טל ונתלאל סלמן",
+      "videoId": "tzk3dRDhibo",
+      "duration": "1:10"
+    },
+    {
+      "title": "שירו לאל נבוני-פיוט לשבת וראש חודש",
+      "videoId": "6_k-J5AWOHU",
+      "duration": "2:46"
+    },
+    {
+      "title": "ראש חודש לישראל",
+      "videoId": "EtzwbRL-d30",
+      "duration": "4:01"
+    },
+    {
+      "title": "ראש חודש לישראל2",
+      "videoId": "RSI5owOpd-4",
+      "duration": "2:36"
+    },
+    {
+      "title": "הפטרת ערב ראש חודש שחל בשבת",
+      "videoId": "R3F8KBI_TGw",
+      "duration": "5:44"
+    },
+    {
+      "title": "הפטרת שבת וראש חודש",
+      "videoId": "gKHLPCA4Gr8",
+      "duration": "5:26"
+    }
+  ]
+},
+{
+  "id": "taamei-hamikra",
+  "name": "טעמי המקרא - חיים סלמן",
+  "channel": "חיים סלמן",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLbIBGdyDfPSE",
+  "songs": [
+    {
+      "title": "טעמי הנביאים",
+      "videoId": "xn3LcQaNyVI",
+      "duration": "1:07"
+    },
+    {
+      "title": "טעמי הכתובים נוסח בבלי חכם חיים סלמן שליט\"א",
+      "videoId": "uxSS7JJta4w",
+      "duration": "1:06"
+    },
+    {
+      "title": "מגילת אסתר פרק א-כמנהג יהודי עירק קורא: חיים סלמן",
+      "videoId": "MuCqn5iQu8o",
+      "duration": "6:29"
+    },
+    {
+      "title": "1.תהלים - לימוד הטעמים - חיים סלמן",
+      "videoId": "VOc299t3O9w",
+      "duration": "8:55"
+    },
+    {
+      "title": "11.תהלים טעמים",
+      "videoId": "M7QqNgUrAgA",
+      "duration": "46:10"
+    },
+    {
+      "title": "טעמי הנביאים חכם חיים סלמן שליט\"א",
+      "videoId": "9FMo2kXqmHE",
+      "duration": "1:28"
+    },
+    {
+      "title": "טעמי הכתובים",
+      "videoId": "u5r87QCYmQU",
+      "duration": "1:03"
+    },
+    {
+      "title": "ב. אותיות א-ג - מבטא האותיות בלשון הקודש - חיים סלמן",
+      "videoId": "_iFTb60GqV0",
+      "duration": "6:03"
+    },
+    {
+      "title": "לימוד לשון הקודש טעמי הנביאים חכם חיים סלמן שליט\"א",
+      "videoId": "68eALZGnMvA",
+      "duration": "1:06:16"
+    },
+    {
+      "title": "לימוד לשון הקודש טעמי הנביאים חכם חיים סלמן שליט\"א",
+      "videoId": "BqOHHrNdAUI",
+      "duration": "1:03:33"
+    },
+    {
+      "title": "2.תהלים לימוד הטעמים",
+      "videoId": "X90zrhwEFes",
+      "duration": "44:25"
+    },
+    {
+      "title": "לימוד לשון הקודש טעמי הכתובים חכם חיים סלמן שליט\"א",
+      "videoId": "titfLTTm1OM",
+      "duration": "55:32"
+    },
+    {
+      "title": "לימוד טעמי הנביאים שיעור 1 חכם חיים סלמן שליט\"א",
+      "videoId": "EBK51a2r7sk",
+      "duration": "55:12"
+    },
+    {
+      "title": "לימוד לשון הקודש טעמי איוב חכם חיים סלמן שליט\"א",
+      "videoId": "hs_QQAIeZ3Y",
+      "duration": "57:08"
+    },
+    {
+      "title": "לימוד לשון הקודש טעמי הכתובים חכם חיים סלמן שליט\"א",
+      "videoId": "QQardplNTJ0",
+      "duration": "1:00:58"
+    },
+    {
+      "title": "לימוד לשון הקודש טעמי הנביאים חכם חיים סלמן שליט\"א",
+      "videoId": "6DBNq5r4Xdg",
+      "duration": "59:26"
+    },
+    {
+      "title": "טעמי המקרא",
+      "videoId": "D-O92h05cxA",
+      "duration": "1:36"
+    },
+    {
+      "title": "שירת הים בנעימה מיוחדת של יהודי עירק",
+      "videoId": "WH4PIQVnS5U",
+      "duration": "5:46"
+    },
+    {
+      "title": "קריאת שיר השירים בטעמים",
+      "videoId": "g9NbwySMARE",
+      "duration": "2:40"
+    },
+    {
+      "title": "קריאת עשרת הדברות ואתחנן בטעם עליון",
+      "videoId": "vaT5v1GjXcc",
+      "duration": "4:18"
+    },
+    {
+      "title": "קריאת ספר משלי בטעמים",
+      "videoId": "kzfGG1HhRyQ",
+      "duration": "3:57"
+    },
+    {
+      "title": "קריאת המשנה בנעימת יהודי עירק",
+      "videoId": "ggQWhlzbrBs",
+      "duration": "2:40"
+    },
+    {
+      "title": "קריאת הזהר בנעימת יהודי עירק",
+      "videoId": "38BtHGaTDIU",
+      "duration": "1:55"
+    },
+    {
+      "title": "קריאה לשבת זכור",
+      "videoId": "rl19XC-pXyo",
+      "duration": "5:51"
+    },
+    {
+      "title": "ספר ישעיה פרק א'",
+      "videoId": "KKbUDRQmj_g",
+      "duration": "7:05"
+    },
+    {
+      "title": "דוגמא לטעמי המקרא -פרשת בראשית",
+      "videoId": "q6BDWWyiOW8",
+      "duration": "2:44"
+    },
+    {
+      "title": "דוגמא לטעמי הכתובים-מגילת אסתר",
+      "videoId": "D3xmddyEaqE",
+      "duration": "2:19"
+    },
+    {
+      "title": "איוב 01",
+      "videoId": "IWCZaxSP8us",
+      "duration": "6:25"
+    },
+    {
+      "title": "קריאת ספר איוב בטעמים",
+      "videoId": "3NhabNu94ao",
+      "duration": "4:35"
+    }
+  ]
+},
+{
+  "id": "rosh-hashana-tefilot",
+  "name": "תפילות לראש השנה וכיפור - חיים סלמן",
+  "channel": "חיים סלמן",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLFM8u8mx1c80",
+  "songs": [
+    {
+      "title": "Rosh Hashana - תפילת העמידה לראש השנה - חיים סלמן",
+      "videoId": "0yX79FDQ6ks",
+      "duration": "10:18"
+    },
+    {
+      "title": "Rosh Hashana - חיים סלמן - תפלה על הפרנסה",
+      "videoId": "Oox5qqLR3cQ",
+      "duration": "2:56"
+    },
+    {
+      "title": "אוחילה לאל פתיחה לפני חזרת המוסף של ראש השנה",
+      "videoId": "-NXPSSzifGA",
+      "duration": "0:51"
+    },
+    {
+      "title": "קדיש לראש השנה וכיפור-כמנהג יהודי עירק בביצוע חיים סלמן",
+      "videoId": "W_aWMTdAvdA",
+      "duration": "2:20"
+    },
+    {
+      "title": "Rosh Hashana - חיים סלמן - מזמור לראש השנה",
+      "videoId": "sEFRg-Cz-nw",
+      "duration": "2:25"
+    },
+    {
+      "title": "המבורך-מתוך תפלת שחרית של ראש השנה כמנהג יהודי עירק בביצוע הרב אייל סלמן",
+      "videoId": "HELVV0WpE6I",
+      "duration": "3:10"
+    },
+    {
+      "title": "אשרי העם יודעי תרועה אחרי תקיעת שופר",
+      "videoId": "NvN3qHAxLXQ",
+      "duration": "0:55"
+    },
+    {
+      "title": "Havdala תפילות כמנהג יהודי עירק - הבדלה - בביצוע חיים סלמן",
+      "videoId": "TX0CWR1SYa8",
+      "duration": "3:03"
+    },
+    {
+      "title": "חון תחון-פיוט לראש השנה וכיפור של יהודי עירק בביצוע הרב אייל וחיים סלמן",
+      "videoId": "6WJ4Magho20",
+      "duration": "2:21"
+    },
+    {
+      "title": "תזכורת לראש השנה",
+      "videoId": "Cc-YUthA2Eo",
+      "duration": "0:47"
+    },
+    {
+      "title": "שמע קולי-פתיחה לתפילת ערבית של יום כיפור בנעימת יהודי עירק בביצוע חיים סלמן",
+      "videoId": "sOqxvckVU6s",
+      "duration": "3:57"
+    },
+    {
+      "title": "היום הרת עולם אחרי כל תקיעה במוסף",
+      "videoId": "kZWSzsr_T6A",
+      "duration": "1:13"
+    },
+    {
+      "title": "אחות קטנה לליל ראש השנה",
+      "videoId": "1n7NE5LTgE4",
+      "duration": "3:04"
+    },
+    {
+      "title": "סדר העבודה 1",
+      "videoId": "1BxGt9brONI",
+      "duration": "3:46"
+    },
+    {
+      "title": "אבינו מלכנו לאחר חזרת שחרית",
+      "videoId": "WN3Ea38R9os",
+      "duration": "2:20"
+    },
+    {
+      "title": "קדושת שחרית של כפור",
+      "videoId": "3dVNwbNvQSk",
+      "duration": "1:54"
+    },
+    {
+      "title": "קדושת כתר",
+      "videoId": "ZkswCMgAi9A",
+      "duration": "2:37"
+    },
+    {
+      "title": "עמידה של כפור-1",
+      "videoId": "49n-xNHBaco",
+      "duration": "5:25"
+    },
+    {
+      "title": "עמידה של כפור 3",
+      "videoId": "Ej1UWFQjGco",
+      "duration": "3:13"
+    },
+    {
+      "title": "עמידה של כפור2",
+      "videoId": "PXW3TvC42OA",
+      "duration": "2:58"
+    },
+    {
+      "title": "סדר העבודה 4",
+      "videoId": "ye_X47ZmyiU",
+      "duration": "5:24"
+    },
+    {
+      "title": "סדר העבודה 5",
+      "videoId": "6tGrfp68x7A",
+      "duration": "3:47"
+    },
+    {
+      "title": "סדר העבודה 3",
+      "videoId": "LIlzPLwKNGw",
+      "duration": "3:49"
+    },
+    {
+      "title": "סדר העבודה 2",
+      "videoId": "uPxNT68Igj8",
+      "duration": "3:35"
+    },
+    {
+      "title": "למענך אלהי",
+      "videoId": "kYJk6qVTF_Q",
+      "duration": "2:33"
+    },
+    {
+      "title": "ניצוצים נקבצים-לפני ברוך שאמר",
+      "videoId": "WqRspRKUstM",
+      "duration": "2:21"
+    },
+    {
+      "title": "ובכן נקדישך מלך",
+      "videoId": "8qd3G1Gicvo",
+      "duration": "3:01"
+    },
+    {
+      "title": "ובכן ולך תעלה קדושה",
+      "videoId": "Rc3xR06Ds1I",
+      "duration": "2:26"
+    },
+    {
+      "title": "הנשמה לך והגוף פעלך",
+      "videoId": "rZFDLzg3zK0",
+      "duration": "3:45"
+    },
+    {
+      "title": "הווידוי של רבנו נסים",
+      "videoId": "1Q2HGmD9_Xo",
+      "duration": "3:37"
+    },
+    {
+      "title": "ארומימך חזקי וחלקי-פיוט לפני סדר העבודה",
+      "videoId": "FY2I6aCSuLo",
+      "duration": "2:23"
+    },
+    {
+      "title": "אנא בקראנו",
+      "videoId": "SSpb2RUbgKs",
+      "duration": "2:37"
+    },
+    {
+      "title": "אל נורא עלילה-תפילת הנעילה",
+      "videoId": "vnMC9yn2Ft0",
+      "duration": "4:03"
+    },
+    {
+      "title": "אלהים אלי אתה-לפני ברוך שאמר",
+      "videoId": "6ZlKwL6U6-w",
+      "duration": "1:16"
+    },
+    {
+      "title": "אל מלך יושב על כסא רחמים",
+      "videoId": "EH6no0QwdpE",
+      "duration": "1:16"
+    },
+    {
+      "title": "אדיר ונאור מהיר",
+      "videoId": "ltkctK_lx3E",
+      "duration": "1:08"
+    },
+    {
+      "title": "אדיר ונאור איטי",
+      "videoId": "fortNHtgH8o",
+      "duration": "2:58"
+    },
+    {
+      "title": "שימני ראש על כל אויבי",
+      "videoId": "TB0eWaH7Ogw",
+      "duration": "3:45"
+    },
+    {
+      "title": "אבינו מלכנו-קטע מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "mdgbx6_m3iY",
+      "duration": "2:25"
+    }
+  ]
+},
+{
+  "id": "parashiyot-hatorah",
+  "name": "קריאת פרשיות התורה - חיים סלמן",
+  "channel": "חיים סלמן",
+  "sourceUrl": "https://www.youtube.com/playlist?list=PLCaysuk-lh9U",
+  "songs": [
+    {
+      "title": "קריאת פרשת בראשית חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "yvPoB28etQs",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת בראשית חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "cpThw4jquno",
+      "duration": "5:30"
+    },
+    {
+      "title": "Tora - פרשיות התורה - נח - בטעמי יהודי עירק- חיים סלמן",
+      "videoId": "nq3KnKvK3AA",
+      "duration": "3:17"
+    },
+    {
+      "title": "קריאת פרשת לך לך חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "W2vdjbgzaKc",
+      "duration": "14:31"
+    },
+    {
+      "title": "Tora - פרשיות התורה - וירא - בטעמי יהודי עירק- חיים סלמן",
+      "videoId": "5hyCz9cYv-I",
+      "duration": "3:01"
+    },
+    {
+      "title": "פרשת העקדה",
+      "videoId": "UXY9f56JuZg",
+      "duration": "5:00"
+    },
+    {
+      "title": "קריאת פרשת העקדה כמנהג יהודי עירק בביצוע: חיים סלמן",
+      "videoId": "tKBy5-lyF6s",
+      "duration": "3:51"
+    },
+    {
+      "title": "קריאת פרשת חיי שרה בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "o1H3Fnq6EgQ",
+      "duration": "14:00"
+    },
+    {
+      "title": "Tora - פרשיות התורה - תולדות - בטעמי יהודי עירק- חיים סלמן",
+      "videoId": "pEamGL-mXpo",
+      "duration": "3:24"
+    },
+    {
+      "title": "קריאת פרשת תולדות חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "TaYHj5XBwkI",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת תולדות חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "6qKZx9UqvjQ",
+      "duration": "1:27"
+    },
+    {
+      "title": "קריאת פרשת ויצא חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "7XstCzz5E2U",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת ויצא חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "bAPDN_5Wg6I",
+      "duration": "6:39"
+    },
+    {
+      "title": "Tora - פרשיות התורה - וישלח- בטעמי יהודי עירק- חיים סלמן",
+      "videoId": "JthfH2JQFLU",
+      "duration": "2:21"
+    },
+    {
+      "title": "קריאת פרשת וישלח חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "7KzMRQN6wnU",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת וישלח חלק ב' בטעמי יהודי עירק ע\"י חים סלמן",
+      "videoId": "LEZro1OnSRA",
+      "duration": "9:23"
+    },
+    {
+      "title": "Tora - פרשיות התורה - וישב - בטעמי יהודי עירק- חיים סלמן",
+      "videoId": "iMk69-3hFDw",
+      "duration": "2:45"
+    },
+    {
+      "title": "קריאת פרשת וישב חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "Bbp7xNS7NkE",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת וישב חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "kVFkzLJQqlA",
+      "duration": "6:12"
+    },
+    {
+      "title": "קריאת פרשת מקץ חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "bf2CWfKax8M",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת מקץ חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "a3pdIV-Y8Ss",
+      "duration": "6:29"
+    },
+    {
+      "title": "קריאת פרשת ויגש חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "U2WsZeOOWZY",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת ויגש חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "pXmqTEM4aOk",
+      "duration": "2:54"
+    },
+    {
+      "title": "קריאת פרשת ויחי חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "DH8pttF59b4",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת ויחי חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "EqKD0uqOhDM",
+      "duration": "0:26"
+    },
+    {
+      "title": "קריאת פרשת שמות חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "-xzdJZLUhjA",
+      "duration": "14:30"
+    },
+    {
+      "title": "קריאת פרשת שמות חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "xmTkHGdSusg",
+      "duration": "7:03"
+    },
+    {
+      "title": "קריאת פרשת וארא חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "kQ768DRCTns",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת וארא חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "ekpUabCHCNU",
+      "duration": "3:19"
+    },
+    {
+      "title": "קריאת פרשת בא חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "zUHjTDZKH6E",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת בא חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "69wvgx744oU",
+      "duration": "1:39"
+    },
+    {
+      "title": "קריאת פרשת בשלח חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "7D2jGJagmXM",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת בשלח חלק ב' בטעמי עירק ע\"י חיים סלמן",
+      "videoId": "u_xQ68j7EMI",
+      "duration": "5:37"
+    },
+    {
+      "title": "קריאת פרשת יתרו בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "lPC8Rl11oSo",
+      "duration": "11:24"
+    },
+    {
+      "title": "קריאת פרשת משפטים חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "YlzVEwEvj8I",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת משפטים חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "6wz1bN4wTkw",
+      "duration": "1:54"
+    },
+    {
+      "title": "קריאת פרשת תצוה חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "Obd-GGjKMUI",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת תצוה חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "Fm5Lew39HKI",
+      "duration": "0:39"
+    },
+    {
+      "title": "קריאת פרשת כי תשא חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "7xxzK5p1r-Y",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת כי תשא חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "TUhqFNLMqzw",
+      "duration": "9:52"
+    },
+    {
+      "title": "קריאת פרשת ויקהל חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "9olfyE91MRc",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת ויקהל חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "HBRZi9ihEAI",
+      "duration": "5:28"
+    },
+    {
+      "title": "קריאת פרשת פקודי בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "r7O3H6zidwo",
+      "duration": "11:54"
+    },
+    {
+      "title": "קריאת פרשת ויקרא חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "rX4royTZ1BU",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת ויקרא חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "HnLCPRqb_7s",
+      "duration": "2:01"
+    },
+    {
+      "title": "קריאת פרשת צו בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "vIBX7CDtncI",
+      "duration": "14:15"
+    },
+    {
+      "title": "קריאת פרשת שמיני חלק א' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "CHDOAehQCbw",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת שמיני חלק ב' בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "J9Rhttj_WAk",
+      "duration": "0:20"
+    },
+    {
+      "title": "תזריע",
+      "videoId": "04mQ8_K2TIY",
+      "duration": "11:22"
+    },
+    {
+      "title": "מצורע",
+      "videoId": "_Nki3lqYqiM",
+      "duration": "13:14"
+    },
+    {
+      "title": "אחרי מות",
+      "videoId": "f1HWIBuvK9k",
+      "duration": "12:59"
+    },
+    {
+      "title": "קדושים",
+      "videoId": "1uqkfsxqvu4",
+      "duration": "8:49"
+    },
+    {
+      "title": "קריאת פרשת אמור בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "rZT0MUZI_xs",
+      "duration": "14:31"
+    },
+    {
+      "title": "בהר סיני",
+      "videoId": "wjvtiBXdHvY",
+      "duration": "9:00"
+    },
+    {
+      "title": "בחוקותי",
+      "videoId": "PUv_54WanaA",
+      "duration": "10:05"
+    },
+    {
+      "title": "קריאה בתורה לשני וחמישי פרשת בחוקותי חכם חיים סלמן שליט\"א",
+      "videoId": "DTRwYO2cm-A",
+      "duration": "58:14"
+    },
+    {
+      "title": "במדבר Part 1",
+      "videoId": "isfGDzS3ung",
+      "duration": "14:30"
+    },
+    {
+      "title": "במדבר Part 2",
+      "videoId": "JmOjgQQrvyQ",
+      "duration": "4:16"
+    },
+    {
+      "title": "נשא Part 1",
+      "videoId": "1jTI3mtZzz4",
+      "duration": "14:30"
+    },
+    {
+      "title": "נשא Part 2",
+      "videoId": "yDk0Lj0Qvus",
+      "duration": "6:34"
+    },
+    {
+      "title": "ב הפטרה לפרשת נשא",
+      "videoId": "DPs5hlU0RFA",
+      "duration": "4:22"
+    },
+    {
+      "title": "בהעלותך Part 1",
+      "videoId": "3zo64sjfIGA",
+      "duration": "14:30"
+    },
+    {
+      "title": "בהעלותך Part 2",
+      "videoId": "EYJJqUynufQ",
+      "duration": "4:23"
+    },
+    {
+      "title": "שלח לך Part 1",
+      "videoId": "nTHyID6DLxo",
+      "duration": "14:30"
+    },
+    {
+      "title": "שלח לך Part 2",
+      "videoId": "91lTChXXyjU",
+      "duration": "1:14"
+    },
+    {
+      "title": "חוקת",
+      "videoId": "y137BznWjzw",
+      "duration": "12:59"
+    },
+    {
+      "title": "בלק Part 1",
+      "videoId": "8WZfY2T_Ybw",
+      "duration": "14:31"
+    },
+    {
+      "title": "בלק Part 2",
+      "videoId": "wuPomC7XHt8",
+      "duration": "1:03"
+    },
+    {
+      "title": "פינחס Part 1",
+      "videoId": "1YfcJcEoLYA",
+      "duration": "14:31"
+    },
+    {
+      "title": "פינחס Part 2",
+      "videoId": "ah-I1vAk3JY",
+      "duration": "5:38"
+    },
+    {
+      "title": "מטות Part 1",
+      "videoId": "HYKMhycyOJM",
+      "duration": "14:31"
+    },
+    {
+      "title": "מטות Part 2",
+      "videoId": "iqwLUpzcqFs",
+      "duration": "1:57"
+    },
+    {
+      "title": "מסעי Part 1",
+      "videoId": "27vKQdGKUcw",
+      "duration": "14:31"
+    },
+    {
+      "title": "מסעי Part 2",
+      "videoId": "nk6Y6T5UU3k",
+      "duration": "2:11"
+    },
+    {
+      "title": "דברים Part 1",
+      "videoId": "sR2rRCQPTRc",
+      "duration": "14:31"
+    },
+    {
+      "title": "דברים Part 2",
+      "videoId": "tApEWtxtLDQ",
+      "duration": "0:53"
+    },
+    {
+      "title": "ואתחנן Part 1",
+      "videoId": "ng6lmTBbrrI",
+      "duration": "14:31"
+    },
+    {
+      "title": "ואתחנן Part 2",
+      "videoId": "cEEkU_gg0as",
+      "duration": "5:46"
+    },
+    {
+      "title": "עקב Part 1",
+      "videoId": "rDvJntixrSk",
+      "duration": "14:31"
+    },
+    {
+      "title": "עקב Part 2",
+      "videoId": "08bjwm0n4Lw",
+      "duration": "4:47"
+    },
+    {
+      "title": "ראה Part 1",
+      "videoId": "92oRrXkNOa0",
+      "duration": "14:31"
+    },
+    {
+      "title": "ראה Part 2",
+      "videoId": "T4tugp0CSeM",
+      "duration": "6:46"
+    },
+    {
+      "title": "שופטים Part 1",
+      "videoId": "nVIZfbDD4l4",
+      "duration": "14:31"
+    },
+    {
+      "title": "כי תצא Part 1",
+      "videoId": "IubyKiKQ5xE",
+      "duration": "14:31"
+    },
+    {
+      "title": "כי תצא Part 2",
+      "videoId": "KHFDJVEmUpU",
+      "duration": "1:31"
+    },
+    {
+      "title": "כי תבוא Part 1",
+      "videoId": "xu3G6S9w8-M",
+      "duration": "14:31"
+    },
+    {
+      "title": "כי תבוא Part 2",
+      "videoId": "9de5N8O3fDg",
+      "duration": "0:37"
+    },
+    {
+      "title": "נצבים",
+      "videoId": "09L_62bb2PA",
+      "duration": "7:28"
+    },
+    {
+      "title": "וילך",
+      "videoId": "Xs79FPjGqKI",
+      "duration": "5:58"
+    },
+    {
+      "title": "קריאת פרשת האזינו בטעמי יהודי עירק ע\"י חיים סלמן",
+      "videoId": "pKOil0plKX4",
+      "duration": "6:31"
+    },
+    {
+      "title": "וזאת הברכה",
+      "videoId": "_2TyEDF1Ctw",
+      "duration": "9:25"
+    },
+    {
+      "title": "קריאת שמע",
+      "videoId": "umaKfN1wjGA",
+      "duration": "5:10"
+    },
+    {
+      "title": "הדרן עלך אוריתא קדישתא-לסיום התורה",
+      "videoId": "kub9DPezv0Q",
+      "duration": "0:20"
+    },
+    {
+      "title": "ז פרשת אמור בשלמותה Part 2",
+      "videoId": "1knSOF45EZU",
+      "duration": "1:12"
+    },
+    {
+      "title": "ד פרשת וירא חלק א'",
+      "videoId": "TmmFs--BtlQ",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאת פרשת וירא חלק ב' ע\"י חיים סלמן בטעמי יהודי עירק",
+      "videoId": "yhFEvIjsTdE",
+      "duration": "4:25"
+    },
+    {
+      "title": "זהר פרשת כי תשא בנעימת יהודי עירק - מבצע: חיים סלמן",
+      "videoId": "tojcYzZP-4U",
+      "duration": "9:19"
+    },
+    {
+      "title": "ב פרשת נח בשלמותה Part 1",
+      "videoId": "hMXyegV14_M",
+      "duration": "14:31"
+    },
+    {
+      "title": "ב פרשת נח בשלמותה Part 2",
+      "videoId": "IlAUZqyJd10",
+      "duration": "3:12"
+    },
+    {
+      "title": "קריאת פרשת לך לך חלק ב' בנעימת יהודי עירק ע\"י חיים סלמן",
+      "videoId": "7iwZtQ1Qa30",
+      "duration": "3:22"
+    },
+    {
+      "title": "דרשה לפרשת תצוה מספר אדרת אליהו בביצוע: חיים סלמן",
+      "videoId": "RH1bVDLbH60",
+      "duration": "8:56"
+    },
+    {
+      "title": "דרשה לפרשת וארא מספר אדרת אליהו",
+      "videoId": "0oouDhPHya4",
+      "duration": "11:24"
+    }
+  ]
+},
 {
   "id": "otzrot-chaim",
   "name": "אוצרות חיים - חיים סלמן",
@@ -1084,6 +1916,56 @@ const playlists = [
       "title": "_._.אוצרות חיים - הקדמת המהרח\"ו זל לשער ההקדמותmp3",
       "videoId": "qCpa7nO70eM",
       "duration": "2:44"
+    },
+    {
+      "title": "79._.צרות חיים - שער האונאה פרק ב'  -  חיים סלמןmp3",
+      "videoId": "laxojWR9Oe0",
+      "duration": "36:52"
+    },
+    {
+      "title": "60._.אוצררות חיים - שער רחל ולאה פרק ב' דף מ\"ז ע\"ד   חיים סלמן    mp3",
+      "videoId": "csqbamrWgQc",
+      "duration": "52:44"
+    },
+    {
+      "title": "51._.אוצרות חים - שער פרצופי הזון פרק א דף מג - חיים סלמן    mp3",
+      "videoId": "vy2wX_VyPuc",
+      "duration": "46:01"
+    },
+    {
+      "title": "37._.אוצרות יים - שער המוחין פרק ב חיים סלמןmp3",
+      "videoId": "a1DW8Zuw2dE",
+      "duration": "37:19"
+    },
+    {
+      "title": "11.1_.אוצרוות חיים - שער עתיק פרק א - חיים סלמן           mp3",
+      "videoId": "9pX5kigzWOo",
+      "duration": "48:00"
+    },
+    {
+      "title": "20._.מושגים בקבלה - סיום - חיים סלמן            mp3",
+      "videoId": "EDaUKLfh5VM",
+      "duration": "11:32"
+    },
+    {
+      "title": "3._. מושגים בקבלה -סיכום הפתיחה למושגים - חיים סלמן         mp3",
+      "videoId": "VsuO0jcsZ40",
+      "duration": "6:05"
+    },
+    {
+      "title": "2._.מושגים בקבלה - שיעורי מושגים בקבלה - חיים סלמן           mp3",
+      "videoId": "IdKIE0Q7Kn8",
+      "duration": "1:09:14"
+    },
+    {
+      "title": "1._1_.מושגים בקבלה - מבוא למושגים בקבלה - חיים סלמןmp3",
+      "videoId": "-L17mXp-Yd8",
+      "duration": "5:27"
+    },
+    {
+      "title": "_2.סיום מסכת בבא בתרא - חיים סלמן                            mp3",
+      "videoId": "zfqqLMsIQ0w",
+      "duration": "9:58"
     }
   ]
 },
@@ -2722,6 +3604,436 @@ const playlists = [
       "title": "taqsim qanun taksim kanun تقسيم قانون תקסים קאנון",
       "videoId": "sw_Mzh68sGg",
       "duration": "4:15"
+    },
+    {
+      "title": "39.המשך חזרה קדיש",
+      "videoId": "qvnrsLs9vH4",
+      "duration": "37:55"
+    },
+    {
+      "title": "4.המשך שלהבת",
+      "videoId": "EYKgi__CMaI",
+      "duration": "22:45"
+    },
+    {
+      "title": "208.אתה גבור בסידור",
+      "videoId": "MVybF7aKyA0",
+      "duration": "27:10"
+    },
+    {
+      "title": "192.המשך קונה הכל בסידור",
+      "videoId": "MC5F4hcCauI",
+      "duration": "43:40"
+    },
+    {
+      "title": "191.קונה הכל בסידור",
+      "videoId": "BwCBkwEu8Vc",
+      "duration": "24:20"
+    },
+    {
+      "title": "189.גומל חסדים טובים בסידור",
+      "videoId": "6H7y_cWh0Jo",
+      "duration": "38:50"
+    },
+    {
+      "title": "187.אלהי אברהם אלהי יצחק ואלהי יעקב בסידור",
+      "videoId": "ZLe6Wf1RlYw",
+      "duration": "38:25"
+    },
+    {
+      "title": "188.אל עליון בסידור",
+      "videoId": "yGc0cTLmgEg",
+      "duration": "31:00"
+    },
+    {
+      "title": "186.אבותינו בסידור",
+      "videoId": "dCa1ray3FX0",
+      "duration": "25:15"
+    },
+    {
+      "title": "185.אלוקינו ואלוקי אבותינו בסידור",
+      "videoId": "Y1NXBieIB84",
+      "duration": "30:25"
+    },
+    {
+      "title": "183. המשך במלת השם",
+      "videoId": "kSmUxMpEuLY",
+      "duration": "40:10"
+    },
+    {
+      "title": "182.המשך מלת השם",
+      "videoId": "NkdJkFpOZh0",
+      "duration": "9:55"
+    },
+    {
+      "title": "180.זקיפות בשם השם בסידור הכוונות",
+      "videoId": "nFqjGwW6t9U",
+      "duration": "25:10"
+    },
+    {
+      "title": "176.המשך ברוך בסידור",
+      "videoId": "RNfmcth7BYM",
+      "duration": "30:45"
+    },
+    {
+      "title": "173.1המשך תהלתך",
+      "videoId": "hMxpWFXKl38",
+      "duration": "18:35"
+    },
+    {
+      "title": "152.דרוש ז קריאת שמע",
+      "videoId": "B98oFjrYee0",
+      "duration": "39:20"
+    },
+    {
+      "title": "154.המשך דרוש ח קריאת שמע",
+      "videoId": "EqmYvh6NsD4",
+      "duration": "41:15"
+    },
+    {
+      "title": "151.בשכמלו",
+      "videoId": "DRwlBli47nQ",
+      "duration": "44:05"
+    },
+    {
+      "title": "150.מלת אחד של שמע ישראל",
+      "videoId": "Q05IFP7W5ao",
+      "duration": "33:55"
+    },
+    {
+      "title": "153.דרוש ח קריאת שמע",
+      "videoId": "GAGN9z5KC2Q",
+      "duration": "33:05"
+    },
+    {
+      "title": "155.המשך דרוש ח שמע ישראל",
+      "videoId": "OGCNkSrsh-Y",
+      "duration": "44:20"
+    },
+    {
+      "title": "156.סידור הכוונות קריאת שמע  מלת שמע",
+      "videoId": "2AnrOC9MoF4",
+      "duration": "48:00"
+    },
+    {
+      "title": "19._.מושגים בקבלה - המשך - חיים סלמן          mp3",
+      "videoId": "uYMV-aimDdk",
+      "duration": "19:27"
+    },
+    {
+      "title": "18._. מושגים בקבלה - המשך - חיים סלמןmp3",
+      "videoId": "VzkB7h2FdNE",
+      "duration": "43:02"
+    },
+    {
+      "title": "17._.מושגים בקבלה - המשך - חיים סלמן                         mp3",
+      "videoId": "I3TNGEB2Se4",
+      "duration": "35:28"
+    },
+    {
+      "title": "16._. מושגים בקבלה - המשך - חיים סלמן                           mp3",
+      "videoId": "lrmHtwKMCck",
+      "duration": "37:40"
+    },
+    {
+      "title": "15._. מושגים בקבלה - המשך - חיים סלמן                       mp3",
+      "videoId": "00sT3aDqmg0",
+      "duration": "5:07"
+    },
+    {
+      "title": "14._.מושגים בקבלה - המשך - חיים סלמן                       mp3",
+      "videoId": "3GoxjmU1YQM",
+      "duration": "39:21"
+    },
+    {
+      "title": "13._.מושגים בקבלה - המשך - חיים סלמן                               mp3",
+      "videoId": "0ALt4hypTfU",
+      "duration": "1:08:11"
+    },
+    {
+      "title": "12._.מושגים בקבלה - המשך - חיים סלמן                          mp3",
+      "videoId": "pbkIljXvWvw",
+      "duration": "41:46"
+    },
+    {
+      "title": "11._. מושגים בקבלה - המשך - חיים סלמן          mp3",
+      "videoId": "qxAlT-gcZgM",
+      "duration": "48:25"
+    },
+    {
+      "title": "10._. מושגים בקבלה - המשך - חיים סלמן                     mp3",
+      "videoId": "NaW0dPBef3U",
+      "duration": "46:56"
+    },
+    {
+      "title": "9._.mp3מושגים בקבלה - המשך - חיים סלמן",
+      "videoId": "dsUJEgbp9og",
+      "duration": "41:37"
+    },
+    {
+      "title": "8._.מושגים בקבלה - המשך - חיים סלמן                          mp3",
+      "videoId": "fPuBzER9P1U",
+      "duration": "51:24"
+    },
+    {
+      "title": "7._. מושגים בקבלה - המשך - חיים סלמן                            mp3",
+      "videoId": "RVDvv8u7lQE",
+      "duration": "36:42"
+    },
+    {
+      "title": "6._.מושגים בקבלה - המשך - חיים סלמן         mp3",
+      "videoId": "tp5c7tpTnNQ",
+      "duration": "1:18:00"
+    },
+    {
+      "title": "5._.. מושגים בקבלה - המשך המושגים - חיים סלמן         mp3",
+      "videoId": "130tjVfgXFw",
+      "duration": "1:35:23"
+    },
+    {
+      "title": "4._.. מושגים בקבלה - המשך - חיים סלמן         mp3",
+      "videoId": "h5a9xSwDAwU",
+      "duration": "1:09:11"
+    },
+    {
+      "title": "13._.כוונות העומר - סיום -   חיים סלמן         mp3",
+      "videoId": "qNHB2_WAjqc",
+      "duration": "47:12"
+    },
+    {
+      "title": "12._. כוונות העומר- המשך כוונות העומר בברכת העומר - חיים סלמן   mp3",
+      "videoId": "_3T4ZBs-Rt8",
+      "duration": "37:29"
+    },
+    {
+      "title": "11._. כוונות העומר וחזרה על מטבע הברכה -חיים סלמן          mp3",
+      "videoId": "8Kmz7wZFJXE",
+      "duration": "29:20"
+    },
+    {
+      "title": "10._. כוונות העומר - חזרה על מטבע הברכה וברכת העומר - חיים סלמן    mp3",
+      "videoId": "q22RQRCIscY",
+      "duration": "42:46"
+    },
+    {
+      "title": "9._.כוונות העומר - המשך חזרה על מטבע הברכה בעומר - חיים סלמן    mp3",
+      "videoId": "X0cAZeag4HM",
+      "duration": "39:42"
+    },
+    {
+      "title": "8._. כוונות העומר - המשך כוונות מטבע הברכה וברכת העומר - חיים סלמן   mp3",
+      "videoId": "PmdMQyVDwpo",
+      "duration": "34:12"
+    },
+    {
+      "title": "7._.כוונות העומר - חזרה על מטבע הברכה וספירת העומר - חיים סלמן     mp3",
+      "videoId": "pykEGei_8XU",
+      "duration": "49:07"
+    },
+    {
+      "title": "6._.כוונות העומר - חזרה על מטבע הברכה ןברכת העומר - חיים סלמן      mp3",
+      "videoId": "Gp9nOH0Jpbo",
+      "duration": "1:25:39"
+    },
+    {
+      "title": "5._. כוונות העומר - חזרה כללית - חיים סלמן            mp3",
+      "videoId": "SR4nHzEYey4",
+      "duration": "59:37"
+    },
+    {
+      "title": "4._3.כוונות העומר - המשך כוונות ברכת העומר - חיים סלמן         mp3",
+      "videoId": "GjvpVdCK6ZY",
+      "duration": "33:28"
+    },
+    {
+      "title": "3._. כוונות העומר - המשך כוונות הברכה - חיים סלמן         mp3",
+      "videoId": "KM9GA1Qafj4",
+      "duration": "12:39"
+    },
+    {
+      "title": "2._.כוונות העומר - ברכת ספירת העומר - חיים סלמן             mp3",
+      "videoId": "lftzD4X3lXc",
+      "duration": "49:27"
+    },
+    {
+      "title": "1._.כוונות העומר - הקדמות - חיים סלמן          mp3",
+      "videoId": "JsQWCR7gZwY",
+      "duration": "1:11:35"
+    },
+    {
+      "title": "9._. קדיש  כוונות במלת בעלמא ובאמן האחרון  - התשע\"ז  -  חיים סלמןmp3",
+      "videoId": "Vcl-q2CVvhU",
+      "duration": "39:21"
+    },
+    {
+      "title": "8._.קדיש כוונות במלת ויתהלל התשע\"ז   -  חיים סלמן       mp3",
+      "videoId": "GhEzn3Anmpw",
+      "duration": "17:04"
+    },
+    {
+      "title": "7._. קדיש כוונות אמן השני התתשע\"ז  -  חיים סלמן    mp3",
+      "videoId": "y9BZBy9akXo",
+      "duration": "51:06"
+    },
+    {
+      "title": "6._. קדיש כוונות חזרה מהתחלה עד אמן השני התשע\"ז  -  חיים סלמן   mp3",
+      "videoId": "iqW8zIKR6cg",
+      "duration": "12:19"
+    },
+    {
+      "title": "5._. קדיש כוונות בעלמא די   התשע\"ז  -  חיים סלמן        mp3",
+      "videoId": "fvIXNSJJC18",
+      "duration": "50:46"
+    },
+    {
+      "title": "3._.קדיש  כוונות חזרה על יתגדל  התשע\"ז  -  חיים סלמן        mp3",
+      "videoId": "5dvea_Rd7jU",
+      "duration": "1:08:50"
+    },
+    {
+      "title": "2._. קדיש כוונות דקדיש דקרבנות התשע\"ז  -  חיים סלמן         mp3",
+      "videoId": "Brhn2JBJGNw",
+      "duration": "31:31"
+    },
+    {
+      "title": "12._. מטבע הברכה התשע\"ז  - חיים סלמן      mp3",
+      "videoId": "ei3a_5J76Qg",
+      "duration": "16:44"
+    },
+    {
+      "title": "11._. מטבע הברכה התשע\"ז  -   חיים סלמןmp3",
+      "videoId": "3X-MpXT6jDI",
+      "duration": "35:06"
+    },
+    {
+      "title": "10._. מטבע הברכה התשע\"ז  -  חיים סלמן  mp3",
+      "videoId": "Q9ZuZcqiYfw",
+      "duration": "43:41"
+    },
+    {
+      "title": "9._. מטבע הברכה התשע\"ז  -  חיים סלמן    mp3",
+      "videoId": "SOLfcrkJAIY",
+      "duration": "59:39"
+    },
+    {
+      "title": "8._. מטבע הברכה התשע\"ז  -  חיים סלמן   mp3",
+      "videoId": "zoH9a47TQNc",
+      "duration": "35:39"
+    },
+    {
+      "title": "7._.  מטבע הברכה התשע\"ז  - חיים סלמן     mp3",
+      "videoId": "sLgmFpquOsM",
+      "duration": "40:26"
+    },
+    {
+      "title": "6._.מטבע הברכה התשע\"ז  - חיים סלמן   mp3",
+      "videoId": "icuc7WfTZCc",
+      "duration": "53:53"
+    },
+    {
+      "title": "5._.מטבע הברכה התשע\"ז  -  חיים סלמןmp3",
+      "videoId": "gyJBouJaERk",
+      "duration": "46:52"
+    },
+    {
+      "title": "4._.מטבע הברכה התשע\"ז - חייםסלמןmp3",
+      "videoId": "KZF02sMgPDg",
+      "duration": "50:21"
+    },
+    {
+      "title": "3.  מטבע הברכה התשע\"ז  -  חיים סלמן",
+      "videoId": "d7Th8EMaRQ4",
+      "duration": "38:50"
+    },
+    {
+      "title": "2._.מטבע הברכה התשע\"ז  -  חיים סלמןmp3",
+      "videoId": "8oHsnjPJR8o",
+      "duration": "57:39"
+    },
+    {
+      "title": "1._.מטבע הברכה התשע\"ז  - חיים סלמןmp3",
+      "videoId": "fMUdql8YGLo",
+      "duration": "37:43"
+    },
+    {
+      "title": "74.6_.המשך כוונותחנוכה התשע\"ז - חיים סלמן   mp3",
+      "videoId": "P9Fh6cqDIRE",
+      "duration": "16:59"
+    },
+    {
+      "title": "74.5_.המשך כוונות חנוכה התשע\"ז  -  חיים סלמןmp3",
+      "videoId": "YIGqamn8fVo",
+      "duration": "24:45"
+    },
+    {
+      "title": "74.4_.המשך כוונות חנוכה התשע\"ז  -  חיים סלמןmp3",
+      "videoId": "LC9-4PoU0kA",
+      "duration": "47:21"
+    },
+    {
+      "title": "74.3_.המשך כוונות חנוכה התשע\"ז - חיים סלמןmp3",
+      "videoId": "18ZLx9GXOUE",
+      "duration": "34:05"
+    },
+    {
+      "title": "74.2_.המשך כוונות חנוכה התשע\"ז   חיים סלמןmp3",
+      "videoId": "wmfBXZ1M6y0",
+      "duration": "40:00"
+    },
+    {
+      "title": "_._.י. הקדמות לראש השנה - חיים סלמן          mp3",
+      "videoId": "hdTLkcjb_N8",
+      "duration": "24:42"
+    },
+    {
+      "title": "_._.ט. הקדמות לראש השנה - חיים סלמן                 mp3",
+      "videoId": "3tZQwRzn1Hc",
+      "duration": "47:36"
+    },
+    {
+      "title": "_._.ח. הקדמות לראש השנה - חיים סלמן            mp3",
+      "videoId": "MHLnksWboS4",
+      "duration": "40:52"
+    },
+    {
+      "title": "_._.ז. הקדמות לראש השנה  -  חיים סלמן         mp3",
+      "videoId": "vmdB5_dWv50",
+      "duration": "32:18"
+    },
+    {
+      "title": "_._.ו. הקדמות לראש השנה   -  חיים סלמן       mp3",
+      "videoId": "vCAkRzR_Qbs",
+      "duration": "43:48"
+    },
+    {
+      "title": "_._.ה. הקדמות לראש השנה  -   חיים סלמן    mp3",
+      "videoId": "pDzUuzinucc",
+      "duration": "45:09"
+    },
+    {
+      "title": "_._.ד. הקדמות לראש השנה  -  חיים סלמן             mp3",
+      "videoId": "qgdnj6_Zvtc",
+      "duration": "45:30"
+    },
+    {
+      "title": "_._.ג. הקדמות לראש השנה - חיים סלמן         mp3",
+      "videoId": "HT_JsOmqoCM",
+      "duration": "35:07"
+    },
+    {
+      "title": "_._.ב. הקדמות לראש השנה    חיים סלמן        mp3",
+      "videoId": "iA9wWuH4O5s",
+      "duration": "38:15"
+    },
+    {
+      "title": "_.א הקדמות לראש השנה   חיים סלמן           mp3",
+      "videoId": "oy-tiw_dLG4",
+      "duration": "37:21"
+    },
+    {
+      "title": "_.א כוונות ראש השנה   חיים סלמן       mp3",
+      "videoId": "ihNs5e8k4cI",
+      "duration": "34:42"
     }
   ]
 },
@@ -3023,6 +4335,51 @@ const playlists = [
       "title": "40.תהלים ס\"ג-ס\"ה טעמים",
       "videoId": "jklRB3dHPv4",
       "duration": "4:45"
+    },
+    {
+      "title": "42.תהלים עב טעמים",
+      "videoId": "xvIcFOb0Gkg",
+      "duration": "33:10"
+    },
+    {
+      "title": "41.תהלים טעמים סח",
+      "videoId": "JZrE0xS4Uzs",
+      "duration": "36:50"
+    },
+    {
+      "title": "21.תהלים ל טעמים",
+      "videoId": "hN2AoRJGwbI",
+      "duration": "26:05"
+    },
+    {
+      "title": "18.תהלים טעמים",
+      "videoId": "7yY0WMYxnVI",
+      "duration": "36:00"
+    },
+    {
+      "title": "17.תהלים טעמים",
+      "videoId": "xX-J6zsgiTo",
+      "duration": "22:20"
+    },
+    {
+      "title": "12.תהלים טעמים",
+      "videoId": "InhBO1w7e0I",
+      "duration": "36:55"
+    },
+    {
+      "title": "תפילות לבית העלמין - פרק קיט בתהלים",
+      "videoId": "Cdchb-Mdtk8",
+      "duration": "10:54"
+    },
+    {
+      "title": "תהלים מפרק מב עד פרק נ ועד בכלל",
+      "videoId": "hhOeKtyONDM",
+      "duration": "12:26"
+    },
+    {
+      "title": "קריאת ספר תהלים בטעמים",
+      "videoId": "nIurwuSq5jA",
+      "duration": "2:01"
     }
   ]
 },
@@ -3111,6 +4468,51 @@ const playlists = [
       "title": "דרשה לפרשת תרומה מספר אדרת אליהו-קורא: חיים סלמן",
       "videoId": "-__PviMus7U",
       "duration": "8:39"
+    },
+    {
+      "title": "NA",
+      "videoId": "6Imj18CoW0U",
+      "duration": "NA"
+    },
+    {
+      "title": "NA",
+      "videoId": "Fxj3q4cpnOk",
+      "duration": "NA"
+    },
+    {
+      "title": "NA",
+      "videoId": "glxkkvwrAXU",
+      "duration": "NA"
+    },
+    {
+      "title": "NA",
+      "videoId": "NZnc5lGl3cM",
+      "duration": "NA"
+    },
+    {
+      "title": "NA",
+      "videoId": "gewbau-1Js8",
+      "duration": "NA"
+    },
+    {
+      "title": "NA",
+      "videoId": "Ec4D3SrUh-Y",
+      "duration": "NA"
+    },
+    {
+      "title": "NA",
+      "videoId": "wY8rhG5pLvY",
+      "duration": "NA"
+    },
+    {
+      "title": "NA",
+      "videoId": "sZY4d8Pm2s4",
+      "duration": "NA"
+    },
+    {
+      "title": "NA",
+      "videoId": "89XaIPuVuTM",
+      "duration": "NA"
     }
   ]
 },
@@ -3174,6 +4576,1146 @@ const playlists = [
       "title": "אז ירנן עץ היערים-שיר לט\"ו בשבט בביצוע: חיים סלמן",
       "videoId": "fTdH3eMV1qA",
       "duration": "3:54"
+    },
+    {
+      "title": "30.ועל כולם יתברך ויתרומם",
+      "videoId": "CGGypnQkfio",
+      "duration": "20:25"
+    },
+    {
+      "title": "_.נשמת כל חי - חיים סלמן                               mp3",
+      "videoId": "W2yxKiEs2YU",
+      "duration": "1:28"
+    },
+    {
+      "title": "_                        mp3",
+      "videoId": "kcnHDd099kY",
+      "duration": "1:27"
+    },
+    {
+      "title": "132._.mp3",
+      "videoId": "VWwRDSMBCIU",
+      "duration": "35:00"
+    },
+    {
+      "title": "131._130.mp3",
+      "videoId": "gzHnjUz0WNo",
+      "duration": "3:03"
+    },
+    {
+      "title": "130._.mp3",
+      "videoId": "_DggdHafo-w",
+      "duration": "18:31"
+    },
+    {
+      "title": "_.אינתה עומרי בליווי קנון - חיים סלמן                                             mp3",
+      "videoId": "2I8U9xJAsE0",
+      "duration": "5:30"
+    },
+    {
+      "title": "יום השבת אין כמוהו בנעימה מיוחדת של יהודי עירק כשיש הרבה זמן למוצאי שבת - בביצוע חיים סלמן",
+      "videoId": "Hi00vF_ltXE",
+      "duration": "51"
+    },
+    {
+      "title": "6._.mp3",
+      "videoId": "uxA9Cd26U28",
+      "duration": "12:19"
+    },
+    {
+      "title": "4._.קדיש  כוונת חזרה מהתחלה   התשע\"ז   חיים סלמן        mp3",
+      "videoId": "tkHb_Bs_thM",
+      "duration": "39:19"
+    },
+    {
+      "title": "1._.קדיש - כוונות התשע\"ז  חיים סלמן       mp3",
+      "videoId": "j_o5seu27Iw",
+      "duration": "21:40"
+    },
+    {
+      "title": "לסמר - נגינה על עוד     - חיים סלמן",
+      "videoId": "K293FdAWXEM",
+      "duration": "1:44"
+    },
+    {
+      "title": "שיר לכבוד שבת פרה כתב ומבצע חיים סלמן",
+      "videoId": "PzDGB8zdwp0",
+      "duration": "2:16"
+    },
+    {
+      "title": "חיים סלמן - עוד",
+      "videoId": "PWFDqIOCOss",
+      "duration": "2:44"
+    },
+    {
+      "title": "ברכות בעירקית - מקריא: חיים סלמן",
+      "videoId": "fyCmUdcNvbI",
+      "duration": "50"
+    },
+    {
+      "title": "קונאג' לירושלים - שיר של יהודי עירק בביצוע חיים סלמן",
+      "videoId": "oMHsnQoOKIM",
+      "duration": "3:02"
+    },
+    {
+      "title": "ןבכן היה לאין - מתוך מוסף של יום כפור בביצוע חיים סלמן",
+      "videoId": "qiUNynLV1p4",
+      "duration": "1:56"
+    },
+    {
+      "title": "שיר הכוונות לעומר מאת חיים סלמן",
+      "videoId": "BO7H906zBII",
+      "duration": "1:33"
+    },
+    {
+      "title": "שיר כוונות ההגדה בלחן מלך גואל ומושיע. כתב ומבצע חיים סלמן",
+      "videoId": "rWkdgM0KSVs",
+      "duration": "3:22"
+    },
+    {
+      "title": "אדון עולם כמנהג יהודי עירק",
+      "videoId": "u1WkOGPc7Fw",
+      "duration": "2:22"
+    },
+    {
+      "title": "אדון עולם במקאם חיג'אז דוגמא",
+      "videoId": "9T5mV6-Cns4",
+      "duration": "41"
+    },
+    {
+      "title": "חביב אמא אליהו - פיוט למוצאי שבת של יהודי עירק",
+      "videoId": "rW02KOp1C7Q",
+      "duration": "6:39"
+    },
+    {
+      "title": "אל פדה נא",
+      "videoId": "5iQv3f7NkUM",
+      "duration": "5:19"
+    },
+    {
+      "title": "שחרית של חול 27",
+      "videoId": "8rVI4XpJtIk",
+      "duration": "12:15"
+    },
+    {
+      "title": "שחרית של חול 6",
+      "videoId": "-FSZQ4a8Jok",
+      "duration": "5:59"
+    },
+    {
+      "title": "שחרית של חול 5",
+      "videoId": "l_M8KOSKais",
+      "duration": "9:44"
+    },
+    {
+      "title": "לשון הקודש 16",
+      "videoId": "HN-5Zv4_wl8",
+      "duration": "8:24"
+    },
+    {
+      "title": "לשון הקודש 15",
+      "videoId": "bMsF3qZHLTc",
+      "duration": "13:26"
+    },
+    {
+      "title": "חביב אמה אליהו",
+      "videoId": "vodvrXUGDB8",
+      "duration": "5:23"
+    },
+    {
+      "title": "א ערב רח שחל בשבת",
+      "videoId": "P9B1fi_NeDc",
+      "duration": "5:44"
+    },
+    {
+      "title": "חיים סלמן - בפכאר עם עוד מתחיל - לכבוד אומן העוד הגדול עזרא ברהום",
+      "videoId": "xLOMj9VUF6g",
+      "duration": "8:26"
+    },
+    {
+      "title": "נר שבת עפי נאר יא חביבי",
+      "videoId": "o6nQFn2vrUM",
+      "duration": "2:14"
+    },
+    {
+      "title": "שיר הדקדוק עפי סוואח",
+      "videoId": "ULb5Xt8Z47M",
+      "duration": "4:17"
+    },
+    {
+      "title": "אל נא חמול נא",
+      "videoId": "GiuOCCFUsIw",
+      "duration": "2:56"
+    },
+    {
+      "title": "לולה ואלף לילה",
+      "videoId": "oN44DsNaKtk",
+      "duration": "5:14"
+    },
+    {
+      "title": "יוסף דהאן -ריחת ורד עומרי",
+      "videoId": "PBr9krpHSBw",
+      "duration": "4:11"
+    },
+    {
+      "title": "עזיז עלי",
+      "videoId": "4NiuHmYg8po",
+      "duration": "6:34"
+    },
+    {
+      "title": "דהוד לכווייתי - יהל כ'לאג",
+      "videoId": "GV-DKwHZl4I",
+      "duration": "8:49"
+    },
+    {
+      "title": "מסעוד אל עמרליקי",
+      "videoId": "8lBaGkaSYmk",
+      "duration": "5:07"
+    },
+    {
+      "title": "סעד עבד אל חמיד",
+      "videoId": "31s032_oTQ0",
+      "duration": "3:07"
+    },
+    {
+      "title": "יום אלעיד וולפי",
+      "videoId": "kLFUOiqlXWE",
+      "duration": "1:33"
+    },
+    {
+      "title": "חסיין אל נעמה-יא נג'מה",
+      "videoId": "lz-JJMy46JY",
+      "duration": "7:33"
+    },
+    {
+      "title": "גלבאק צכ'ר ג'למוד",
+      "videoId": "GWGM01lDnJs",
+      "duration": "4:03"
+    },
+    {
+      "title": "מילו חממה - תהדיל",
+      "videoId": "jN6qUdp3kKk",
+      "duration": "2:18"
+    },
+    {
+      "title": "אוילאך יאבא-ז' חוסיין",
+      "videoId": "0GfVDXwvglg",
+      "duration": "6:37"
+    },
+    {
+      "title": "איג'ה אל עיד ומה איג'ית-עבד אל ג'פור",
+      "videoId": "1ktNUqlpX48",
+      "duration": "5:26"
+    },
+    {
+      "title": "עבד אל ג'באר",
+      "videoId": "D48LlpclmpA",
+      "duration": "3:34"
+    },
+    {
+      "title": "שיר עירקי נוסף",
+      "videoId": "n0NB_9kDFDg",
+      "duration": "7:46"
+    },
+    {
+      "title": "שיר עירקי",
+      "videoId": "py36HAqcZRY",
+      "duration": "8:06"
+    },
+    {
+      "title": "עבד אל ר'אני אל שייך-בין אל כנה ומרת אל עם",
+      "videoId": "rgjtqWXy0AU",
+      "duration": "7:47"
+    },
+    {
+      "title": "צלאח עבד אל ג'אפור - שלונאק",
+      "videoId": "mhH8XbOjbGk",
+      "duration": "6:04"
+    },
+    {
+      "title": "מחמד אל גובאנצ'י - מקאם לאמי",
+      "videoId": "xwg4OYiDT5Q",
+      "duration": "8:37"
+    },
+    {
+      "title": "עזיז עלי - אל נסואן",
+      "videoId": "qt3LoalPgf0",
+      "duration": "6:29"
+    },
+    {
+      "title": "מואל עיראקי",
+      "videoId": "Qmikv1h0Cf8",
+      "duration": "5:04"
+    },
+    {
+      "title": "חתאם אל כ'ייאט-מקאם סיגא",
+      "videoId": "vjbykZ7XSbk",
+      "duration": "5:35"
+    },
+    {
+      "title": "יוסוף דהאן",
+      "videoId": "I_xhMR1EM9o",
+      "duration": "4:44"
+    },
+    {
+      "title": "אבו סהר - מקאם מדני",
+      "videoId": "lNdnO4rVIC8",
+      "duration": "8:09"
+    },
+    {
+      "title": "שמאלי ואלי",
+      "videoId": "Xe5510PDbNI",
+      "duration": "5:31"
+    },
+    {
+      "title": "נעימות של שירי זפה",
+      "videoId": "gwhaXCrOUjo",
+      "duration": "3:55"
+    },
+    {
+      "title": "לילנצריה",
+      "videoId": "fyFBEMwD16I",
+      "duration": "7:27"
+    },
+    {
+      "title": "מניין איג'אני ואלי",
+      "videoId": "Sxu6CLKsrO8",
+      "duration": "4:51"
+    },
+    {
+      "title": "מורו בינה מן תמשון",
+      "videoId": "gSVpm1wu9gI",
+      "duration": "4:41"
+    },
+    {
+      "title": "יא זרעין בזר אל גוש",
+      "videoId": "emxZckEsktk",
+      "duration": "2:47"
+    },
+    {
+      "title": "שיר השירים - פרק ח'",
+      "videoId": "eUuBPXcKde8",
+      "duration": "2:30"
+    },
+    {
+      "title": "שיר השירים - פרק ז'",
+      "videoId": "C7DtBL7kU3k",
+      "duration": "2:04"
+    },
+    {
+      "title": "שיר השירים - פרק ו'",
+      "videoId": "Z3lOb4m8OrA",
+      "duration": "1:45"
+    },
+    {
+      "title": "שיר השירים - פרק ה'",
+      "videoId": "Y4fXiclOtYQ",
+      "duration": "2:36"
+    },
+    {
+      "title": "שיר השירים - פרק ד'",
+      "videoId": "W80pNDVAH4U",
+      "duration": "2:30"
+    },
+    {
+      "title": "שיר השירים - פרק ב'",
+      "videoId": "YRgCfB_SXkQ",
+      "duration": "2:41"
+    },
+    {
+      "title": "שיר השירים - פרק ג'",
+      "videoId": "A5xkeRdvzOE",
+      "duration": "1:54"
+    },
+    {
+      "title": "שיר השירים - פרק א'",
+      "videoId": "t--Vy6VhVhE",
+      "duration": "2:43"
+    },
+    {
+      "title": "למנצח מזמור לדוד - מפי יניב יעקב היו",
+      "videoId": "K_pm6o7-sEs",
+      "duration": "1:50"
+    },
+    {
+      "title": "במה מדליקין - משנה",
+      "videoId": "12DDKSjoMRY",
+      "duration": "3:13"
+    },
+    {
+      "title": "שיר עירקי-כדרי אבו עזיז",
+      "videoId": "bUWpTn4FCTY",
+      "duration": "2:36"
+    },
+    {
+      "title": "שיר עירקי 3-כדירי אבו עזיז",
+      "videoId": "454GfOsiw-I",
+      "duration": "7:37"
+    },
+    {
+      "title": "עמי יא בייע אל ורד-כדרי אבו עזיז",
+      "videoId": "rpyo46pzWcE",
+      "duration": "6:56"
+    },
+    {
+      "title": "כדרי אבו עזיז - שיר עירקי 2",
+      "videoId": "Xa94hsS5BgY",
+      "duration": "7:21"
+    },
+    {
+      "title": "עיני יא אסמאר מאלאק-כדירי אבו עזיז",
+      "videoId": "b5Up7BSDGCg",
+      "duration": "4:00"
+    },
+    {
+      "title": "ברכת הלבנה",
+      "videoId": "Ts2b6aslBfw",
+      "duration": "1:22"
+    },
+    {
+      "title": "אשרי יושבי ביתיך - מתוך תפלת שבת",
+      "videoId": "DT43hVp7ZA4",
+      "duration": "2:26"
+    },
+    {
+      "title": "ברוך בא - פיוט לשבת",
+      "videoId": "cw41QRpWvBQ",
+      "duration": "15"
+    },
+    {
+      "title": "אשיר לאל - פיוט לשבת",
+      "videoId": "ZoB6wC856-o",
+      "duration": "17"
+    },
+    {
+      "title": "תפילות לבית העלמין - פתח אליהו",
+      "videoId": "ZAe8VS-vXS0",
+      "duration": "5:44"
+    },
+    {
+      "title": "תפילות בית העלמין - יהי רצון לפני הלימוד",
+      "videoId": "s34aVnDnZRo",
+      "duration": "1:16"
+    },
+    {
+      "title": "תנינן עשרת דברים - סוף הזוהר משפטים - מנוחת הנפש",
+      "videoId": "sUBjhATLvDI",
+      "duration": "6:43"
+    },
+    {
+      "title": "דינים השייכים לעילוי נשמת הנפטר",
+      "videoId": "_iTOr12A-8c",
+      "duration": "7:50"
+    },
+    {
+      "title": "תקון רחל",
+      "videoId": "TUZyzypfCLU",
+      "duration": "8:36"
+    },
+    {
+      "title": "תקון לאה",
+      "videoId": "NwQ_IW3k9UQ",
+      "duration": "6:33"
+    },
+    {
+      "title": "תפילת העמידה בחול",
+      "videoId": "TDoCLKSsVUc",
+      "duration": "5:43"
+    },
+    {
+      "title": "פתח אליהו זכור לטוב",
+      "videoId": "RsqyBkYk44g",
+      "duration": "5:44"
+    },
+    {
+      "title": "שפל ברך - פיוט לשחר - חיים סלמן",
+      "videoId": "nLzokIr5D3Y",
+      "duration": "1:36"
+    },
+    {
+      "title": "יה רבון עלם - בקשות לפני התפילה",
+      "videoId": "HD8VXVKT2dw",
+      "duration": "4:35"
+    },
+    {
+      "title": "עשרה הרוגי מלכות",
+      "videoId": "9UxLh-7E7cY",
+      "duration": "9:15"
+    },
+    {
+      "title": "בבואי אליך-נכתב לפייטן הגדול משה חבושה היו",
+      "videoId": "o3wLmehU6KY",
+      "duration": "5:32"
+    },
+    {
+      "title": "בזאת יה האמונה-על פי לחן של אברהם בצון עה",
+      "videoId": "Irg72-KF_tw",
+      "duration": "4:16"
+    },
+    {
+      "title": "חננו יא חננו בזכות רחל אמנו",
+      "videoId": "ZLdYGTJUSUw",
+      "duration": "1:58"
+    },
+    {
+      "title": "אנא אלך מרוחך",
+      "videoId": "lY6G3lA43vg",
+      "duration": "2:46"
+    },
+    {
+      "title": "שאי קינה",
+      "videoId": "ig70cat-Y4E",
+      "duration": "5:24"
+    },
+    {
+      "title": "ידידי רועי מקימי",
+      "videoId": "ss9oNxpFESM",
+      "duration": "3:55"
+    },
+    {
+      "title": "ראו עתה",
+      "videoId": "9EKpVKbXp4o",
+      "duration": "2:34"
+    },
+    {
+      "title": "שומרון",
+      "videoId": "G5dJaOPJwjw",
+      "duration": "2:31"
+    },
+    {
+      "title": "שמעו נא אחינו",
+      "videoId": "DSmJ8oU8Keg",
+      "duration": "1:03"
+    },
+    {
+      "title": "עד מתי",
+      "videoId": "hNp7i4GNeIE",
+      "duration": "3:18"
+    },
+    {
+      "title": "למי אבכה",
+      "videoId": "L1UE-zB2ZiQ",
+      "duration": "4:29"
+    },
+    {
+      "title": "חסרה",
+      "videoId": "eN4-9bGrDug",
+      "duration": "5:31"
+    },
+    {
+      "title": "ספדי והילילי",
+      "videoId": "8jtzvL47HZc",
+      "duration": "2:17"
+    },
+    {
+      "title": "נחמו נחמו עמי",
+      "videoId": "d2eqXGDgxk4",
+      "duration": "4:18"
+    },
+    {
+      "title": "מזמור לאסף",
+      "videoId": "qND9Z9ljWMg",
+      "duration": "1:52"
+    },
+    {
+      "title": "זכור ה'",
+      "videoId": "UTiZZzDgFFI",
+      "duration": "7:28"
+    },
+    {
+      "title": "ירדתי לתחתיות",
+      "videoId": "zeioS4q8UDY",
+      "duration": "2:19"
+    },
+    {
+      "title": "לשכינה עלתה",
+      "videoId": "Jnvec5B5zps",
+      "duration": "1:02"
+    },
+    {
+      "title": "וארץ שפל רומי",
+      "videoId": "YuIGjzJmA4c",
+      "duration": "1:06"
+    },
+    {
+      "title": "שבע ברכות לחתן וכלה",
+      "videoId": "2FQt7kcq-a0",
+      "duration": "9:48"
+    },
+    {
+      "title": "שיר השירים-לשמחות",
+      "videoId": "zUU8EL3BucE",
+      "duration": "5:44"
+    },
+    {
+      "title": "יהי שלום בחילנו-לברית מילה",
+      "videoId": "oDnnt9qCiN8",
+      "duration": "3:40"
+    },
+    {
+      "title": "ירומם צור-לברית מילה",
+      "videoId": "lg_hNg9XtaM",
+      "duration": "6:33"
+    },
+    {
+      "title": "ידידי השכחת-לחתן וכלה",
+      "videoId": "aOi1-rLTemc",
+      "duration": "7:22"
+    },
+    {
+      "title": "יבוא הגואל-לשמחות",
+      "videoId": "ALivkJKa1p8",
+      "duration": "6:15"
+    },
+    {
+      "title": "זה אלי מאד נעלה-לחתן וכלה",
+      "videoId": "olsEvercHSQ",
+      "duration": "3:10"
+    },
+    {
+      "title": "חתן עמוד לקרוא-לעליה לתורה של החתן",
+      "videoId": "asdXaYFS800",
+      "duration": "1:27"
+    },
+    {
+      "title": "אתה אהובי-לברית מילה",
+      "videoId": "3lpEQyNSIBI",
+      "duration": "3:27"
+    },
+    {
+      "title": "אמת אתה חתננו-לחתן וכלה",
+      "videoId": "WVtvxnF0OO8",
+      "duration": "3:50"
+    },
+    {
+      "title": "אבני אקדח-לשמחות",
+      "videoId": "GBzLH_LTDHU",
+      "duration": "5:59"
+    },
+    {
+      "title": "יום יום אודה בלי תזמורת",
+      "videoId": "sBbVYHux-5Q",
+      "duration": "3:20"
+    },
+    {
+      "title": "אביו ישמח במילתו-לברית מילה",
+      "videoId": "7p6W4Gz4FSM",
+      "duration": "1:42"
+    },
+    {
+      "title": "נורא במרום אדיר",
+      "videoId": "xH7LfZWSH14",
+      "duration": "2:36"
+    },
+    {
+      "title": "בר יוחאי",
+      "videoId": "dWiKwEJ2NJk",
+      "duration": "3:18"
+    },
+    {
+      "title": "שמחו נא בברכת הלבנה",
+      "videoId": "ONixmp0jyvM",
+      "duration": "2:50"
+    },
+    {
+      "title": "תיקון הגשם לשמיני עצרת",
+      "videoId": "hKnm2NUzo6c",
+      "duration": "8:02"
+    },
+    {
+      "title": "ברכי נפשי",
+      "videoId": "5ENwdj1vSys",
+      "duration": "3:18"
+    },
+    {
+      "title": "שמחו נא-לשמחת תורה",
+      "videoId": "eorPMAWgWcQ",
+      "duration": "2:14"
+    },
+    {
+      "title": "שבעת כורתי ברית-דוד",
+      "videoId": "iidUyPuKU0Q",
+      "duration": "1:15"
+    },
+    {
+      "title": "שבעת כורתי ברית-יוסף ופינחס",
+      "videoId": "cTLRon_PzAE",
+      "duration": "1:42"
+    },
+    {
+      "title": "שבעה כורתי ברית -אברהם",
+      "videoId": "Ct77ghpW-5U",
+      "duration": "3:18"
+    },
+    {
+      "title": "צמאה לך נפשי-פיוט לפני ברוך שאמר לשמיני עצרת",
+      "videoId": "W0KivqwWxKI",
+      "duration": "4:32"
+    },
+    {
+      "title": "צורי גואלי יה",
+      "videoId": "XZlWd0YUkEg",
+      "duration": "2:04"
+    },
+    {
+      "title": "קריאת המפטיר ביום טוב ראשון",
+      "videoId": "-kbkRO3LmNM",
+      "duration": "1:23"
+    },
+    {
+      "title": "פיוט לעלית הלוי בשמחת תורה",
+      "videoId": "SxH-4VAD6qc",
+      "duration": "2:15"
+    },
+    {
+      "title": "פיוט לעלית המפטיר בשמחת תורה",
+      "videoId": "JdxXvqfdS08",
+      "duration": "2:39"
+    },
+    {
+      "title": "פיוט לעולה בברכת זבולון בשמחת תורה",
+      "videoId": "wU6jAxjeCxo",
+      "duration": "3:14"
+    },
+    {
+      "title": "פיוט לעלית הכהן בשמחת תורה",
+      "videoId": "h1MRNrx0X84",
+      "duration": "2:15"
+    },
+    {
+      "title": "פיוט לחתן תורה בשמחת תורה",
+      "videoId": "BumZULfkqIk",
+      "duration": "2:56"
+    },
+    {
+      "title": "פיוט לחתן בראשית בשמחת תורה",
+      "videoId": "ULnbiMokUj8",
+      "duration": "3:10"
+    },
+    {
+      "title": "פיוט לחתן מעונה בשמחת תורה",
+      "videoId": "T0ROK9JNWRA",
+      "duration": "2:07"
+    },
+    {
+      "title": "מפי אל-לשמחת תורה",
+      "videoId": "E_hWFQkT1QI",
+      "duration": "1:28"
+    },
+    {
+      "title": "כירי רם כירי רם-לשמחת תורה",
+      "videoId": "DsCShiUpFio",
+      "duration": "1:55"
+    },
+    {
+      "title": "ידך תנחני",
+      "videoId": "qQl_E-fgJO4",
+      "duration": "3:25"
+    },
+    {
+      "title": "יום שמחה-לשמחת תורה",
+      "videoId": "pzGpomDmBdU",
+      "duration": "1:49"
+    },
+    {
+      "title": "פסוקים להחזרת ספר התורה ביום א",
+      "videoId": "1BEairxRun4",
+      "duration": "1:37"
+    },
+    {
+      "title": "אלי אלי למה",
+      "videoId": "-QmKERo-wUE",
+      "duration": "2:04"
+    },
+    {
+      "title": "חננו יה חננו בזכות משה רבנו",
+      "videoId": "yVndiEiMGEU",
+      "duration": "1:42"
+    },
+    {
+      "title": "תפילת העמידה לראש השנה",
+      "videoId": "-FtwdbsNqmQ",
+      "duration": "8:54"
+    },
+    {
+      "title": "2תזכו לשנים רבות-לשמחת תורה",
+      "videoId": "-uT6WMU9dBc",
+      "duration": "1:40"
+    },
+    {
+      "title": "יומא טבא דרבנן - לבר מצווה",
+      "videoId": "gT9iox3eXZo",
+      "duration": "2:14"
+    },
+    {
+      "title": "שפל רוח פיוט לפני ברוך שאמר ביום ב",
+      "videoId": "8ohfBhNZZ4k",
+      "duration": "3:37"
+    },
+    {
+      "title": "שופט כל הארץ לפני ברוך שאמר",
+      "videoId": "F5jguuB0yLg",
+      "duration": "3:30"
+    },
+    {
+      "title": "שואף כמו עבד לפני ברוך שאמר",
+      "videoId": "9yDMqxvhsfY",
+      "duration": "2:52"
+    },
+    {
+      "title": "קדיש לראש השנה",
+      "videoId": "ZlFD77hHnLU",
+      "duration": "2:22"
+    },
+    {
+      "title": "עת שערי רצון לפני תקיעת שופר",
+      "videoId": "uky8pHPxDVA",
+      "duration": "3:55"
+    },
+    {
+      "title": "מזמור לראש השנה למנצח על הגיתית לאסף",
+      "videoId": "9cg91imnyDU",
+      "duration": "2:21"
+    },
+    {
+      "title": "חון תחון על בניך פיוט לראש השנה",
+      "videoId": "Cjd50YE3t_o",
+      "duration": "2:30"
+    },
+    {
+      "title": "השתונן לפני ברוך שאמר ביום ב",
+      "videoId": "08wCH8vVsl0",
+      "duration": "3:04"
+    },
+    {
+      "title": "המבורך פיוט לפני ברוך שאמר ביום ב",
+      "videoId": "Q76LsIekv3I",
+      "duration": "3:11"
+    },
+    {
+      "title": "בני עבדיך לפני ברוך שאמר",
+      "videoId": "BrQiDQxRJ8E",
+      "duration": "2:24"
+    },
+    {
+      "title": "ברכת כהנים בנעימת יהודי עירק",
+      "videoId": "brpqEwMFm3U",
+      "duration": "2:01"
+    },
+    {
+      "title": "שמע קולי-פתיחה לליל כפור",
+      "videoId": "NkPkhmpc_FE",
+      "duration": "4:02"
+    },
+    {
+      "title": "עת קרוא אחרי מות-פיוט לפני קריאת התורה",
+      "videoId": "m6MAX8dHnlA",
+      "duration": "2:52"
+    },
+    {
+      "title": "אנא ה' רחמיך יראו",
+      "videoId": "m7Yv0Qq-54A",
+      "duration": "3:36"
+    },
+    {
+      "title": "פיוט לשבת פרה שכתב חיים סלמן",
+      "videoId": "Bk5pUP11xZE",
+      "duration": "1:38"
+    },
+    {
+      "title": "עזר מצרי היית",
+      "videoId": "EMIyiDpagd0",
+      "duration": "5:16"
+    },
+    {
+      "title": "שיר השירים עם שרח ערבי",
+      "videoId": "hHj6D2zcfPA",
+      "duration": "6:24"
+    },
+    {
+      "title": "שבת זה שבת הגדול - פיוט לשבת הגדול כמנהג יהודי עירק",
+      "videoId": "YILmrJ94FIE",
+      "duration": "2:45"
+    },
+    {
+      "title": "נכון לבו-בלי תזמורת",
+      "videoId": "ExiiM8F_Gf4",
+      "duration": "4:09"
+    },
+    {
+      "title": "מלך גואל ומושיע-שפיק סלמן עה",
+      "videoId": "IrtVESCNboc",
+      "duration": "2:42"
+    },
+    {
+      "title": "תמהנו מרעות-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "rq1i95el0Yo",
+      "duration": "3:01"
+    },
+    {
+      "title": "עשה למען שמך-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "COTUVjsn1G4",
+      "duration": "6:13"
+    },
+    {
+      "title": "שומר ישראלמסליחות יהודי עירק-חיים סלמן",
+      "videoId": "LJ1POUVUd80",
+      "duration": "1:42"
+    },
+    {
+      "title": "שבט יהודה בדוחק ובצער-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "XHbWsqj-H64",
+      "duration": "1:01"
+    },
+    {
+      "title": "רבונו של עולם-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "rpW2QOb5Hpc",
+      "duration": "1:26"
+    },
+    {
+      "title": "עשה למען שמך וחוסה על ישראל-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "QSKgASBxYOY",
+      "duration": "1:10"
+    },
+    {
+      "title": "עננו-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "3VliRL00Lrw",
+      "duration": "2:52"
+    },
+    {
+      "title": "ישן אל תרדם-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "WRas3nOpCfo",
+      "duration": "4:56"
+    },
+    {
+      "title": "עשה למען מלאכיך-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "rL8xygHGwWQ",
+      "duration": "3:48"
+    },
+    {
+      "title": "לה' אלוקנו הרחמים והסליחות-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "EuJvzMD3ZPI",
+      "duration": "4:37"
+    },
+    {
+      "title": "יה שמע אביונך-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "PcUK5-Jiydg",
+      "duration": "2:53"
+    },
+    {
+      "title": "חטאנו לפניך-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "lmYxG5Kvg9M",
+      "duration": "2:09"
+    },
+    {
+      "title": "ווידוי-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "OLH-uh_yp9w",
+      "duration": "5:00"
+    },
+    {
+      "title": "התרת נדרים-מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "CwJMS1A9p5c",
+      "duration": "8:46"
+    },
+    {
+      "title": "בן אדם מה לך נרדם-קטע מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "xxCuwXgkq7s",
+      "duration": "2:26"
+    },
+    {
+      "title": "דעני לעניי ענינן-קטע מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "D1YJKmQNP5w",
+      "duration": "1:39"
+    },
+    {
+      "title": "אתאנו לחלות פניך-קטע מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "IsKkq8AJE-Y",
+      "duration": "1:52"
+    },
+    {
+      "title": "אנשי אמונה אבדו-קטע מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "3OGClNHP_3M",
+      "duration": "3:12"
+    },
+    {
+      "title": "אם אפס רובע הקן-קטע מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "i4uqL57-K-0",
+      "duration": "6:03"
+    },
+    {
+      "title": "אליך ה' נשאתי עיני-קטע מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "9xKQBZrl0-s",
+      "duration": "5:35"
+    },
+    {
+      "title": "אל רחום שמך-קטע מסליחות יהודי עירק-חיים סלמן",
+      "videoId": "8nQMkIxK1-8",
+      "duration": "2:41"
+    },
+    {
+      "title": "נעימות רק תזמורת 13",
+      "videoId": "_d4KXlUn0Dc",
+      "duration": "2:06"
+    },
+    {
+      "title": "נעימות רק תזמורת 8",
+      "videoId": "QXI_BgAsoTo",
+      "duration": "3:04"
+    },
+    {
+      "title": "נעימות רק תזמורת 5",
+      "videoId": "pHjaU9HRadE",
+      "duration": "1:23"
+    },
+    {
+      "title": "נעימות רק תזמורת15",
+      "videoId": "7TmxYephIOY",
+      "duration": "7:20"
+    },
+    {
+      "title": "קריאת עשרת הדיברות בטעם עליון",
+      "videoId": "tndAEMMfJek",
+      "duration": "4:30"
+    },
+    {
+      "title": "בר יוחאי",
+      "videoId": "9gP3_FNh9ts",
+      "duration": "3:18"
+    },
+    {
+      "title": "נורא במרום אדיר",
+      "videoId": "AzzqfScBzB8",
+      "duration": "2:36"
+    },
+    {
+      "title": "יום יום אודה (בלי תזמורת)-פיוט לשבועות בביצוע חיים סלמן",
+      "videoId": "VMiJsJ5seK4",
+      "duration": "3:20"
+    },
+    {
+      "title": "על אחת כמה וכמה",
+      "videoId": "2D_ysx_xSfY",
+      "duration": "56"
+    },
+    {
+      "title": "נשמת כל חי",
+      "videoId": "OwtGjXmRGgo",
+      "duration": "4:24"
+    },
+    {
+      "title": "עבדים",
+      "videoId": "Lm5_iBytjKM",
+      "duration": "1:11"
+    },
+    {
+      "title": "סיפור על הרמבם שהחרימו אותו",
+      "videoId": "dpIgH9rl3eA",
+      "duration": "11:22"
+    },
+    {
+      "title": "סיפור על הרמבם שהחרימו אותו",
+      "videoId": "Zaopupx6AMw",
+      "duration": "11:22"
+    },
+    {
+      "title": "יום השבת אין כמוהו-פיוט לשבת בנעימת יהודי עירק בביצוע משפחת סלמן",
+      "videoId": "ea5olqj8WQ8",
+      "duration": "4:52"
+    },
+    {
+      "title": "יודוך רעיוני",
+      "videoId": "wI0GeqORTCQ",
+      "duration": "3:44"
+    },
+    {
+      "title": "אליו מי הקשה וישלם בביצוע חיים סלמן עם תזמורת האחים סלמן",
+      "videoId": "HhPRZlki9Vs",
+      "duration": "8:01"
+    },
+    {
+      "title": "דרור יקרא 1",
+      "videoId": "EwKvbWoyNlI",
+      "duration": "4:42"
+    },
+    {
+      "title": "כי אשמרה שבת2",
+      "videoId": "T6wtSYzL8gY",
+      "duration": "3:54"
+    },
+    {
+      "title": "אדון עולם-פיוט לשבת כמנהג יהודי עירק-מבצע: חיים סלמן",
+      "videoId": "V6cIM_RCSnc",
+      "duration": "2:55"
+    },
+    {
+      "title": "כדרי אבו עזיז - שיר עירקי 2",
+      "videoId": "z2UrT90AeqE",
+      "duration": "7:21"
+    },
+    {
+      "title": "כדירי אבו עזיז-שיר עירקי 4",
+      "videoId": "tBQkxThqiEM",
+      "duration": "3:32"
+    },
+    {
+      "title": "חמייד-כדירי אבו עזיז",
+      "videoId": "n7KDbf5vGFU",
+      "duration": "4:39"
+    },
+    {
+      "title": "שיר המליון לאתר שירי עירק - בביצוע חיים סלמן",
+      "videoId": "9H6OPq7CBe0",
+      "duration": "3:08"
+    },
+    {
+      "title": "תפילת העמידה לראש השנה-כמנהג יהודי עירק בביצוע חיים סלמן",
+      "videoId": "x1ajnZpftUA",
+      "duration": "10:18"
+    },
+    {
+      "title": "סליחות-לה' אלהינו הרחמים והסליחות כמנהג יהודי עירק בביצוע חיים סלמן",
+      "videoId": "7XX3C-clR4w",
+      "duration": "4:33"
+    },
+    {
+      "title": "סליחות של יהודי עירק-אנשי אמונה אבדו בביצוע חיים סלמן",
+      "videoId": "E3YOOrFq5QU",
+      "duration": "3:12"
+    },
+    {
+      "title": "פתח אליהו בנעימת יהודי עירק בביצוע חיים סלמן",
+      "videoId": "wcLnCEcKzuQ",
+      "duration": "5:34"
+    },
+    {
+      "title": "אז ירנן הבן איש חי",
+      "videoId": "Kh7O9wNnVhk",
+      "duration": "3:34"
+    },
+    {
+      "title": "סליחות של יהודי עירק מה לך נרדם בביצוע חיים סלמן",
+      "videoId": "xk2Iq6BmL5k",
+      "duration": "5:12"
+    },
+    {
+      "title": "שבת - מזמור שיר ליום השבת בביצוע חיים סלמן",
+      "videoId": "HDdceGmToh0",
+      "duration": "1:42"
+    },
+    {
+      "title": "שבת - במה מדליקין בביצוע חיים סלמן",
+      "videoId": "FH_G6x7wgYY",
+      "duration": "2:56"
+    },
+    {
+      "title": "שבת - לך דודי בביצוע חיים סלמן",
+      "videoId": "t3fLL3p7Xj4",
+      "duration": "2:18"
+    },
+    {
+      "title": "שבת - ה' מלך ירגזו עמים בביצוע חיים סלמן",
+      "videoId": "CGd1wXycJVg",
+      "duration": "1:08"
     }
   ]
 },
@@ -3227,6 +5769,81 @@ const playlists = [
       "title": "שימני-פיוט לשבת זכור ולפורים כמנהג יהודי עירק. ח'סלמן",
       "videoId": "qWH3MrUztzc",
       "duration": "3:43"
+    },
+    {
+      "title": "פורים פורים פורים לנו",
+      "videoId": "lFKkqasEGW8",
+      "duration": "2:41"
+    },
+    {
+      "title": "מגילת אסתר פרק ח",
+      "videoId": "CcHt1Abtd-0",
+      "duration": "11:49"
+    },
+    {
+      "title": "עוז לאלהים לשבת שקלים",
+      "videoId": "gakTh1aywSQ",
+      "duration": "2:46"
+    },
+    {
+      "title": "מגילת אסתר פרק ו",
+      "videoId": "GmV-dFi5bvg",
+      "duration": "3:57"
+    },
+    {
+      "title": "מגילת אסתר פרק ז",
+      "videoId": "MBTJxeD7owg",
+      "duration": "2:50"
+    },
+    {
+      "title": "מגילת אסתר פרק ד",
+      "videoId": "41kwEtR0cnM",
+      "duration": "4:22"
+    },
+    {
+      "title": "מגילת אסתר פרק ה'",
+      "videoId": "U_q-5XYX1PY",
+      "duration": "3:27"
+    },
+    {
+      "title": "מגילת אסתר פרק ג",
+      "videoId": "DrVKjUK3VUI",
+      "duration": "4:21"
+    },
+    {
+      "title": "מגילת אסתר פרק ב",
+      "videoId": "ke1KUPUOICs",
+      "duration": "6:35"
+    },
+    {
+      "title": "מגילת אסתר פרק א",
+      "videoId": "6nfZOlD1Oc8",
+      "duration": "5:32"
+    },
+    {
+      "title": "הפטרה לשבת שקלים לפני רח אדר",
+      "videoId": "IvRroERQcW8",
+      "duration": "3:59"
+    },
+    {
+      "title": "הפטרה לשבת פרה (אחרי פורים)",
+      "videoId": "vULFTfjWPVA",
+      "duration": "4:00"
+    },
+    {
+      "title": "הפטרה לשבת זכור (לפני פורים)",
+      "videoId": "ZHJCu9k0xI0",
+      "duration": "6:48"
+    },
+    {
+      "title": "שימני-פיוט לפורים כמנהג יהודי עירק,ביצוע: משפחת סלמן",
+      "videoId": "CIt0f-wqF3o",
+      "duration": "3:45"
+    },
+    {
+      "title": "פיוט לשבת שקלים כמנהג יהודי עירק",
+      "videoId": "RiNq9eXSp4k",
+      "duration": "2:36"
     }
   ]
 },
@@ -3336,6 +5953,26 @@ const playlists = [
       "title": "פתיחה לאינתא עומרי בגיטרה - חיים סלמן",
       "videoId": "5oP-7M279Co",
       "duration": "2:55"
+    },
+    {
+      "title": "שיר הודי של ראג' קאפור בגיטרה ע\"י חיים סלמן",
+      "videoId": "IcwUr2jFlgQ",
+      "duration": "1:43"
+    },
+    {
+      "title": "שיר הודי מהסרט אאן בנגינה בגיטרה  ע\"י חיים סלמן",
+      "videoId": "Ea-wTr9x9lM",
+      "duration": "2:54"
+    },
+    {
+      "title": "מרז'וטה היי ג'פאני - שיר הודי על גיטרה - חיים סלמן",
+      "videoId": "i7Xkd2emmFA",
+      "duration": "2:39"
+    },
+    {
+      "title": "שיר היתומים בהודית - עם גיטרה חיים סלמן",
+      "videoId": "2h3e6fuPk0A",
+      "duration": "2:28"
     }
   ]
 },
@@ -3877,6 +6514,51 @@ const playlists = [
       "title": "חזרה כללית על האותיות לשון הקו Part 6",
       "videoId": "5sXvN2oXeS4",
       "duration": "8:08"
+    },
+    {
+      "title": "אותיות ש-ת",
+      "videoId": "pEu0lwypz6I",
+      "duration": "1:53"
+    },
+    {
+      "title": "אותיות ק-ר",
+      "videoId": "3laUQSKgTWs",
+      "duration": "3:38"
+    },
+    {
+      "title": "אותיות פ-צ",
+      "videoId": "KtT3LLJRhNc",
+      "duration": "3:06"
+    },
+    {
+      "title": "אותיות כ-ע",
+      "videoId": "Q3eOHzjmV08",
+      "duration": "3:49"
+    },
+    {
+      "title": "אותיות ט-י",
+      "videoId": "sD-U8ZNIt70",
+      "duration": "3:07"
+    },
+    {
+      "title": "אותיות ו-ז",
+      "videoId": "TclrkRhwa_w",
+      "duration": "4:24"
+    },
+    {
+      "title": "אותיות א-ב",
+      "videoId": "26VZ8wuirT0",
+      "duration": "4:46"
+    },
+    {
+      "title": "אותיות ד-ה",
+      "videoId": "GdgevfhqPxA",
+      "duration": "2:47"
+    },
+    {
+      "title": "אות ג'",
+      "videoId": "Nwq27BAE3oE",
+      "duration": "1:25"
     }
   ]
 },
@@ -5142,6 +7824,1731 @@ const playlists = [
       "title": "גיטין נה עב - חכם סלמאן חוגי עבודי",
       "videoId": "L0foPBLUeuk",
       "duration": "3:21"
+    },
+    {
+      "title": "הרב אייל סלמן ובנו נועם מנגן על הכינור",
+      "videoId": "Cm2uehdr9ew",
+      "duration": "2:51"
+    },
+    {
+      "title": "הרב אייל סלמן ובנו נועם המנגן על הכינור",
+      "videoId": "GZCJQYiUNrk",
+      "duration": "2:51"
+    },
+    {
+      "title": "ברכות דף מ\"ה רבי בניהו יששכר שמואלי שליט\"א",
+      "videoId": "2hTYYmGW_tA",
+      "duration": "1:06:30"
+    },
+    {
+      "title": "007הנער דוד נאור הי\"ו קורא בתהילים פרק ז' בטעמי והגיית יה×",
+      "videoId": "F7u_rBARbbM",
+      "duration": "2:25"
+    },
+    {
+      "title": "006הנער דוד נאור הי\"ו קורא תהילים פרק ו' בטעמי והגיית יהו×",
+      "videoId": "6afkgXFfF2w",
+      "duration": "1:30"
+    },
+    {
+      "title": "הנער דוד נאור הי\"ו קורא בספר משלי בטעמי יהודי עיראק 01",
+      "videoId": "gUMOaenDEQk",
+      "duration": "4:45"
+    },
+    {
+      "title": "148.148._.חכם דוד שמואלי שליט\"א - מזמור לאסף לתשעה באב -  חיים סלמן      mp3",
+      "videoId": "Xqk1yX8XOnk",
+      "duration": "3:48"
+    },
+    {
+      "title": "146._.חכם יחזקאל יאיר הי\"ו - על נהרות בבל לתשעה באב  - חיים סלמן   mp3",
+      "videoId": "lZQI5Mk507k",
+      "duration": "1:59"
+    },
+    {
+      "title": "_. מורד (מרייד) סלמן בשירים עירקים (2)  - חיים סלמןmp3",
+      "videoId": "2salPYtx304",
+      "duration": "17:50"
+    },
+    {
+      "title": "_2_. מורד (מרייד) סלמן בשירים עירקים  - חיים סלמן    mp3",
+      "videoId": "LwYnvVHHlpA",
+      "duration": "28:31"
+    },
+    {
+      "title": "_.חכם יוסף חיים מזרחי שליט\"א מלמד קריאת שמע וטעמיםmp3",
+      "videoId": "-dTvdU1fO0M",
+      "duration": "6:15"
+    },
+    {
+      "title": "_.חכם יוסף חיים מזרחי שליט\"א מלמד טעמים וקריאת שמעmp3",
+      "videoId": "vuMSWOmnwUA",
+      "duration": "20:43"
+    },
+    {
+      "title": "_2_.חכם יוסף חיים מזרחי שליט\"א מלמד קריאת שמעmp3",
+      "videoId": "_ElhfsUJNAg",
+      "duration": "21:10"
+    },
+    {
+      "title": "חכם יוסף חיים מזרחי שליט\"א מלמד טעמים וקריאת שמעmp3",
+      "videoId": "AjwvyUa7CfA",
+      "duration": "5:13"
+    },
+    {
+      "title": "_.חכם יוסף חיים מזרחי שליט\"א מלמד קריאת שמעmp3",
+      "videoId": "CUxNyH8VbFY",
+      "duration": "22:45"
+    },
+    {
+      "title": "קריאת מגילת אסתר ע\"י חכם יצחק מחלב בן שמחה ע\"ה",
+      "videoId": "IU7r9WqUxmg",
+      "duration": "31:46"
+    },
+    {
+      "title": "יתרועעו - שיר לשבת חנוכה מפי החזן שלמה ראובן מעלם",
+      "videoId": "iUhT2j3-Xic",
+      "duration": "9:41"
+    },
+    {
+      "title": "חכם שמעון דדו הלוי קורא בנעימת יהודי מוצול",
+      "videoId": "8fhoX5_gZvM",
+      "duration": "5:37"
+    },
+    {
+      "title": "שיר השירים  פרק ב  חכם סלמן חוגי עבודי ע\"ה",
+      "videoId": "pAKCp1Jf4H4",
+      "duration": "3:09"
+    },
+    {
+      "title": "פרקי אבות פרק ב' - חכם סלמן חוגי עבודי ע\"ה",
+      "videoId": "hgXwHMIzY3c",
+      "duration": "7:54"
+    },
+    {
+      "title": "פרקי אבות - חכם סלמן חוגי עבודי ע\"ה",
+      "videoId": "ErJT3r1nB-s",
+      "duration": "5:44"
+    },
+    {
+      "title": "מסכת יומא -משניות - חכם סלמן חוגי עבודי ע\"ה",
+      "videoId": "iHCcb4RnOCc",
+      "duration": "2:58"
+    },
+    {
+      "title": "כי אשמרה שבת - פיוט לשבת-חכם סלמאן חוגי עבודי ע\"ה",
+      "videoId": "cZ8vToKT9kc",
+      "duration": "11"
+    },
+    {
+      "title": "ישמח משה - מתפלת שחרית של שבת-חכם סלמאן חוגי עבודי ע\"ה",
+      "videoId": "qctxBVdahKo",
+      "duration": "1:00"
+    },
+    {
+      "title": "חכם סלמן חוגי עבודי עה - שיר השירים א'",
+      "videoId": "HJxhi4vZwfk",
+      "duration": "2:57"
+    },
+    {
+      "title": "ויושע - מתפילת שחרית - חכם סלמאן חוגי עבודי ע\"ה",
+      "videoId": "mBJlSi9ay_A",
+      "duration": "5:24"
+    },
+    {
+      "title": "המשך ברוך ב א - פיוט לשבת-חכם סלמאן חוגי עבודי ע\"ה",
+      "videoId": "vxaSSSP0rm4",
+      "duration": "25"
+    },
+    {
+      "title": "הללי נפשי את ה' - מתפלת שבת-חכם סלמאן חוגי עבודי ע\"ה",
+      "videoId": "hDc8v4WFBfU",
+      "duration": "55"
+    },
+    {
+      "title": "הללויה כי טוב זמרה אלוהינו - חכם סלמאן חוגי עבודי ע\"ה",
+      "videoId": "JXkNIXSI13g",
+      "duration": "1:36"
+    },
+    {
+      "title": "הללו את ה' מן השמים - מתפילת שבת - חכם סלמאן חוגי עבודי ע\"ה",
+      "videoId": "lFKdde0ARs0",
+      "duration": "1:04"
+    },
+    {
+      "title": "פרשת האזינו - חכם סלמאן חוגי עבודי ע\"ה",
+      "videoId": "k_6SkWYD8lo",
+      "duration": "7:17"
+    },
+    {
+      "title": "דרור יקרא - פיוט לשבת - חכם סלמאן חוגי עבודי ע\"ה",
+      "videoId": "e6EvWGR9R58",
+      "duration": "13"
+    },
+    {
+      "title": "גיטין נח עא-חכם סלמאן חוגי עבודי ע\"ה",
+      "videoId": "uSDzw9FXqvA",
+      "duration": "4:38"
+    },
+    {
+      "title": "אליו מי הקשה וישלם - פיוט לשבת-חכם סלמאן חוגי עבודי ע\"ה",
+      "videoId": "4_XqhwjNLjs",
+      "duration": "23"
+    },
+    {
+      "title": "אמר רבי אבא - סיום האדרא זוטא",
+      "videoId": "GInmntrlQYc",
+      "duration": "2:54"
+    },
+    {
+      "title": "יוצר המאורות - מנשה זהבי",
+      "videoId": "26Q6J3si4-4",
+      "duration": "5:42"
+    },
+    {
+      "title": "מבין הכרובים - מנשה זהבי",
+      "videoId": "G7Y_Fgx4sj8",
+      "duration": "4:15"
+    },
+    {
+      "title": "חכם דוד חלבי עה - שבע ברכות",
+      "videoId": "yFIXLtBNihM",
+      "duration": "6:59"
+    },
+    {
+      "title": "הנה דודי - מנשה זהבי",
+      "videoId": "GDPAvMz6nWA",
+      "duration": "3:30"
+    },
+    {
+      "title": "יהודה עובדיה פתיא-שמחו נא בברכת הלבנה",
+      "videoId": "bjAY5avCU7w",
+      "duration": "3:39"
+    },
+    {
+      "title": "מקאם עג'ם דו-מז'ור - נסים סלמן - קנון",
+      "videoId": "0P4J5CC6_Bs",
+      "duration": "2:28"
+    },
+    {
+      "title": "מקאם קורד פריגי מי - נסים סלמן - קנון",
+      "videoId": "4VLHbUkE10o",
+      "duration": "3:01"
+    },
+    {
+      "title": "מקאם חיג'אז ריי - נסים סלמן - קנון",
+      "videoId": "BPGf0TbeZ-o",
+      "duration": "3:10"
+    },
+    {
+      "title": "מקאם נהוונד לה מינור - נסים סלמן - קנון",
+      "videoId": "5aWEa8wv7Jo",
+      "duration": "2:16"
+    },
+    {
+      "title": "מקאם חיג'ז ריי - נסים סלמן - קנון",
+      "videoId": "nFkBPMtrPUc",
+      "duration": "3:22"
+    },
+    {
+      "title": "מקאם זנגראן - סול - נסים סלמן - קנון",
+      "videoId": "H5voU0Nc1fk",
+      "duration": "3:51"
+    },
+    {
+      "title": "מקאם חיג'אז קור סול - שאט ערבאן-נסים סלמן קנון",
+      "videoId": "ReizV0EH3fw",
+      "duration": "4:57"
+    },
+    {
+      "title": "חכם שמעון דדו הלוי קורא בנעימת יהודי מוצול",
+      "videoId": "VNVCFjOyVqw",
+      "duration": "5:37"
+    },
+    {
+      "title": "צה הרב אורן אליהו - פתח אליהו הנביא",
+      "videoId": "-nbT3r0suVI",
+      "duration": "4:44"
+    },
+    {
+      "title": "צג הרב אורן אליהו - אמר רבי שמעון ארימית ידי",
+      "videoId": "BM-LQUIlVCk",
+      "duration": "3:31"
+    },
+    {
+      "title": "צד הרב אורן אליהו - קם רבי שמעון פתח ואמר",
+      "videoId": "Oc0wL-b0wcs",
+      "duration": "2:45"
+    },
+    {
+      "title": "צא הרב אורן אליהו - ואלה המלכים מלכי אריך",
+      "videoId": "TcElLg3XiNM",
+      "duration": "8:28"
+    },
+    {
+      "title": "צב הרב אורן אליהו - רבון עלמא יהא רעוא מהריח טוב",
+      "videoId": "3WOkI_V31Qk",
+      "duration": "2:34"
+    },
+    {
+      "title": "צ הרב אורן אליהו - ואלה המלכים מלכי אריך",
+      "videoId": "6Y1cy0Y3qyw",
+      "duration": "1:58"
+    },
+    {
+      "title": "פט הרב אורן אליהו - אריך אנפין טלא דבדולחא",
+      "videoId": "LNVFKnxEXis",
+      "duration": "2:25"
+    },
+    {
+      "title": "פח הרב אורן אליהו - קרומא דאוירא ומוחא סתימאה",
+      "videoId": "FBG-030VbGY",
+      "duration": "1:05"
+    },
+    {
+      "title": "פז הרב אורן אליהו - עמר נקי",
+      "videoId": "W5SwesRHovA",
+      "duration": "3:26"
+    },
+    {
+      "title": "פה הרב אורן אליהו - חוטמא דאריך",
+      "videoId": "Ovm-7Cm_d78",
+      "duration": "5:28"
+    },
+    {
+      "title": "פו הרב אורן אליהו - מצחא דאריך  Part 1",
+      "videoId": "b8je7EbBZwE",
+      "duration": "14:31"
+    },
+    {
+      "title": "פו הרב אורן אליהו - מצחא דאריך  Part 2",
+      "videoId": "vBhGSN7R6gA",
+      "duration": "1:19"
+    },
+    {
+      "title": "פד הרב אורן אליהו - תקוני דיקנא דאריך",
+      "videoId": "e-lOL9sYtCc",
+      "duration": "5:12"
+    },
+    {
+      "title": "פב הרב אורן אליהו - תקונא קדמאה",
+      "videoId": "nm_NXcKkecc",
+      "duration": "6:08"
+    },
+    {
+      "title": "פג הרב אורן אליהו - תקוני דיקנא דאא בחודש השביעי",
+      "videoId": "ke25XE6nscM",
+      "duration": "1:49"
+    },
+    {
+      "title": "פא הרב אורן אליהו - תקונא קדמאה מי אל כמוך",
+      "videoId": "xc7xL6T9krM",
+      "duration": "7:22"
+    },
+    {
+      "title": "פ הרב אורן אליהו - תקונא תניינא",
+      "videoId": "YG5OuS0TBEw",
+      "duration": "6:23"
+    },
+    {
+      "title": "עט הרב אורן אליהו - תקונא תליתאה",
+      "videoId": "Nh5zEovzQVg",
+      "duration": "2:38"
+    },
+    {
+      "title": "עז הרב אורן אליהו - תקונא חמישאה",
+      "videoId": "p08gHeOfDB8",
+      "duration": "2:26"
+    },
+    {
+      "title": "עח הרב אורן אליהו - תקונא רביעאה",
+      "videoId": "J4PjTmZufjA",
+      "duration": "28"
+    },
+    {
+      "title": "עה הרב אורן אליהו - תקונא שביעאה",
+      "videoId": "OMGqZkA62jQ",
+      "duration": "2:57"
+    },
+    {
+      "title": "עו הרב אורן אליהו - תקונא שתיתאה",
+      "videoId": "GkerUPrSELg",
+      "duration": "2:30"
+    },
+    {
+      "title": "עד הרב אורן אליהו - תקונא תמינאה",
+      "videoId": "GIEKV5Y-heI",
+      "duration": "3:30"
+    },
+    {
+      "title": "עג הרב אורן אליהו - תקונא תשיעאה",
+      "videoId": "NG_r8sRNrf4",
+      "duration": "38"
+    },
+    {
+      "title": "עא הרב אורן אליהו - תקונא תריסר",
+      "videoId": "hBmSdLilRyI",
+      "duration": "2:20"
+    },
+    {
+      "title": "עב הרב אורן אליהו - תקונא עשיראה וחד עסר",
+      "videoId": "AGekH2GQKOU",
+      "duration": "49"
+    },
+    {
+      "title": "ע הרב אורן אליהו - תקונה תליסר",
+      "videoId": "enBoeDk8ZS8",
+      "duration": "4:12"
+    },
+    {
+      "title": "סט הרב אורן אליהו - עליית התיקונים בפרסה",
+      "videoId": "RF6vRCzSCas",
+      "duration": "3:48"
+    },
+    {
+      "title": "סח הרב אורן אליהו - שבירת מלכי זא ותקונן",
+      "videoId": "Whg8MsP_9ks",
+      "duration": "4:10"
+    },
+    {
+      "title": "סז הרב אורן אליהו - גולגלתא דזא",
+      "videoId": "ZORQSgOm3Qw",
+      "duration": "3:47"
+    },
+    {
+      "title": "סה הרב אורן אליהו - שערות דגולגלתא דרישא דזא",
+      "videoId": "GofGYWS1bRk",
+      "duration": "3:27"
+    },
+    {
+      "title": "סו הרב אורן אליהו - תלת חללי גוגלתא ותלת מוחין דזא",
+      "videoId": "tDuK-jz76Ac",
+      "duration": "1:52"
+    },
+    {
+      "title": "סג הרב אורן אליהו - עיינין דרישא דזא",
+      "videoId": "p1kaOD3qT54",
+      "duration": "8:42"
+    },
+    {
+      "title": "סד הרב אורן אליהו - מצחא דרישא דזא",
+      "videoId": "VB-GPpZ8JY4",
+      "duration": "3:22"
+    },
+    {
+      "title": "סב הרב אורן אליהו - חוטמא דזא",
+      "videoId": "iYYmNtbEkIg",
+      "duration": "7:13"
+    },
+    {
+      "title": "סא הרב אורן אליהו - אודנין דזא",
+      "videoId": "0ZmxkGbCT40",
+      "duration": "6:21"
+    },
+    {
+      "title": "ס הרב אורן אליהו - עדות רשבי על שמחתו",
+      "videoId": "E7q8X31GLlQ",
+      "duration": "53"
+    },
+    {
+      "title": "נח הרב אורן אליהו - משחא דדיקנא דאריך מתקן תשעה תקוני ד",
+      "videoId": "KxOPHbsratI",
+      "duration": "1:42"
+    },
+    {
+      "title": "נט הרב אורן אליהו - פתיחה לתשעה תקוני דיקנא דזא",
+      "videoId": "obSkEzqAkXk",
+      "duration": "38"
+    },
+    {
+      "title": "נז הרב אורן אליהו - פירוש מקום דתשעה תקוני דדיקנא דזא",
+      "videoId": "LJTmh26t2I4",
+      "duration": "8:47"
+    },
+    {
+      "title": "נו הרב אורן אליהו - תקונא קדמאה",
+      "videoId": "JiJr5fPTO8U",
+      "duration": "6:49"
+    },
+    {
+      "title": "נד הרב אורן אליהו - תקונא תליתאה",
+      "videoId": "eKIPkifkgtQ",
+      "duration": "2:04"
+    },
+    {
+      "title": "נה הרב אורן אליהו - תקונא תניינא",
+      "videoId": "FCVjwc7UvjI",
+      "duration": "1:14"
+    },
+    {
+      "title": "נג הרב אורן אליהו - תקונא רביעאה",
+      "videoId": "vcoRLYZWYak",
+      "duration": "1:44"
+    },
+    {
+      "title": "נב הרב אורן אליהו - תקונא חמישאה",
+      "videoId": "tC41W8OabEM",
+      "duration": "1:05"
+    },
+    {
+      "title": "נ הרב אורן אליהו - תקונא שביעאה",
+      "videoId": "VlX3dCZypBE",
+      "duration": "1:28"
+    },
+    {
+      "title": "נא הרב אורן אליהו - תקונא שתיתאה",
+      "videoId": "qh2bF25-_v0",
+      "duration": "32"
+    },
+    {
+      "title": "מט הרב אורן אליהו - תקונא תמינאה",
+      "videoId": "mL7Z2JKmbWo",
+      "duration": "42"
+    },
+    {
+      "title": "מז הרב אורן אליהו - עתיקא קדישא וזא",
+      "videoId": "Ew-2snDlxxo",
+      "duration": "4:53"
+    },
+    {
+      "title": "מח הרב אורן אליהו - תקונא תשיעאה",
+      "videoId": "iijA1SgESZI",
+      "duration": "43"
+    },
+    {
+      "title": "מו הרב אורן אליהו - סדר אצילות ובנית נוק",
+      "videoId": "cdQNAjaKqUw",
+      "duration": "2:18"
+    },
+    {
+      "title": "מה הרב אורן אליהו - תקון אמא דכיא",
+      "videoId": "loZhg58TbEA",
+      "duration": "2:17"
+    },
+    {
+      "title": "מג הרב אורן אליהו - תקון דרועין דדכורא",
+      "videoId": "oLoRYHLSiZs",
+      "duration": "3:35"
+    },
+    {
+      "title": "מד הרב אורן אליהו - שבעת מלכי הנוק' דמיתו",
+      "videoId": "1CpLiun4zxc",
+      "duration": "2:12"
+    },
+    {
+      "title": "מב הרב אורן אליהו - סוד נסירת הנוק",
+      "videoId": "NmAirSwT-n4",
+      "duration": "2:41"
+    },
+    {
+      "title": "מא הרב אורן אליהו - מעשה קין והבל",
+      "videoId": "_iRiEmJ-30o",
+      "duration": "3:11"
+    },
+    {
+      "title": "מ הרב אורן אליהו - עליונים לתתא ותתאין לעילא",
+      "videoId": "rOCndkKtlTk",
+      "duration": "25"
+    },
+    {
+      "title": "לח הרב אורן אליהו - סוד אדם דאצילות",
+      "videoId": "vPvlumRmlsw",
+      "duration": "2:47"
+    },
+    {
+      "title": "לט הרב אורן אליהו - השתלשלות העולמות",
+      "videoId": "8SGJyDCcW9g",
+      "duration": "1:39"
+    },
+    {
+      "title": "לז הרב אורן אליהו - מתוק הדינין",
+      "videoId": "o_OeKsYs8So",
+      "duration": "4:39"
+    },
+    {
+      "title": "לו הרב אורן אליהו - חכמה דאריך",
+      "videoId": "Bt-a1j7Wijw",
+      "duration": "2:02"
+    },
+    {
+      "title": "לד הרב אורן אליהו - הסתלקות שלשת החברים",
+      "videoId": "b33IXJPh8qc",
+      "duration": "2:21"
+    },
+    {
+      "title": "לה הרב אורן אליהו - תפילת רשבי בבכיה",
+      "videoId": "6KANqv_vEv8",
+      "duration": "1:07"
+    },
+    {
+      "title": "לב הרב אורן אליהו - העדרות אליהו הנביא",
+      "videoId": "3651Ii7OW3s",
+      "duration": "4:46"
+    },
+    {
+      "title": "לג הרב אורן אליהו - ביאור ר' שמעון זכות חברייא",
+      "videoId": "g1GVGD2kmCY",
+      "duration": "1:46"
+    },
+    {
+      "title": "ל הרב אורן אליהו - הקדמת האדרא זוטא",
+      "videoId": "DcphalAQRaw",
+      "duration": "6:05"
+    },
+    {
+      "title": "לא הרב אורן אליהו - תפילה קודם האדרא",
+      "videoId": "6oqMJAz1vXI",
+      "duration": "2:49"
+    },
+    {
+      "title": "כט הרב אורן אליהו - כינוס חברייא",
+      "videoId": "Qxr0685xVW8",
+      "duration": "6:25"
+    },
+    {
+      "title": "כח הרב אורן אליהו - אק נשמת האצילות",
+      "videoId": "avNwy3RBU7M",
+      "duration": "2:13"
+    },
+    {
+      "title": "כו הרב אורן אליהו - תלת רישין",
+      "videoId": "2IbbTb_E-M4",
+      "duration": "3:06"
+    },
+    {
+      "title": "כז הרב אורן אליהו - גולגלתא דאריך ויג חוורתא",
+      "videoId": "R4xiOt1rXGU",
+      "duration": "1:16"
+    },
+    {
+      "title": "כד הרב אורן אליהו - התלבשות עתיקא",
+      "videoId": "gFNZQov6qg4",
+      "duration": "3:35"
+    },
+    {
+      "title": "כה הרב אורן אליהו - מצחא דאריך",
+      "videoId": "FGNtzzBA6oE",
+      "duration": "2:16"
+    },
+    {
+      "title": "כב הרב אורן אליהו - דיקנא דאריך",
+      "videoId": "w2xNx0dSXTg",
+      "duration": "2:30"
+    },
+    {
+      "title": "כג הרב אורן אליהו - חוטמא דאריך",
+      "videoId": "k3p6FxwzQgQ",
+      "duration": "2:02"
+    },
+    {
+      "title": "כא הרב אורן אליהו - התלבשות חסד ויסוד דעתיק",
+      "videoId": "hFI87gNzhZI",
+      "duration": "4:29"
+    },
+    {
+      "title": "כ הרב אורן אליהו - כולם בחכמה עשית",
+      "videoId": "cTG_KTSYdPY",
+      "duration": "2:28"
+    },
+    {
+      "title": "יח הרב אורן אליהו - בינה ותבונה",
+      "videoId": "1OcNjq5i4JY",
+      "duration": "5:51"
+    },
+    {
+      "title": "יט הרב אורן אליהו - אבא ואמא",
+      "videoId": "5_IpeFFaI98",
+      "duration": "6:43"
+    },
+    {
+      "title": "יז הרב אורן אליהו - דעת עליון ותחתון",
+      "videoId": "8RymGpCJBZ4",
+      "duration": "2:45"
+    },
+    {
+      "title": "יו הרב אורן אליהו - דרוש זון",
+      "videoId": "HDUBJfZzhsk",
+      "duration": "4:16"
+    },
+    {
+      "title": "יו הרב אורן אליהו - דרוש זון",
+      "videoId": "YeIV2Muko_c",
+      "duration": "4:16"
+    },
+    {
+      "title": "יה הרב אורן אליהו - שבירת המלכים דזא",
+      "videoId": "BNPrtrfMC-Q",
+      "duration": "3:36"
+    },
+    {
+      "title": "יד הרב אורן אליהו - חבד דזא",
+      "videoId": "dVJZ3QdlJQA",
+      "duration": "6:03"
+    },
+    {
+      "title": "יג הרב אורן אליהו - מצחא דזא",
+      "videoId": "lSpj1q2qKa0",
+      "duration": "2:09"
+    },
+    {
+      "title": "יב הרב אורן אליהו - עיני זא",
+      "videoId": "1f6wYfL4KNw",
+      "duration": "6:42"
+    },
+    {
+      "title": "יא הרב אורן אליהו - חוטמא דזא",
+      "videoId": "KqZlKhWf1jA",
+      "duration": "3:13"
+    },
+    {
+      "title": "י הרב אורן אליהו - אודנין דזא",
+      "videoId": "DJPDsn8Qzng",
+      "duration": "7:18"
+    },
+    {
+      "title": "ט הרב אורן אליהו - אנפי זא",
+      "videoId": "j-hu3yKTYPs",
+      "duration": "1:31"
+    },
+    {
+      "title": "ח הרב אורן אליהו - תקוני דיקנא דזא",
+      "videoId": "AGk2NkJVHmE",
+      "duration": "5:26"
+    },
+    {
+      "title": "ד הרב אורן אליהו - נהי דזא",
+      "videoId": "LMJFY9LLKlc",
+      "duration": "1:08"
+    },
+    {
+      "title": "ה הרב אורן אליהו - נהי דזא",
+      "videoId": "Z0KUwRHIC3k",
+      "duration": "50"
+    },
+    {
+      "title": "א הרב אורן אליהו - מח' ר' שמעון",
+      "videoId": "VQCwTrqCflo",
+      "duration": "4:07"
+    },
+    {
+      "title": "ז הרב אורן אליהו - שפוון ופומא דזא",
+      "videoId": "gupP1_DYyvw",
+      "duration": "3:50"
+    },
+    {
+      "title": "יג הרב אורן אליהו - מצחא דזא",
+      "videoId": "7xKFXkZwg5o",
+      "duration": "2:09"
+    },
+    {
+      "title": "הרב אורן אליהו - הרשעים גורמים פירוד והצדיקים ממתקים",
+      "videoId": "868JaE4iClU",
+      "duration": "4:49"
+    },
+    {
+      "title": "ו הרב אורן אליהו - בנין גולגלתא דנוק",
+      "videoId": "0IzqtxV2JgY",
+      "duration": "3:03"
+    },
+    {
+      "title": "הרב אורן אליהו - תקון זא",
+      "videoId": "LHG-jDG5DI8",
+      "duration": "3:10"
+    },
+    {
+      "title": "ג הרב אורן אליהו - יחוד זון פנים בפנים שבת",
+      "videoId": "FnFOPjCH1sQ",
+      "duration": "3:15"
+    },
+    {
+      "title": "ד הרב אורן אליהו - נהי דזא",
+      "videoId": "h9ym5uT5KDk",
+      "duration": "1:08"
+    },
+    {
+      "title": "א הרב אורן אליהו - מח' ר' שמעון",
+      "videoId": "fF-vml6tZII",
+      "duration": "4:07"
+    },
+    {
+      "title": "ב הרב אורן אליהו - הסתלקות רשבי",
+      "videoId": "_c8AYfBJdD4",
+      "duration": "4:10"
+    },
+    {
+      "title": "מעשה ברבי אליעזר",
+      "videoId": "uC2oDQwRbfk",
+      "duration": "1:11"
+    },
+    {
+      "title": "חכם יחזקאל עזרא דורי עה -חכם יחזקאל סעאת",
+      "videoId": "FQ1Gli4o0g4",
+      "duration": "4:22"
+    },
+    {
+      "title": "סיפור לפסח מאת חכם יחזקאל סעאת",
+      "videoId": "CVU7oPt7WOM",
+      "duration": "10:08"
+    },
+    {
+      "title": "יחסם של חכמי עירק לחילוניים-חכם יחזקאל סעאת",
+      "videoId": "tVjbAZZ3uIY",
+      "duration": "8:27"
+    },
+    {
+      "title": "חכם יחזקאל סעאת מסביר על בית הכנסת בבגדד והדרשות שלו.",
+      "videoId": "x5AOS7krwWE",
+      "duration": "4:33"
+    },
+    {
+      "title": "דרשה לפרשת שמיני על אהרון הכהן - חכם יחזקאל סעאת",
+      "videoId": "omXyJFVOBk8",
+      "duration": "9:40"
+    },
+    {
+      "title": "חכם יחזקאל סעאת ע\"ה על דרשת שבת הגדול של חכם דוד בן רבנו יוסף חיים עה",
+      "videoId": "VLhPRsy-60w",
+      "duration": "3:05"
+    },
+    {
+      "title": "דרשה על חכם מרידך ועל ימי חיי האדם",
+      "videoId": "7YC3XfSQd-Q",
+      "duration": "4:05"
+    },
+    {
+      "title": "דרשה לפרשת שמיני - מאכלות אסורות- חכם יחזקאל סעאת",
+      "videoId": "fu2jInSI_j8",
+      "duration": "3:55"
+    },
+    {
+      "title": "דרשה לפרשת קדושים-חכם יחזקאל סעאת",
+      "videoId": "59ck6AhCAek",
+      "duration": "3:41"
+    },
+    {
+      "title": "דרשה לפרשת צו מאת חכם יחזקאל סעאת",
+      "videoId": "k5Cjaxw-VBM",
+      "duration": "2:23"
+    },
+    {
+      "title": "דרשה לפרשת צו - זבח השלמים מאת חכם יחזקאל סעאת",
+      "videoId": "TIAsvgVyC08",
+      "duration": "4:52"
+    },
+    {
+      "title": "דרשה לפרשת מצורע מפי חכם יחזקאל סעאת ע\"ה מאחרוני חכמי עירק.",
+      "videoId": "m8kjNguO-MA",
+      "duration": "7:01"
+    },
+    {
+      "title": "דרשה לפרשת ויקרא מאת חכם יחזקאל סעאת-טעם איסור חלב ודם",
+      "videoId": "kDH_Y8I4hds",
+      "duration": "3:49"
+    },
+    {
+      "title": "דרשה לפרשת במדבר-חכם יחזקאל סעאת",
+      "videoId": "yG4CCD2YkuQ",
+      "duration": "12:29"
+    },
+    {
+      "title": "דרשה לפרשת בחוקותי-חכםיחזקאל סעאת",
+      "videoId": "Wh68JKUHjZY",
+      "duration": "9:53"
+    },
+    {
+      "title": "דרשה לפרשת בהר סיני-חכם יחזקאל סעאת",
+      "videoId": "ocxtVJa1yyA",
+      "duration": "6:46"
+    },
+    {
+      "title": "דרשה לפרשת אמור-חכם יחזקאל סעאת ע\"ה",
+      "videoId": "sYQO8_Vlw94",
+      "duration": "5:16"
+    },
+    {
+      "title": "דרשה לחג השבועות מאת חכם יחזקאל סעאת",
+      "videoId": "XnMWvwLM1QY",
+      "duration": "6:05"
+    },
+    {
+      "title": "סלימה מראד-רוחי כ'לצאת מן אל סהר",
+      "videoId": "GXKYC2R_awM",
+      "duration": "5:42"
+    },
+    {
+      "title": "נסים סלמן ע\"ה מסביר את \"מקאם חיג'אז סול\"",
+      "videoId": "7pmMl18QQY0",
+      "duration": "4:57"
+    },
+    {
+      "title": "נסים סלמן ע\"ה מסביר את \"מקאם קורד\"",
+      "videoId": "f21bfrUqySA",
+      "duration": "3:01"
+    },
+    {
+      "title": "נסים סלמן ע\"ה מסביר \"מקאם עג'אם\"",
+      "videoId": "r8UIZZS__Dk",
+      "duration": "2:28"
+    },
+    {
+      "title": "נסים סלמן ע\"ה מסביר \"מקאם נהוואנד\"",
+      "videoId": "k9sI20r5XJQ",
+      "duration": "2:16"
+    },
+    {
+      "title": "נסים סלמן מסביר את \"מקאם חיג'אז\"",
+      "videoId": "c3cBdJ11uao",
+      "duration": "3:10"
+    },
+    {
+      "title": "נסים סלמן ע\"ה מסביר את \"מקאם זנגראן\" .",
+      "videoId": "3oyiUnktdvI",
+      "duration": "3:51"
+    },
+    {
+      "title": "יאמר נא ישראל- פיוט מהבקשות בביצוע הרב אייל סלמן ובניו",
+      "videoId": "aVFMW_jpx3A",
+      "duration": "2:23"
+    },
+    {
+      "title": "אל מסתתר- פיוט מהבקשות בביצוע הרב אייל סלמן  ובניו הי\"ו",
+      "videoId": "dhKUfaFhOJM",
+      "duration": "3:32"
+    },
+    {
+      "title": "בני עבדיך-מתוך תפילת שחרית לראש השנה של יהודי עירק בביצוע הרב אייל סלמן",
+      "videoId": "qIO9meKhZ6w",
+      "duration": "2:02"
+    },
+    {
+      "title": "שואף כמו עבד-מתוך תפילת שחרית של ראש השנה כמנהג יהודי עירק בביצוע הרב אייל סלמן",
+      "videoId": "erQT9MvWv_M",
+      "duration": "2:46"
+    },
+    {
+      "title": "אחות קטנה - פתיחה של ערבית לראש השנה כמנהג יהודי עירק בביצוע הרב אייל סלמן",
+      "videoId": "dcgDNGlu9EE",
+      "duration": "5:15"
+    }
+  ]
+},
+{
+  "id": "chanukah",
+  "name": "חנוכה - חיים סלמן",
+  "channel": "חיים סלמן",
+  "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
+  "songs": [
+    {
+      "title": "3.שלהבת",
+      "videoId": "YrXS5y7dYAg",
+      "duration": "28:05"
+    },
+    {
+      "title": "2.להדליק נר חנוכה",
+      "videoId": "0BSbhoIZqek",
+      "duration": "35:55"
+    },
+    {
+      "title": "1. חנוכה ברכת להדליק",
+      "videoId": "0NHYoGdLtfc",
+      "duration": "33:55"
+    },
+    {
+      "title": "74.1_.כוונות חנוכה התשע\"ז  חיים סלמןmp3",
+      "videoId": "EA2C119J5zI",
+      "duration": "42:44"
+    },
+    {
+      "title": "ימי החנוכה - בביצוע משפחת סלמן",
+      "videoId": "ao6N-N0L0No",
+      "duration": "2:23"
+    },
+    {
+      "title": "הפטרה לשבת שניה של חנוכה",
+      "videoId": "WRN4g27O58M",
+      "duration": "2:47"
+    },
+    {
+      "title": "הפטרה לשבת ראשונה של חנוכה",
+      "videoId": "TzrlDuvWQjU",
+      "duration": "5:14"
+    }
+  ]
+},
+{
+  "id": "pesach-hallel",
+  "name": "פסח והלל - חיים סלמן",
+  "channel": "חיים סלמן",
+  "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
+  "songs": [
+    {
+      "title": "חיים סלמן קריאת ההלל בליל פסח כמנהג יהודי עירק",
+      "videoId": "l7COeyn-G38",
+      "duration": "7:49"
+    },
+    {
+      "title": "_.קריאת ההלל כמנהג יהודי עירק - חיים סלמן                             mp3",
+      "videoId": "XyhWpXFGF44",
+      "duration": "1:01"
+    },
+    {
+      "title": "12._.כוונות הגדה של פסח - סיכום ג' ואחרון - חיים סלמן        mp3",
+      "videoId": "WYO0fbCb1io",
+      "duration": "38:26"
+    },
+    {
+      "title": "11._. כוונות הגדה של פסח - סיכום ב' - חיים סלמן         mp3",
+      "videoId": "R6BtZz9lWe0",
+      "duration": "48:18"
+    },
+    {
+      "title": "10._. כוונות הגדה של פסח - סיכום א' - חיים סלמן           mp3",
+      "videoId": "CV7vGb_Mmdw",
+      "duration": "48:13"
+    },
+    {
+      "title": "9._.כוונות הגדה של פסח - כוס שלישי וכוס רביעי - חיים סלמן       mp3",
+      "videoId": "5umPDntrsGc",
+      "duration": "57:34"
+    },
+    {
+      "title": "8._.כוונות הגדה של פסח - כוונות המרור והכורך - חיים סלמן      mp3",
+      "videoId": "bJXyHjVVsPI",
+      "duration": "25:38"
+    },
+    {
+      "title": "7._.כוונות הגדה של פסח - כוונות המצה ומרור - חיים סלמן       mp3",
+      "videoId": "5iMWnDVEijU",
+      "duration": "45:03"
+    },
+    {
+      "title": "_. סדר ליל פסח - משפחת בצון - חלק ב' - חיים סלמן       mp3",
+      "videoId": "d4HhzZdJCZM",
+      "duration": "49:31"
+    },
+    {
+      "title": "_1_. סדר פסח - משפחת בצון - חלק א' -   חיים סלמן        mp3",
+      "videoId": "svilnuPr6_E",
+      "duration": "18:13"
+    },
+    {
+      "title": "6._.כוונות הגדה של פסח - דצ\"ך עד\"ש באח\"ב - חיים סלמן        mp3",
+      "videoId": "jES46hoEcxk",
+      "duration": "45:51"
+    },
+    {
+      "title": "5._.כוונות הגדה של פסח - כרפס  - חיים סלמן     mp3",
+      "videoId": "YGMPC7E8slA",
+      "duration": "1:09:58"
+    },
+    {
+      "title": "4._.כוונות הגדה של פסח - סברי מרנן - חיים סלמן        mp3",
+      "videoId": "_835xesi6wY",
+      "duration": "45:39"
+    },
+    {
+      "title": "3._.כוונות הגדה של פסח - גדלות ראשון של ישס\"ות - חיים סלמן    mp3",
+      "videoId": "gTGer5CR0xE",
+      "duration": "1:06"
+    },
+    {
+      "title": "2._.כוונות הגדה של פסח - כוס ראשון - חיים סלמן      mp3",
+      "videoId": "IdLoQqHl9to",
+      "duration": "15:31"
+    },
+    {
+      "title": "1._.כוונות הגדה של פסח - מבוא - חיים סלמן mp3",
+      "videoId": "88tsRUg_1a8",
+      "duration": "36:46"
+    },
+    {
+      "title": "הללויה הללו אל בקודשו - מתפלת שבת",
+      "videoId": "pZotS01MYag",
+      "duration": "28"
+    },
+    {
+      "title": "תקון הטל ליום ראשון של פסח",
+      "videoId": "aUAm9n5_Xgg",
+      "duration": "5:11"
+    },
+    {
+      "title": "קריאת ההפטרה לפסח",
+      "videoId": "jkG7b3FEU60",
+      "duration": "3:06"
+    },
+    {
+      "title": "קריאה ליום ה' חול המועד פסח",
+      "videoId": "qHjWw5ro3Mw",
+      "duration": "2:27"
+    },
+    {
+      "title": "קריאת המפטיר לפסח",
+      "videoId": "hPxwsdOu9nE",
+      "duration": "1:17"
+    },
+    {
+      "title": "קריאה יום ד' חול המועד פסח",
+      "videoId": "XUpCEgy0QkU",
+      "duration": "4:15"
+    },
+    {
+      "title": "קריאה יום ג' חול המועד פסח",
+      "videoId": "Scyo5BjbuRo",
+      "duration": "2:49"
+    },
+    {
+      "title": "קריאה יום א' חול המועד פסח",
+      "videoId": "1C_R4FH5t5E",
+      "duration": "9:23"
+    },
+    {
+      "title": "קריאה יום ב' חול המועד פסח",
+      "videoId": "C8DKiYmrbrY",
+      "duration": "3:48"
+    },
+    {
+      "title": "קריאה בתורה ליום טוב ראשון של פסח",
+      "videoId": "0I_TFrAMsg0",
+      "duration": "5:45"
+    },
+    {
+      "title": "נכון לבו-פיוט לפסח-יהודי עירק-חיים סלמן",
+      "videoId": "MBZqIQdBz0Q",
+      "duration": "4:01"
+    },
+    {
+      "title": "מלך גואל ומושיע-פיוט לפסח-חיים סלמן",
+      "videoId": "L6_230oQtT8",
+      "duration": "4:06"
+    },
+    {
+      "title": "אשיר לאל גאה גאה לשביעי של פסח-יהודי עירק-חיים סלמן",
+      "videoId": "NzFAByFFKeY",
+      "duration": "2:42"
+    },
+    {
+      "title": "קטע של הגדה של פסח בנעימת יהודי עירק -שפיק סלמן ע\"ה",
+      "videoId": "ecHaa2kXQ64",
+      "duration": "1:49"
+    },
+    {
+      "title": "קריאה לשבת חול המועד פסח וסוכות",
+      "videoId": "ufdJcB7xbhg",
+      "duration": "7:33"
+    },
+    {
+      "title": "הפטרה לשבת וחול המועד פסח",
+      "videoId": "AerkSknmNsY",
+      "duration": "2:37"
+    },
+    {
+      "title": "הפטרה לשבת הגדול (לפני פסח)",
+      "videoId": "u0UZrObpr0Y",
+      "duration": "5:48"
+    },
+    {
+      "title": "הפטרה לשביעי של פסח",
+      "videoId": "zhGbZsIoVJ0",
+      "duration": "4:22"
+    },
+    {
+      "title": "הפטרה ליום טוב ראשון של פסח",
+      "videoId": "4PoXFDZeGRk",
+      "duration": "3:00"
+    },
+    {
+      "title": "קידוש ליל פסח",
+      "videoId": "TsVzFZRdx5U",
+      "duration": "1:24"
+    },
+    {
+      "title": "לפיכך",
+      "videoId": "giiNVS6tarE",
+      "duration": "55"
+    },
+    {
+      "title": "מה נשתנה",
+      "videoId": "PijRi_CfKP0",
+      "duration": "1:28"
+    },
+    {
+      "title": "חד גדיא בשרח ערבי",
+      "videoId": "CcTdxVNXZiw",
+      "duration": "2:07"
+    },
+    {
+      "title": "הא לחמא עניא",
+      "videoId": "1pJm8qipDiQ",
+      "duration": "2:35"
+    },
+    {
+      "title": "הלל",
+      "videoId": "V1udDrfMnF4",
+      "duration": "3:40"
+    },
+    {
+      "title": "דיינו",
+      "videoId": "ooOQkKSTFC4",
+      "duration": "3:15"
+    },
+    {
+      "title": "ויוציאנו ה' ממצרים",
+      "videoId": "wRThbw4SzOs",
+      "duration": "44"
+    },
+    {
+      "title": "היא שעמדה",
+      "videoId": "f2dzeh2IDP4",
+      "duration": "48"
+    },
+    {
+      "title": "אמרו רבותינו",
+      "videoId": "sfPZuzZp2wg",
+      "duration": "1:43"
+    },
+    {
+      "title": "ברוך המקום",
+      "videoId": "9vGtukuOG9g",
+      "duration": "47"
+    },
+    {
+      "title": "פירוש מיוחד על הפיוט חד גדיא",
+      "videoId": "oj7ExGAcKtU",
+      "duration": "8:18"
+    },
+    {
+      "title": "דרשה לפסח - שואלין בהלכות הפסח",
+      "videoId": "0RoXbAf8QVw",
+      "duration": "6:21"
+    }
+  ]
+},
+{
+  "id": "hoshanot-sukkot",
+  "name": "הושענות וסוכות - חיים סלמן",
+  "channel": "חיים סלמן",
+  "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
+  "songs": [
+    {
+      "title": "_.הושענות - יה איום - חיים סלמן                                      mp3",
+      "videoId": "kla9WRvmapE",
+      "duration": "59"
+    },
+    {
+      "title": "_.הושענות - ברית נפקד - חיים סלמן                                    mp3",
+      "videoId": "z4fCewu_z_c",
+      "duration": "1:19"
+    },
+    {
+      "title": "סוכה ולולב",
+      "videoId": "xBtPdihZ72g",
+      "duration": "5:46"
+    },
+    {
+      "title": "מזמור לסוכות",
+      "videoId": "RAcOptl3748",
+      "duration": "2:08"
+    },
+    {
+      "title": "הפטרה לשבת חול המועד סוכות",
+      "videoId": "-vrtoCXf7vg",
+      "duration": "3:55"
+    },
+    {
+      "title": "הפטרה ליום טוב ראשון של סוכות",
+      "videoId": "Poca3JVc12o",
+      "duration": "4:34"
+    }
+  ]
+},
+{
+  "id": "tisha-bav-kinot",
+  "name": "קינות לתשעה באב - חיים סלמן",
+  "channel": "חיים סלמן",
+  "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
+  "songs": [
+    {
+      "title": "קריאת מגילת איכה בנעימת יהודי  Part 1",
+      "videoId": "Mw_Qa7-A6Is",
+      "duration": "14:31"
+    },
+    {
+      "title": "קריאה בתורה לתשעה באב",
+      "videoId": "MlXRX2Fyrp0",
+      "duration": "2:30"
+    },
+    {
+      "title": "מגילת איכה",
+      "videoId": "ZwzUHRKQg5M",
+      "duration": "5:17"
+    },
+    {
+      "title": "על נהרות בבל - פתיחה לערב תשעה באב",
+      "videoId": "mlbZpwDw6Rw",
+      "duration": "2:47"
+    },
+    {
+      "title": "התנחמו בגלות",
+      "videoId": "8YAYWZOkflc",
+      "duration": "1:28"
+    },
+    {
+      "title": "האזינו ליל תשעה באב",
+      "videoId": "m9moq6HEKpg",
+      "duration": "4:59"
+    },
+    {
+      "title": "גרושים מבית תענוגיהם",
+      "videoId": "0_AVFsVeRes",
+      "duration": "2:03"
+    },
+    {
+      "title": "דוק וחוג רעשו",
+      "videoId": "Rej51GuTr6g",
+      "duration": "1:13"
+    },
+    {
+      "title": "בת ציון שמעתי",
+      "videoId": "eCdACKknz5I",
+      "duration": "1:56"
+    },
+    {
+      "title": "במקום אשרי העם",
+      "videoId": "Ehf-S0xQY-M",
+      "duration": "2:00"
+    },
+    {
+      "title": "בליל זה יבכיון",
+      "videoId": "oY1b4v1yAEc",
+      "duration": "3:52"
+    },
+    {
+      "title": "בת עמי תייליל",
+      "videoId": "VUOybkMFFEw",
+      "duration": "1:35"
+    },
+    {
+      "title": "בחודש החמישי השני",
+      "videoId": "vMP5xYuvaeg",
+      "duration": "1:43"
+    },
+    {
+      "title": "בחודש החמישי",
+      "videoId": "pLlW--Viza4",
+      "duration": "1:49"
+    },
+    {
+      "title": "אללי לי אללי",
+      "videoId": "8S3mEvpTc-4",
+      "duration": "3:24"
+    },
+    {
+      "title": "אמרה ציון",
+      "videoId": "dopxI9pasB4",
+      "duration": "2:15"
+    },
+    {
+      "title": "אלי עדתי והילילי",
+      "videoId": "BHOFjGOofRo",
+      "duration": "2:34"
+    },
+    {
+      "title": "אך זה היום",
+      "videoId": "6YVB-s-eGH0",
+      "duration": "2:14"
+    },
+    {
+      "title": "איך נוי שודד",
+      "videoId": "_LZ4fISoS3g",
+      "duration": "3:13"
+    },
+    {
+      "title": "איכה צאן ההריגה",
+      "videoId": "_Z-C9oIFd-c",
+      "duration": "2:02"
+    },
+    {
+      "title": "איכה צאן ההריגה",
+      "videoId": "IxGguIhE_uk",
+      "duration": "2:02"
+    },
+    {
+      "title": "איך נוי חטאתי",
+      "videoId": "O8hkYeqya0c",
+      "duration": "2:09"
+    },
+    {
+      "title": "אז בחטאינו חרב מקדש",
+      "videoId": "5OGuMX3Bc3Y",
+      "duration": "3:25"
+    },
+    {
+      "title": "אוי כי ירד אש מן השמים",
+      "videoId": "jVXghxNMGNo",
+      "duration": "2:46"
+    },
+    {
+      "title": "תשעה באב-יהודה וישראל בביצוע חיים סלמן",
+      "videoId": "ivXIqkRIZyQ",
+      "duration": "1:28"
+    },
+    {
+      "title": "תשעה באב-שאי קינה בביצוע חיים סלמן",
+      "videoId": "ignyu5ZCd40",
+      "duration": "1:36"
+    },
+    {
+      "title": "תשעה באב-זכור ה' בביצוע חיים סלמן",
+      "videoId": "Ee0aTYFoIBI",
+      "duration": "2:26"
+    },
+    {
+      "title": "תשעה באב-במקום אשרי העם בביצוע חיים סלמן",
+      "videoId": "YK9csQbKJwQ",
+      "duration": "1:13"
+    },
+    {
+      "title": "תשעה באב-בליל זה יבכיון בביצוע חיים סלמן",
+      "videoId": "jWVqdsGom7c",
+      "duration": "3:37"
+    },
+    {
+      "title": "תשעה באב- אללי לי.בביצוע חיים סלמן",
+      "videoId": "zeF35_JyRJA",
+      "duration": "1:13"
+    },
+    {
+      "title": "תשעה באב-ראו עתה בביצוע חיים סלמן",
+      "videoId": "IjfOd-DTEy4",
+      "duration": "1:57"
+    },
+    {
+      "title": "תשעה באב-למי אבכה בביצוע חיים סלמן",
+      "videoId": "WrhBkV9IBaE",
+      "duration": "4:06"
+    },
+    {
+      "title": "תשעה באב-על נהרות בבל בביצוע חיים סלמן",
+      "videoId": "z81nMZIbdTU",
+      "duration": "2:43"
+    },
+    {
+      "title": "תשעה באב-אוי כי ירד אש בביצוע חיים סלמן",
+      "videoId": "jdIZoQpqjbA",
+      "duration": "2:58"
+    }
+  ]
+},
+{
+  "id": "haftarot",
+  "name": "הפטרות השנה - חיים סלמן",
+  "channel": "חיים סלמן",
+  "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
+  "songs": [
+    {
+      "title": "הפטרת שחרית - אסוף אסיפם",
+      "videoId": "9x5pmLPwab4",
+      "duration": "4:46"
+    },
+    {
+      "title": "הפטרת מנחה - שובה ישראל",
+      "videoId": "IameoZZ1lXA",
+      "duration": "1:18"
+    },
+    {
+      "title": "ט הפטרה לפרשת בהר סיני",
+      "videoId": "NnuzOdXSAXs",
+      "duration": "4:12"
+    },
+    {
+      "title": "הפטרת שבת שובה בין ראש השנה ליום כפור",
+      "videoId": "NjkPVNqgX7g",
+      "duration": "4:15"
+    },
+    {
+      "title": "הפטרת יום ב' דראש השנה",
+      "videoId": "6ZDg4KPdcF4",
+      "duration": "3:51"
+    },
+    {
+      "title": "הפטרת יום א' דראש השנה",
+      "videoId": "0aarhU14cJs",
+      "duration": "6:38"
+    },
+    {
+      "title": "הפטרה לשמחת תורה (וזאת הברכה)",
+      "videoId": "1owL79vcAMM",
+      "duration": "1:46"
+    },
+    {
+      "title": "הפטרה לשבת החודש (לפני רח ניסן)",
+      "videoId": "wROoz6S9jjY",
+      "duration": "3:51"
+    },
+    {
+      "title": "הפטרה ליום כפור",
+      "videoId": "jegPx_SfxTY",
+      "duration": "4:20"
+    },
+    {
+      "title": "הפטרה לחג השבועות",
+      "videoId": "OShjBGbYsJY",
+      "duration": "4:36"
+    },
+    {
+      "title": "ט הפטרה לפרשת נצבים",
+      "videoId": "Z2SLN5fzTHs",
+      "duration": "3:53"
+    },
+    {
+      "title": "ח הפטרה לפרשת כי תבוא",
+      "videoId": "IhQ4WdIjVtI",
+      "duration": "3:44"
+    },
+    {
+      "title": "ו הפטרה לפרשת כי תצא",
+      "videoId": "UZ01uPA91Jw",
+      "duration": "1:52"
+    },
+    {
+      "title": "ה הפטרה לפרשת שופטים",
+      "videoId": "CPneFF0c6HA",
+      "duration": "4:19"
+    },
+    {
+      "title": "ד הפטרה לפרשת ראה",
+      "videoId": "bobI4Z6AyF8",
+      "duration": "2:14"
+    },
+    {
+      "title": "ג הפטרה לפרשת עקב",
+      "videoId": "MhNXNMqtGgQ",
+      "duration": "5:05"
+    },
+    {
+      "title": "ב הפטרה לפרשת ואתחנן",
+      "videoId": "mCTjWwJzJ3Q",
+      "duration": "3:41"
+    },
+    {
+      "title": "א הפטרה לפרשת דברים",
+      "videoId": "fXixCE0_AZg",
+      "duration": "4:52"
+    },
+    {
+      "title": "י הפטרה לפרשת מסעי",
+      "videoId": "5O7ejeIPrrE",
+      "duration": "4:59"
+    },
+    {
+      "title": "ט הפטרה לפרשת מטות",
+      "videoId": "tQhHu2iTqIc",
+      "duration": "3:40"
+    },
+    {
+      "title": "ז הפטרה לפרשת בלק",
+      "videoId": "LvTxEJhISXo",
+      "duration": "2:37"
+    },
+    {
+      "title": "ח הפטרה לפרשת פינחס",
+      "videoId": "HlYbTKQi2MA",
+      "duration": "4:11"
+    },
+    {
+      "title": "ו הפטרה לפרשת חוקת",
+      "videoId": "Ei76DgwZx0Q",
+      "duration": "5:18"
+    },
+    {
+      "title": "ה הפטרה לפרשת קורח",
+      "videoId": "jHhW-IAtWZk",
+      "duration": "4:48"
+    },
+    {
+      "title": "ד הפטרה לפרשת שלח לך",
+      "videoId": "_IPSiZ1psWQ",
+      "duration": "4:44"
+    },
+    {
+      "title": "ג הפטרה לפרשת בהעלותך",
+      "videoId": "Dmrb2SKi5NY",
+      "duration": "3:56"
+    },
+    {
+      "title": "א הפטרה לפרשת במדבר",
+      "videoId": "NwqaSrMYtB0",
+      "duration": "3:36"
+    },
+    {
+      "title": "י הפטרה לפרשת בחוקותי",
+      "videoId": "fUqXp1AxIVU",
+      "duration": "3:52"
+    },
+    {
+      "title": "ט הפטרה לפרשת בהר",
+      "videoId": "iHK9rp6YvKo",
+      "duration": "4:12"
+    },
+    {
+      "title": "ח הפטרה לפרשת אמור",
+      "videoId": "yzuRhB1teRs",
+      "duration": "3:20"
+    },
+    {
+      "title": "ז הפטרה לפרשת קדושים",
+      "videoId": "YchAyksTY5I",
+      "duration": "4:03"
+    },
+    {
+      "title": "ה הפטרה לפרשת מצורע",
+      "videoId": "pGNqvbQZuf8",
+      "duration": "4:19"
+    },
+    {
+      "title": "ו הפטרה לפרשת אחרי מות",
+      "videoId": "kJWyHABMyvE",
+      "duration": "2:16"
+    },
+    {
+      "title": "ד הפטרה לפרשת תזריע",
+      "videoId": "wLfSEzi0rSA",
+      "duration": "4:30"
+    },
+    {
+      "title": "ב הפטרה לפרשת צו",
+      "videoId": "ysJpIRPe_C0",
+      "duration": "3:55"
+    },
+    {
+      "title": "ג הפטרה לפרשת שמיני",
+      "videoId": "mQfPJe0Jroo",
+      "duration": "3:16"
+    },
+    {
+      "title": "א הפטרה לפרשת ויקרא",
+      "videoId": "kpyhSe-E2jQ",
+      "duration": "5:04"
+    },
+    {
+      "title": "יא הפטרה לפרשת פקודי",
+      "videoId": "qob8BlORE4A",
+      "duration": "5:28"
+    },
+    {
+      "title": "י הפטרה לפרשת ויקהל",
+      "videoId": "BTgZtwfSE1U",
+      "duration": "3:31"
+    },
+    {
+      "title": "ט הפטרה לפרשת כי תשא",
+      "videoId": "86DTiCPj60g",
+      "duration": "5:24"
+    },
+    {
+      "title": "ח הפטרה לפרשת תצוה",
+      "videoId": "AcNMQZOS6XI",
+      "duration": "3:57"
+    },
+    {
+      "title": "ו הפטרה לפרשת משפטים",
+      "videoId": "pVO1HAdmb5I",
+      "duration": "4:01"
+    },
+    {
+      "title": "ז הפטרה לפרשת תרומה",
+      "videoId": "tuwgsGe2m30",
+      "duration": "5:02"
+    },
+    {
+      "title": "ד הפטרה לפרשת בשלח",
+      "videoId": "mevwoyv4TEw",
+      "duration": "8:10"
+    },
+    {
+      "title": "ה הפטרה לפרשת יתרו",
+      "videoId": "m7B7OpVkIHk",
+      "duration": "2:45"
+    },
+    {
+      "title": "ג הפטרה לפרשת בא לפי מנהג יהודי עירק",
+      "videoId": "4M85HHGVxPI",
+      "duration": "5:31"
+    },
+    {
+      "title": "ב הפטרה לפרשת וארא",
+      "videoId": "6RYx4quH4vc",
+      "duration": "4:51"
+    },
+    {
+      "title": "א הפטרה לפרשת שמות לפי מנהג יהודי עירק",
+      "videoId": "Q-qHBnFGsno",
+      "duration": "3:49"
+    },
+    {
+      "title": "יג הפטרה לפרשת ויחי",
+      "videoId": "O-LhvWEl9AI",
+      "duration": "4:00"
+    },
+    {
+      "title": "יב הפטרה לפרשת ויגש",
+      "videoId": "x15XSFrxEdo",
+      "duration": "3:10"
+    },
+    {
+      "title": "ט הפטרה לפרשת וישלח",
+      "videoId": "8Va4BcLmrEg",
+      "duration": "5:17"
+    },
+    {
+      "title": "יא הפטרה לפרשת מקץ",
+      "videoId": "K6XUhld_0pg",
+      "duration": "2:58"
+    },
+    {
+      "title": "י הפטרה לפרשת וישב",
+      "videoId": "63KIT80D4wA",
+      "duration": "3:07"
+    },
+    {
+      "title": "ח הפטרה לפרשת ויצא",
+      "videoId": "Yy714Q9Utic",
+      "duration": "3:02"
+    },
+    {
+      "title": "ז הפטרה לפרשת תולדות",
+      "videoId": "30URhb5TLB4",
+      "duration": "5:31"
+    },
+    {
+      "title": "ו הפטרה לפרשת חיי שרה",
+      "videoId": "_qfjzxNbd3E",
+      "duration": "6:42"
+    },
+    {
+      "title": "ה הפטרה לפרשת וירא",
+      "videoId": "OC3-Hucf3KM",
+      "duration": "4:58"
+    },
+    {
+      "title": "ד הפטרה לפרשת לך לך",
+      "videoId": "4NO5z_hz5AU",
+      "duration": "3:59"
+    },
+    {
+      "title": "ג הפטרה לפרשת נח",
+      "videoId": "Ix8VF_IoaaQ",
+      "duration": "2:23"
+    },
+    {
+      "title": "ב בהפטרה לפרשת בראשית",
+      "videoId": "WeLLcquj_Y4",
+      "duration": "2:58"
+    },
+    {
+      "title": "א ברכות ההפטרה של יהודי עירק-חיים סלמן",
+      "videoId": "UCRqO5JnTog",
+      "duration": "1:53"
     }
   ]
 }
