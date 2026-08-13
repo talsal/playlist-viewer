@@ -9818,10 +9818,10 @@ const PLAYLIST_CATEGORIES = {
 const CATEGORY_LABELS = [
   { key: "all", label: "הכל", icon: "🎵" },
   { key: "prayers", label: "פרשיות ותפילות", icon: "📖" },
-  { key: "study", label: "לימוד ותורה", icon: "🕯️" },
+  { key: "study", label: "לימוד ותורה", icon: "📚" },
   { key: "music", label: "שירה ופיוט", icon: "🎶" },
-  { key: "guests", label: "אורחים בערוץ", icon: "🎙️" },
-  { key: "family", label: "משפחה", icon: "👨‍👩‍👧‍👦" },
+  { key: "guests", label: "אורחים בערוץ", icon: "🎤" },
+  { key: "family", label: "משפחה", icon: "👪" },
 ];
 function categoryOf(pl){
   return PLAYLIST_CATEGORIES[pl.id] || (pl.id.startsWith("guest-") ? "guests" : "study");
