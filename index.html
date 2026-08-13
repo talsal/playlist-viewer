@@ -88,12 +88,37 @@
   header p{color:var(--muted);margin:0;}
   header p.stats{margin-top:6px;font-size:.9rem;opacity:.85;}
 
+  .categories{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+    padding:20px 16px 0;
+  }
+  .category-chip{
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--muted);
+    padding:7px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:0.85rem;
+    transition:all .15s ease;
+  }
+  .category-chip:hover{background:var(--card-hover); color:var(--text);}
+  .category-chip.active{
+    background:var(--accent2);
+    border-color:var(--accent2);
+    color:#fff;
+    font-weight:600;
+  }
+
   .tabs{
     display:flex;
     flex-wrap:wrap;
     gap:10px;
     justify-content:center;
-    padding:20px 16px;
+    padding:14px 16px;
   }
   .tab{
     background:var(--card);
@@ -428,6 +453,7 @@
   <p class="stats" id="statsLine"></p>
 </header>
 
+<div class="categories" id="categories"></div>
 <div class="tabs" id="tabs"></div>
 
 <div class="search-bar">
@@ -9742,6 +9768,31 @@ const playlists = [
 }
 ];
 
+const PLAYLIST_CATEGORIES = {
+  "parashiyot-hatorah": "prayers", "rosh-chodesh": "prayers", "rosh-hashana-tefilot": "prayers",
+  "shabbat-tefilot": "prayers", "tefilot-misc": "prayers", "haftarot": "prayers",
+  "pesach-hallel": "prayers", "chanukah": "prayers", "hoshanot-sukkot": "prayers",
+  "tisha-bav-kinot": "prayers", "purim": "prayers", "mi-kamocha": "prayers",
+  "shaar-hakavanot-chol": "study", "shaar-hakavanot-shabbat": "study", "otzrot-chaim": "study",
+  "adderet-eliyahu": "study", "lashon-hakodesh": "study", "tehillim-taamim": "study",
+  "tehillim-chapters": "study", "shacharit-shel-chol": "study", "taamei-hamikra": "study",
+  "guitar-melodies": "music", "filfil-gorji": "music", "nifla-maasecha": "music",
+  "shevachot-piyutim": "music",
+  "family-music": "family",
+};
+const CATEGORY_LABELS = [
+  { key: "all", label: "הכל" },
+  { key: "prayers", label: "פרשיות ותפילות" },
+  { key: "study", label: "לימוד ותורה" },
+  { key: "music", label: "שירה ופיוט" },
+  { key: "guests", label: "אורחים בערוץ" },
+  { key: "family", label: "משפחה" },
+];
+function categoryOf(pl){
+  return PLAYLIST_CATEGORIES[pl.id] || (pl.id.startsWith("guest-") ? "guests" : "study");
+}
+
+let currentCategory = "all";
 let currentPlaylistId = playlists[0].id;
 const PAGE_SIZE = 60;
 let visibleLimit = PAGE_SIZE;
@@ -9847,9 +9898,35 @@ function applySort(songs){
   return arr;
 }
 
+const categoriesEl = document.getElementById("categories");
+
+function renderCategories(){
+  categoriesEl.innerHTML = "";
+  CATEGORY_LABELS.forEach(cat => {
+    const count = cat.key === "all" ? playlists.length : playlists.filter(pl => categoryOf(pl) === cat.key).length;
+    const chip = document.createElement("button");
+    chip.className = "category-chip" + (currentCategory === cat.key ? " active" : "");
+    chip.textContent = `${cat.label} (${count})`;
+    chip.onclick = () => {
+      currentCategory = cat.key;
+      const visible = playlists.filter(pl => currentCategory === "all" || categoryOf(pl) === currentCategory);
+      if(currentPlaylistId !== FAVORITES_ID && !visible.some(pl => pl.id === currentPlaylistId) && visible.length){
+        currentPlaylistId = visible[0].id;
+      }
+      searchEl.value = "";
+      visibleLimit = PAGE_SIZE;
+      renderCategories();
+      renderTabs();
+      renderGrid();
+    };
+    categoriesEl.appendChild(chip);
+  });
+}
+
 function renderTabs(){
   tabsEl.innerHTML = "";
   const searching = isSearching();
+  const visiblePlaylists = playlists.filter(pl => currentCategory === "all" || categoryOf(pl) === currentCategory);
 
   const favBtn = document.createElement("button");
   favBtn.className = "tab" + (!searching && currentPlaylistId === FAVORITES_ID ? " active" : "");
@@ -9857,7 +9934,7 @@ function renderTabs(){
   favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; searchEl.value=""; visibleLimit = PAGE_SIZE; renderTabs(); renderGrid(); };
   tabsEl.appendChild(favBtn);
 
-  playlists.forEach(pl => {
+  visiblePlaylists.forEach(pl => {
     const btn = document.createElement("button");
     btn.className = "tab" + (!searching && pl.id === currentPlaylistId ? " active" : "");
     btn.textContent = `${pl.name} (${pl.songs.length})`;
@@ -10076,6 +10153,7 @@ function renderStats(){
     `${playlists.length} פלייליסטים · ${totalSongs} שירים`;
 }
 
+renderCategories();
 renderTabs();
 renderGrid();
 renderStats();
