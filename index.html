@@ -222,6 +222,20 @@
     max-width:1200px;
     margin:0 auto;
   }
+  .load-more-btn{
+    grid-column:1 / -1;
+    justify-self:center;
+    margin-top:8px;
+    padding:10px 24px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    font-size:.95rem;
+    cursor:pointer;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .load-more-btn:hover{background:var(--card-hover); transform:scale(1.03);}
   .song-card{
     background:var(--card);
     border:1px solid var(--border);
@@ -5134,6 +5148,8 @@ const playlists = [
 ];
 
 let currentPlaylistId = playlists[0].id;
+const PAGE_SIZE = 60;
+let visibleLimit = PAGE_SIZE;
 
 const FAVORITES_ID = "__favorites__";
 const FAVORITES_KEY = "playlist-viewer-favorites";
@@ -5243,14 +5259,14 @@ function renderTabs(){
   const favBtn = document.createElement("button");
   favBtn.className = "tab" + (!searching && currentPlaylistId === FAVORITES_ID ? " active" : "");
   favBtn.textContent = `⭐ מועדפים (${favorites.size})`;
-  favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; searchEl.value=""; renderTabs(); renderGrid(); };
+  favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; searchEl.value=""; visibleLimit = PAGE_SIZE; renderTabs(); renderGrid(); };
   tabsEl.appendChild(favBtn);
 
   playlists.forEach(pl => {
     const btn = document.createElement("button");
     btn.className = "tab" + (!searching && pl.id === currentPlaylistId ? " active" : "");
-    btn.textContent = pl.name;
-    btn.onclick = () => { currentPlaylistId = pl.id; searchEl.value=""; renderTabs(); renderGrid(); };
+    btn.textContent = `${pl.name} (${pl.songs.length})`;
+    btn.onclick = () => { currentPlaylistId = pl.id; searchEl.value=""; visibleLimit = PAGE_SIZE; renderTabs(); renderGrid(); };
     tabsEl.appendChild(btn);
   });
 }
@@ -5287,7 +5303,8 @@ function renderGrid(){
     return;
   }
 
-  songs.forEach((song, idx) => {
+  const visibleSongs = songs.slice(0, visibleLimit);
+  visibleSongs.forEach((song, idx) => {
     const isFav = favorites.has(song.videoId);
     const card = document.createElement("div");
     card.className = "song-card";
@@ -5314,6 +5331,14 @@ function renderGrid(){
     };
     gridEl.appendChild(card);
   });
+
+  if(songs.length > visibleSongs.length){
+    const loadMoreBtn = document.createElement("button");
+    loadMoreBtn.className = "load-more-btn";
+    loadMoreBtn.textContent = `טען עוד (${songs.length - visibleSongs.length} נותרו)`;
+    loadMoreBtn.onclick = () => { visibleLimit += PAGE_SIZE; renderGrid(); };
+    gridEl.appendChild(loadMoreBtn);
+  }
 }
 
 // ---- Modal & player ----
@@ -5424,8 +5449,8 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-searchEl.addEventListener("input", () => { renderTabs(); renderGrid(); });
-sortEl.addEventListener("change", renderGrid);
+searchEl.addEventListener("input", () => { visibleLimit = PAGE_SIZE; renderTabs(); renderGrid(); });
+sortEl.addEventListener("change", () => { visibleLimit = PAGE_SIZE; renderGrid(); });
 
 // ---- Theme toggle ----
 const THEME_KEY = "playlist-viewer-theme";
