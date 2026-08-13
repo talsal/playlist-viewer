@@ -9816,12 +9816,12 @@ const PLAYLIST_CATEGORIES = {
   "family-music": "family",
 };
 const CATEGORY_LABELS = [
-  { key: "all", label: "הכל" },
-  { key: "prayers", label: "פרשיות ותפילות" },
-  { key: "study", label: "לימוד ותורה" },
-  { key: "music", label: "שירה ופיוט" },
-  { key: "guests", label: "אורחים בערוץ" },
-  { key: "family", label: "משפחה" },
+  { key: "all", label: "הכל", icon: "🎵" },
+  { key: "prayers", label: "פרשיות ותפילות", icon: "📖" },
+  { key: "study", label: "לימוד ותורה", icon: "🕯️" },
+  { key: "music", label: "שירה ופיוט", icon: "🎶" },
+  { key: "guests", label: "אורחים בערוץ", icon: "🎙️" },
+  { key: "family", label: "משפחה", icon: "👨‍👩‍👧‍👦" },
 ];
 function categoryOf(pl){
   return PLAYLIST_CATEGORIES[pl.id] || (pl.id.startsWith("guest-") ? "guests" : "study");
@@ -9943,7 +9943,7 @@ function renderCategories(){
     const count = cat.key === "all" ? playlists.length : playlists.filter(pl => categoryOf(pl) === cat.key).length;
     const chip = document.createElement("button");
     chip.className = "category-chip" + (currentCategory === cat.key ? " active" : "");
-    chip.textContent = `${cat.label} (${count})`;
+    chip.textContent = `${cat.icon} ${cat.label} (${count})`;
     chip.onclick = () => {
       currentCategory = cat.key;
       const visible = playlists.filter(pl => currentCategory === "all" || categoryOf(pl) === currentCategory);
