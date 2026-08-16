@@ -109,6 +109,38 @@
     line-height:1.7;
     margin:0;
   }
+  .continue-row{
+    display:flex;
+    justify-content:center;
+    padding:20px 16px 0;
+  }
+  .continue-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    max-width:100%;
+    background:var(--card);
+    border:2px solid var(--accent);
+    color:var(--accent);
+    padding:9px 22px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:0.95rem;
+    font-weight:600;
+    transition:transform .1s ease, box-shadow .1s ease, background .15s ease;
+    box-shadow:0 3px 0 color-mix(in srgb, var(--accent) 60%, black), 0 4px 6px rgba(0,0,0,.15);
+  }
+  .continue-btn:hover{background:var(--card-hover); transform:translateY(-1px); box-shadow:0 4px 0 color-mix(in srgb, var(--accent) 60%, black), 0 6px 8px rgba(0,0,0,.18);}
+  .continue-btn:active{transform:translateY(3px); box-shadow:0 0 0 color-mix(in srgb, var(--accent) 60%, black), 0 1px 2px rgba(0,0,0,.15);}
+  .continue-btn .continue-title{
+    max-width:280px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-weight:400;
+    color:var(--text);
+  }
+
   .fav-row{
     display:flex;
     justify-content:center;
@@ -560,6 +592,8 @@
     השתמשו בקטגוריות למטה כדי למצוא את מה שמחפשים, או חפשו שיר ספציפי בתיבת החיפוש.
   </p>
 </div>
+
+<div class="continue-row" id="continueRow"></div>
 
 <div class="fav-row" id="favRow"></div>
 <div class="categories" id="categories"></div>
@@ -10025,8 +10059,30 @@ function getAllSongs(){
 
 const favorites = loadFavorites();
 
+const LAST_PLAYED_KEY = "playlist-viewer-last-played";
+function loadLastPlayed(){
+  try{
+    const raw = localStorage.getItem(LAST_PLAYED_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch(e){
+    return null;
+  }
+}
+function saveLastPlayed(song, playlistId){
+  try{
+    localStorage.setItem(LAST_PLAYED_KEY, JSON.stringify({
+      videoId: song.videoId,
+      title: song.title,
+      playlistId: playlistId,
+      ts: Date.now()
+    }));
+  } catch(e){}
+}
+let lastPlayed = loadLastPlayed();
+
 const tabsEl = document.getElementById("tabs");
 const favRowEl = document.getElementById("favRow");
+const continueRowEl = document.getElementById("continueRow");
 const gridEl = document.getElementById("grid");
 const titleEl = document.getElementById("playlistTitle");
 const searchEl = document.getElementById("search");
@@ -10117,6 +10173,39 @@ function renderFavRow(){
   favBtn.textContent = `⭐ מועדפים (${favorites.size})`;
   favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; searchEl.value=""; visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); pushPlaylistURL(); };
   favRowEl.appendChild(favBtn);
+}
+
+function renderContinueRow(){
+  continueRowEl.innerHTML = "";
+  if(!lastPlayed) return;
+  const btn = document.createElement("button");
+  btn.className = "continue-btn";
+  btn.innerHTML = `🎧 המשך האזנה: <span class="continue-title"></span>`;
+  btn.querySelector(".continue-title").textContent = lastPlayed.title;
+  btn.onclick = () => {
+    let songs = [];
+    let idx = -1;
+    for(const p of playlists){
+      const i = p.songs.findIndex(s => s.videoId === lastPlayed.videoId);
+      if(i !== -1){
+        currentPlaylistId = p.id;
+        currentCategory = categoryOf(p);
+        songs = p.songs.map(s => ({ ...s, channel: p.channel }));
+        idx = i;
+        break;
+      }
+    }
+    if(idx === -1) return;
+    searchEl.value = "";
+    visibleLimit = PAGE_SIZE;
+    renderFavRow();
+    renderCategories();
+    renderTabs();
+    renderGrid();
+    pushPlaylistURL();
+    openModal(songs[idx], idx, songs);
+  };
+  continueRowEl.appendChild(btn);
 }
 
 function renderTabs(){
@@ -10268,6 +10357,9 @@ function openModal(song, index = 0, list = [song]){
   replaceSongURL();
   const shareText = `${song.title}\n${window.location.origin}${buildShareURL()}`;
   whatsappBtn.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+  saveLastPlayed(song, currentPlaylistId);
+  lastPlayed = { videoId: song.videoId, title: song.title, playlistId: currentPlaylistId, ts: Date.now() };
+  renderContinueRow();
 }
 function playRelative(delta){
   const nextIndex = currentSongIndex + delta;
@@ -10379,6 +10471,7 @@ window.addEventListener("popstate", () => {
 
 applyStateFromURL();
 renderFavRow();
+renderContinueRow();
 renderCategories();
 renderTabs();
 renderGrid();
