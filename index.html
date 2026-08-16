@@ -464,6 +464,25 @@
     font-size:0.9rem;
   }
   .modal-footer a:hover{text-decoration:underline;}
+  .modal-links{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .copy-link-btn{
+    background:none;
+    border:1px solid var(--border);
+    color:var(--muted);
+    padding:6px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:0.85rem;
+    transition:background .15s ease, color .15s ease;
+  }
+  .copy-link-btn:hover{background:var(--card-hover); color:var(--text);}
+  .copy-link-btn.copied{color:var(--accent2); border-color:var(--accent2);}
   .kbd-hint{
     margin:10px 0 0;
     color:var(--muted);
@@ -564,7 +583,10 @@
         <span id="autoplayStatus" class="autoplay-status"></span>
         <button id="nextBtn" class="nav-btn">הבא ⏭</button>
       </div>
-      <a id="modalLink" href="#" target="_blank" rel="noopener">פתח ביוטיוב ↗</a>
+      <div class="modal-links">
+        <a id="modalLink" href="#" target="_blank" rel="noopener">פתח ביוטיוב ↗</a>
+        <button id="copyLinkBtn" class="copy-link-btn" type="button">🔗 העתק קישור לשיר</button>
+      </div>
       <p class="kbd-hint">קיצורי מקלדת: Space להשהיה/נגינה · ← → למעבר בין שירים · Esc לסגירה</p>
     </div>
   </div>
@@ -9867,6 +9889,69 @@ const PAGE_SIZE = 60;
 let visibleLimit = PAGE_SIZE;
 
 const FAVORITES_ID = "__favorites__";
+
+function getSongParamFromModal(){
+  if(currentSongIndex >= 0 && currentSongList[currentSongIndex]) return currentSongList[currentSongIndex].videoId;
+  return null;
+}
+function buildShareURL(){
+  const params = new URLSearchParams();
+  if(currentPlaylistId === FAVORITES_ID){
+    params.set("playlist", "favorites");
+  } else if(currentPlaylistId && currentPlaylistId !== playlists[0].id){
+    params.set("playlist", currentPlaylistId);
+  }
+  const songId = getSongParamFromModal();
+  if(songId) params.set("song", songId);
+  const qs = params.toString();
+  return window.location.pathname + (qs ? "?" + qs : "");
+}
+function pushPlaylistURL(){
+  history.pushState(null, "", buildShareURL());
+}
+function replaceSongURL(){
+  history.replaceState(null, "", buildShareURL());
+}
+function applyStateFromURL(){
+  const params = new URLSearchParams(window.location.search);
+  const playlistParam = params.get("playlist");
+  const songParam = params.get("song");
+
+  if(playlistParam === "favorites"){
+    currentPlaylistId = FAVORITES_ID;
+  } else if(playlistParam && playlists.some(p => p.id === playlistParam)){
+    currentPlaylistId = playlistParam;
+    currentCategory = categoryOf(playlists.find(p => p.id === playlistParam));
+  }
+
+  if(songParam){
+    let songs = [];
+    let idx = -1;
+    if(currentPlaylistId === FAVORITES_ID){
+      songs = getFavoriteSongs();
+      idx = songs.findIndex(s => s.videoId === songParam);
+    } else {
+      const pl = playlists.find(p => p.id === currentPlaylistId) || playlists[0];
+      songs = pl.songs.map(s => ({ ...s, channel: pl.channel }));
+      idx = songs.findIndex(s => s.videoId === songParam);
+    }
+    if(idx === -1){
+      for(const p of playlists){
+        const i = p.songs.findIndex(s => s.videoId === songParam);
+        if(i !== -1){
+          currentPlaylistId = p.id;
+          currentCategory = categoryOf(p);
+          songs = p.songs.map(s => ({ ...s, channel: p.channel }));
+          idx = i;
+          break;
+        }
+      }
+    }
+    if(idx !== -1) openModal(songs[idx], idx, songs);
+  } else if(overlay.classList.contains("open")){
+    closeModal();
+  }
+}
 const FAVORITES_KEY = "playlist-viewer-favorites";
 
 function loadFavorites(){
@@ -9990,6 +10075,7 @@ function renderCategories(){
       renderCategories();
       renderTabs();
       renderGrid();
+      pushPlaylistURL();
     };
     categoriesEl.appendChild(chip);
   });
@@ -10001,7 +10087,7 @@ function renderFavRow(){
   const favBtn = document.createElement("button");
   favBtn.className = "fav-btn-standalone" + (!searching && currentPlaylistId === FAVORITES_ID ? " active" : "");
   favBtn.textContent = `⭐ מועדפים (${favorites.size})`;
-  favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; searchEl.value=""; visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); };
+  favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; searchEl.value=""; visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); pushPlaylistURL(); };
   favRowEl.appendChild(favBtn);
 }
 
@@ -10014,7 +10100,7 @@ function renderTabs(){
     const btn = document.createElement("button");
     btn.className = "tab" + (!searching && pl.id === currentPlaylistId ? " active" : "");
     btn.textContent = `${pl.name} (${pl.songs.length})`;
-    btn.onclick = () => { currentPlaylistId = pl.id; searchEl.value=""; visibleLimit = PAGE_SIZE; renderTabs(); renderGrid(); };
+    btn.onclick = () => { currentPlaylistId = pl.id; searchEl.value=""; visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); pushPlaylistURL(); };
     tabsEl.appendChild(btn);
   });
 }
@@ -10093,6 +10179,7 @@ function renderGrid(){
 const overlay = document.getElementById("modalOverlay");
 const modalTitle = document.getElementById("modalTitle");
 const modalLink = document.getElementById("modalLink");
+const copyLinkBtn = document.getElementById("copyLinkBtn");
 const modalClose = document.getElementById("modalClose");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
@@ -10149,6 +10236,7 @@ function openModal(song, index = 0, list = [song]){
   overlay.classList.add("open");
   loadVideo(song.videoId);
   updateNavButtons();
+  replaceSongURL();
 }
 function playRelative(delta){
   const nextIndex = currentSongIndex + delta;
@@ -10172,8 +10260,29 @@ function closeModal(){
   if(playerReady && ytPlayer && ytPlayer.stopVideo) ytPlayer.stopVideo();
   currentSongIndex = -1;
   currentSongList = [];
+  replaceSongURL();
 }
 modalClose.onclick = closeModal;
+copyLinkBtn.onclick = async () => {
+  const url = window.location.origin + buildShareURL();
+  try {
+    await navigator.clipboard.writeText(url);
+  } catch(e){
+    const tmp = document.createElement("textarea");
+    tmp.value = url;
+    document.body.appendChild(tmp);
+    tmp.select();
+    document.execCommand("copy");
+    document.body.removeChild(tmp);
+  }
+  const original = copyLinkBtn.textContent;
+  copyLinkBtn.textContent = "✔ הקישור הועתק!";
+  copyLinkBtn.classList.add("copied");
+  setTimeout(() => {
+    copyLinkBtn.textContent = original;
+    copyLinkBtn.classList.remove("copied");
+  }, 2000);
+};
 prevBtn.onclick = () => playRelative(-1);
 nextBtn.onclick = () => playRelative(1);
 overlay.onclick = (e) => { if(e.target === overlay) closeModal(); };
@@ -10229,6 +10338,15 @@ function renderStats(){
     `${playlists.length} פלייליסטים · ${totalSongs} שירים`;
 }
 
+window.addEventListener("popstate", () => {
+  applyStateFromURL();
+  renderFavRow();
+  renderCategories();
+  renderTabs();
+  renderGrid();
+});
+
+applyStateFromURL();
 renderFavRow();
 renderCategories();
 renderTabs();
