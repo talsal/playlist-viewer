@@ -245,10 +245,11 @@
   .search-bar input::placeholder{color:var(--muted);}
 
   .sort-bar{
-    max-width:480px;
+    max-width:560px;
     margin:0 auto 24px;
     padding:0 16px;
     display:flex;
+    flex-wrap:wrap;
     align-items:center;
     justify-content:center;
     gap:8px;
@@ -291,6 +292,20 @@
     border-color:var(--accent);
     color:#fff;
   }
+  .shuffle-btn{
+    margin-inline-start:6px;
+    padding:8px 14px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    font-size:0.85rem;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background .15s ease, transform .1s ease;
+  }
+  .shuffle-btn:hover{background:var(--card-hover); transform:translateY(-1px);}
+  .shuffle-btn:active{transform:scale(.96);}
 
   .grid.view-list{
     display:flex;
@@ -623,6 +638,7 @@
     <button id="viewGridBtn" class="view-btn" title="תצוגת רשת">▦</button>
     <button id="viewListBtn" class="view-btn" title="תצוגת רשימה">☰</button>
   </div>
+  <button id="shuffleBtn" class="shuffle-btn" type="button" title="נגן שיר אקראי">🎲 שיר אקראי</button>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -10147,6 +10163,7 @@ const searchEl = document.getElementById("search");
 const sortEl = document.getElementById("sortSelect");
 const viewGridBtn = document.getElementById("viewGridBtn");
 const viewListBtn = document.getElementById("viewListBtn");
+const shuffleBtn = document.getElementById("shuffleBtn");
 
 const VIEW_KEY = "playlist-viewer-view";
 function loadView(){
@@ -10174,6 +10191,32 @@ viewListBtn.onclick = () => {
 function isSearching(){
   return searchEl.value.trim().length > 0;
 }
+
+shuffleBtn.onclick = () => {
+  const all = getAllSongs();
+  if(all.length === 0) return;
+  const randomSong = all[Math.floor(Math.random() * all.length)];
+  let idx = -1, songs = [];
+  for(const p of playlists){
+    const i = p.songs.findIndex(s => s.videoId === randomSong.videoId);
+    if(i !== -1){
+      currentPlaylistId = p.id;
+      currentCategory = categoryOf(p);
+      songs = p.songs.map(s => ({ ...s, channel: p.channel }));
+      idx = i;
+      break;
+    }
+  }
+  if(idx === -1) return;
+  searchEl.value = "";
+  visibleLimit = PAGE_SIZE;
+  renderFavRow();
+  renderCategories();
+  renderTabs();
+  renderGrid();
+  pushPlaylistURL();
+  openModal(songs[idx], idx, songs);
+};
 
 function durationToSeconds(d){
   if(!d) return 0;
