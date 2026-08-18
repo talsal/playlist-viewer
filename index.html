@@ -327,7 +327,16 @@
     text-align:center;
     color:var(--muted);
     font-size:0.95rem;
-    margin-bottom:18px;
+    margin-bottom:4px;
+  }
+  .playlist-description{
+    text-align:center;
+    color:var(--muted);
+    font-size:0.85rem;
+    opacity:.8;
+    max-width:600px;
+    margin:0 auto 18px;
+    line-height:1.5;
   }
 
   .grid{
@@ -619,6 +628,7 @@
 <div class="tabs" id="tabs"></div>
 
 <div class="playlist-title" id="playlistTitle"></div>
+<div class="playlist-description" id="playlistDescription"></div>
 
 <div class="grid" id="grid"></div>
 
@@ -662,6 +672,7 @@ const playlists = [
   "id": "rosh-chodesh",
   "name": "שירי ראש חודש - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "שירים מקוריים לכבוד כל אחד מחודשי השנה, כתיבה וביצוע חיים סלמן",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLS0KZQAGE9hc",
   "songs": [
     {
@@ -785,6 +796,7 @@ const playlists = [
   "id": "taamei-hamikra",
   "name": "טעמי המקרא - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "לימוד טעמי הקריאה במקרא — תורה, נביאים וכתובים — בביצוע חיים סלמן",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLbIBGdyDfPSE",
   "songs": [
     {
@@ -938,6 +950,7 @@ const playlists = [
   "id": "rosh-hashana-tefilot",
   "name": "תפילות לראש השנה וכיפור - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "תפילות וניגונים לראש השנה ויום כיפור כמנהג יהודי עירק",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLFM8u8mx1c80",
   "songs": [
     {
@@ -1141,6 +1154,7 @@ const playlists = [
   "id": "parashiyot-hatorah",
   "name": "קריאת פרשיות התורה - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "קריאת פרשות השבוע במלואן, פרשה אחר פרשה, בטעמי יהודי עירק",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLCaysuk-lh9U",
   "songs": [
     {
@@ -1659,6 +1673,7 @@ const playlists = [
   "id": "otzrot-chaim",
   "name": "אוצרות חיים - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "שיעורים בספר הקבלה \"עץ חיים\" (אוצרות חיים) מתורת האר\"י הקדוש",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq8o_vm2fzDLnG4Z3t3ziV8o",
   "songs": [
     {
@@ -2157,6 +2172,7 @@ const playlists = [
   "id": "shaar-hakavanot-chol",
   "name": "שער הכוונות - חול - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "שיעורים על ספר \"שער הכוונות\" לימי החול — כתבי האר\"י הקדוש על כוונות התפילה",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq-zPwNKyj4cV1snlhkdnOXi",
   "songs": [
     {
@@ -4225,6 +4241,7 @@ const playlists = [
   "id": "shaar-hakavanot-shabbat",
   "name": "שער הכוונות - שבת - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "שיעורים על ספר \"שער הכוונות\" לשבת — כוונות תפילות ופיוטי קבלת שבת",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq_OpQCxxFLTel5SOYETdRi4",
   "songs": [
     {
@@ -4348,6 +4365,7 @@ const playlists = [
   "id": "tehillim-taamim",
   "name": "תהלים - לימוד הטעמים - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "לימוד טעמי הקריאה בספר תהלים, פרק אחר פרק",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq8M-mOdpTsuaaAmYoyVjvz3",
   "songs": [
     {
@@ -4571,6 +4589,7 @@ const playlists = [
   "id": "adderet-eliyahu",
   "name": "דרשות מספר אדרת אליהו - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "דרשות שבועיות לפרשת השבוע מתוך ספר \"אדרת אליהו\" לרבנו הרי\"ח טוב",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq_CXI2U1c7l8fNTwF_e8qIG",
   "songs": [
     {
@@ -4659,6 +4678,7 @@ const playlists = [
   "id": "shevachot-piyutim",
   "name": "שבחות ופיוטים - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "מבחר פיוטים, תפילות ושירים למועדים ולאירועי חיים כמנהג יהודי עירק",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq_FDTAuWXp2FAOr6Zx9INnW",
   "songs": [
     {
@@ -5867,6 +5887,7 @@ const playlists = [
   "id": "purim",
   "name": "פורים - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "קריאת מגילת אסתר ושירי פורים",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq_YEjmz5wraWTSboLgdPQMn",
   "songs": [
     {
@@ -5995,6 +6016,7 @@ const playlists = [
   "id": "tehillim-chapters",
   "name": "תהלים בפרקים - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "קריאת פרקי תהלים",
   "sourceUrl": "https://www.youtube.com/@newhazzan/playlists",
   "songs": [
     {
@@ -6053,6 +6075,7 @@ const playlists = [
   "id": "nifla-maasecha",
   "name": "נפלאים מעשיך - ספורים - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "סיפורים מתוך ספר \"נפלאים מעשיך\"",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq-ufXI4HpgfY8zIBCRUj7YJ",
   "songs": [
     {
@@ -6081,6 +6104,7 @@ const playlists = [
   "id": "guitar-melodies",
   "name": "נעימות של שירים על גיטרה - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "נגינת מנגינות וזמרים שונים על גיטרה",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq_cUfKH35g5I57w5GN6aR3w",
   "songs": [
     {
@@ -6129,6 +6153,7 @@ const playlists = [
   "id": "shabbat-tefilot",
   "name": "תפילות שבת כמנהג יהודי עירק - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "תפילות שבת כמנהג יהודי עירק",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq_7CFGcoZHl1s5jo8p2sx2C",
   "songs": [
     {
@@ -6167,6 +6192,7 @@ const playlists = [
   "id": "lashon-hakodesh",
   "name": "לשון הקודש - לימוד - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "שיעורי יסוד בקריאה נכונה של לשון הקודש — האותיות והגייתן",
   "sourceUrl": "https://www.youtube.com/@newhazzan/playlists",
   "songs": [
     {
@@ -6715,6 +6741,7 @@ const playlists = [
   "id": "tefilot-misc",
   "name": "תפילות שונות - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "תפילות וברכות שונות",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq8DzCT3-PvGHwaFOtTzFeqU",
   "songs": [
     {
@@ -6753,6 +6780,7 @@ const playlists = [
   "id": "mi-kamocha",
   "name": "מי כמוך ואין כמוך - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "הפיוט \"מי כמוך\" הנאמר לאחר קריאת התורה",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq9OY71mQdNiw7MLCUh-AFOy",
   "songs": [
     {
@@ -6771,6 +6799,7 @@ const playlists = [
   "id": "filfil-gorji",
   "name": "פילפיל גורג'י - מקאם רשדי - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "ביצוע מוזיקלי במקאם רשדי",
   "sourceUrl": "https://www.youtube.com/playlist?list=PLlDTdbKPPbq-dP8LPzmYCETsucf2rdgJd",
   "songs": [
     {
@@ -6789,6 +6818,7 @@ const playlists = [
   "id": "shacharit-shel-chol",
   "name": "שחרית של חול - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "תפילת שחרית של ימי החול",
   "sourceUrl": "https://www.youtube.com/@newhazzan/playlists",
   "songs": [
     {
@@ -7317,6 +7347,7 @@ const playlists = [
   "id": "chanukah",
   "name": "חנוכה - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "ברכות הדלקת נרות ושירי חנוכה",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -7360,6 +7391,7 @@ const playlists = [
   "id": "pesach-hallel",
   "name": "פסח והלל - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "ליל הסדר, קטעי ההגדה, וההלל",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -7608,6 +7640,7 @@ const playlists = [
   "id": "hoshanot-sukkot",
   "name": "הושענות וסוכות - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "תפילות והושענות לחג הסוכות",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -7646,6 +7679,7 @@ const playlists = [
   "id": "tisha-bav-kinot",
   "name": "קינות לתשעה באב - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "קינות ואיכה לתשעה באב",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -7824,6 +7858,7 @@ const playlists = [
   "id": "haftarot",
   "name": "הפטרות השנה - חיים סלמן",
   "channel": "חיים סלמן",
+  "description": "הפטרות השבת והחג לאורך השנה",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -8137,6 +8172,7 @@ const playlists = [
   "id": "family-music",
   "name": "המשפחה מנגנת - בני משפחת סלמן",
   "channel": "משפחת סלמן",
+  "description": "הקלטות של בני משפחת סלמן מנגנים",
   "sourceUrl": "https://www.youtube.com/@newhazzan/playlists",
   "songs": [
     {
@@ -8210,6 +8246,7 @@ const playlists = [
   "id": "guest-oren-eliyahu",
   "name": "הרב אורן אליהו",
   "channel": "הרב אורן אליהו",
+  "description": "שיעורי זוהר ואדרא זוטא בהגשת הרב אורן אליהו",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -8728,6 +8765,7 @@ const playlists = [
   "id": "guest-david-naor",
   "name": "דוד נאור",
   "channel": "דוד נאור",
+  "description": "קריאת תהלים ומשלי בטעמי יהודי עירק בביצוע דוד נאור",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -8991,6 +9029,7 @@ const playlists = [
   "id": "guest-binyahu",
   "name": "רבי בניהו יששכר שמואלי",
   "channel": "רבי בניהו יששכר שמואלי",
+  "description": "שיעורי דף יומי (מסכתות ברכות ושבת) מפי רבי בניהו יששכר שמואלי",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9249,6 +9288,7 @@ const playlists = [
   "id": "guest-chogi-avodi",
   "name": "חכם סלמאן חוגי עבודי",
   "channel": "חכם סלמאן חוגי עבודי",
+  "description": "קריאת פרשת השבוע ולימוד גמרא בהגשת חכם סלמאן חוגי עבודי",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9377,6 +9417,7 @@ const playlists = [
   "id": "guest-yechezkel-seat",
   "name": "חכם יחזקאל סעאת",
   "channel": "חכם יחזקאל סעאת",
+  "description": "דרשות לפרשת השבוע מפי חכם יחזקאל סעאת",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9485,6 +9526,7 @@ const playlists = [
   "id": "guest-nissim-salman",
   "name": "נסים סלמן",
   "channel": "נסים סלמן",
+  "description": "הסברים והדגמות על המקאמים העירקיים מפי נסים סלמן ז\"ל",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9558,6 +9600,7 @@ const playlists = [
   "id": "guest-shoshana-eliyahu",
   "name": "שושנה אליהו",
   "channel": "שושנה אליהו",
+  "description": "שירים עירקיים בביצוע הזמרת שושנה אליהו",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9616,6 +9659,7 @@ const playlists = [
   "id": "guest-eyal-salman",
   "name": "הרב אייל סלמן",
   "channel": "הרב אייל סלמן",
+  "description": "תפילות ופיוטים בביצוע הרב אייל סלמן ובניו",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9659,6 +9703,7 @@ const playlists = [
   "id": "guest-salima-murad",
   "name": "שירים עירקיים - סלימה מראד",
   "channel": "שירים עירקיים - סלימה מראד",
+  "description": "שירים עירקיים קלאסיים בביצוע הזמרת סלימה מראד",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9697,6 +9742,7 @@ const playlists = [
   "id": "guest-menashe-zehavi",
   "name": "החזן מנשה זהבי",
   "channel": "החזן מנשה זהבי",
+  "description": "תפילות בביצוע החזן מנשה זהבי",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9730,6 +9776,7 @@ const playlists = [
   "id": "guest-mareed",
   "name": "הזמר מרייד (מורד סלמן)",
   "channel": "הזמר מרייד (מורד סלמן)",
+  "description": "שירים עירקיים בביצוע הזמר מורד סלמן (מרייד) ז\"ל",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9763,6 +9810,7 @@ const playlists = [
   "id": "guest-yosef-chaim-mizrahi",
   "name": "חכם יוסף חיים מזרחי",
   "channel": "חכם יוסף חיים מזרחי",
+  "description": "שיעור בקריאת שמע וטעמי המקרא מפי חכם יוסף חיים מזרחי",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9796,6 +9844,7 @@ const playlists = [
   "id": "guest-atzlan",
   "name": "הרב אצלאן",
   "channel": "הרב אצלאן",
+  "description": "תפילת \"ברכי נפשי\" בביצוע הרב אצלאן",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9814,6 +9863,7 @@ const playlists = [
   "id": "guest-dado-halevi",
   "name": "חכם שמעון דדו הלוי",
   "channel": "חכם שמעון דדו הלוי",
+  "description": "קריאה בנעימת יהודי מוצול מפי חכם שמעון דדו הלוי",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9832,6 +9882,7 @@ const playlists = [
   "id": "guest-ovadia-yosef",
   "name": "רבנו עובדיה יוסף",
   "channel": "רבנו עובדיה יוסף",
+  "description": "שיעור בדקדוק לשון הקודש מפי רבנו עובדיה יוסף",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9845,6 +9896,7 @@ const playlists = [
   "id": "guest-david-shmueli",
   "name": "חכם דוד שמואלי",
   "channel": "חכם דוד שמואלי",
+  "description": "פיוט לתשעה באב בביצוע חכם דוד שמואלי",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9858,6 +9910,7 @@ const playlists = [
   "id": "guest-yechezkel-yair",
   "name": "חכם יחזקאל יאיר",
   "channel": "חכם יחזקאל יאיר",
+  "description": "פיוט \"על נהרות בבל\" לתשעה באב בביצוע חכם יחזקאל יאיר",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9871,6 +9924,7 @@ const playlists = [
   "id": "guest-ovadia-petaya",
   "name": "יהודה עובדיה פתיא",
   "channel": "יהודה עובדיה פתיא",
+  "description": "פיוט \"שמחו נא בברכת הלבנה\" בביצוע יהודה עובדיה פתיא",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9884,6 +9938,7 @@ const playlists = [
   "id": "guest-yitzchak-machlev",
   "name": "חכם יצחק מחלב",
   "channel": "חכם יצחק מחלב",
+  "description": "קריאת מגילת אסתר מפי חכם יצחק מחלב",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9897,6 +9952,7 @@ const playlists = [
   "id": "guest-david-chalabi",
   "name": "חכם דוד חלבי",
   "channel": "חכם דוד חלבי",
+  "description": "פיוט \"שבע ברכות\" בביצוע חכם דוד חלבי",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -9910,6 +9966,7 @@ const playlists = [
   "id": "guest-shlomo-reuven",
   "name": "החזן שלמה ראובן מעלם",
   "channel": "החזן שלמה ראובן מעלם",
+  "description": "שיר לשבת חנוכה מפי החזן שלמה ראובן מעלם",
   "sourceUrl": "https://www.youtube.com/@newhazzan/videos",
   "songs": [
     {
@@ -10085,6 +10142,7 @@ const favRowEl = document.getElementById("favRow");
 const continueRowEl = document.getElementById("continueRow");
 const gridEl = document.getElementById("grid");
 const titleEl = document.getElementById("playlistTitle");
+const descriptionEl = document.getElementById("playlistDescription");
 const searchEl = document.getElementById("search");
 const sortEl = document.getElementById("sortSelect");
 const viewGridBtn = document.getElementById("viewGridBtn");
@@ -10232,14 +10290,17 @@ function renderGrid(){
   if(searching){
     songs = getAllSongs().filter(s => s.title.includes(q));
     titleEl.textContent = `${songs.length} תוצאות עבור "${q}" · בכל הפלייליסטים`;
+    descriptionEl.textContent = "";
   } else if(currentPlaylistId === FAVORITES_ID){
     songs = getFavoriteSongs();
     titleEl.textContent = `${songs.length} שירים מועדפים`;
+    descriptionEl.textContent = "";
   } else {
     const pl = playlists.find(p => p.id === currentPlaylistId);
-    if(!pl){ titleEl.textContent = ""; return; }
+    if(!pl){ titleEl.textContent = ""; descriptionEl.textContent = ""; return; }
     songs = pl.songs.map(s => ({ ...s, channel: pl.channel }));
     titleEl.textContent = `${pl.channel} · ${pl.songs.length} שירים`;
+    descriptionEl.textContent = pl.description || "";
   }
 
   songs = applySort(songs);
