@@ -606,6 +606,30 @@
     font-size:0.8rem;
     padding:20px;
   }
+  .support-section{
+    text-align:center;
+    padding:24px 16px 8px;
+  }
+  .support-section p{
+    color:var(--muted);
+    font-size:0.85rem;
+    margin:0 0 12px;
+  }
+  .support-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:8px 18px;
+    border-radius:999px;
+    text-decoration:none;
+    font-size:0.9rem;
+    cursor:pointer;
+    transition:background .15s ease, transform .1s ease;
+  }
+  .support-btn:hover{background:var(--card-hover); transform:translateY(-1px);}
 </style>
 </head>
 <body>
@@ -655,6 +679,11 @@
 <div class="playlist-description" id="playlistDescription"></div>
 
 <div class="grid" id="grid"></div>
+
+<div class="support-section">
+  <p>אם האתר הזה יקר לכם — אפשר לתמוך בפרויקט 💛</p>
+  <a class="support-btn" href="https://www.bitpay.co.il/app/me/64EF5C4F-17B9-D810-9AD6-2097BCDE8336C544" target="_blank" rel="noopener">💙 תמיכה ב-Bit</a>
+</div>
 
 <footer>נבנה עבורך ✦ עדכון אחרון: אוגוסט 2026</footer>
 
