@@ -192,36 +192,62 @@
   }
 
   .categories{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    justify-content:center;
-    padding:18px 16px 0;
-    border-bottom:1px solid var(--border);
-    margin:0 16px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+    gap:16px;
+    max-width:900px;
+    margin:0 auto;
+    padding:24px 16px 8px;
   }
   .category-chip{
-    display:inline-flex;
+    display:flex;
+    flex-direction:column;
     align-items:center;
-    gap:7px;
-    background:transparent;
-    border:none;
-    border-bottom:3px solid transparent;
-    color:var(--muted);
-    padding:8px 18px 14px;
-    border-radius:0;
+    gap:10px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    color:var(--text);
+    padding:28px 16px;
     cursor:pointer;
     font-size:1.05rem;
-    letter-spacing:.01em;
-    transition:color .15s ease, border-color .15s ease;
-  }
-  .category-chip svg{flex-shrink:0;}
-  .category-chip:hover{color:var(--text);}
-  .category-chip:active{opacity:.7;}
-  .category-chip.active{
-    color:var(--accent2);
     font-weight:600;
-    border-bottom-color:var(--accent2);
+    text-align:center;
+    letter-spacing:.01em;
+    box-shadow:0 3px 0 var(--border), 0 4px 8px rgba(0,0,0,.15);
+    transition:transform .1s ease, box-shadow .1s ease, background .15s ease;
+  }
+  .category-chip svg{flex-shrink:0; width:34px; height:34px;}
+  .category-chip:hover{background:var(--card-hover); transform:translateY(-2px); box-shadow:0 4px 0 var(--border), 0 6px 10px rgba(0,0,0,.18);}
+  .category-chip:active{transform:translateY(2px); box-shadow:0 1px 0 var(--border), 0 2px 4px rgba(0,0,0,.15);}
+  .category-chip.active{
+    border-color:var(--accent2);
+    box-shadow:0 3px 0 var(--accent2), 0 4px 8px rgba(0,0,0,.2);
+  }
+
+  .category-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    max-width:900px;
+    margin:0 auto;
+    padding:16px 16px 0;
+  }
+  .back-to-categories{
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:8px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:0.9rem;
+    transition:background .15s ease;
+  }
+  .back-to-categories:hover{background:var(--card-hover);}
+  .category-header-label{
+    font-weight:600;
+    color:var(--accent2);
+    font-size:1.05rem;
   }
 
   .tabs{
@@ -689,7 +715,7 @@
   <input type="text" id="search" placeholder="חיפוש בכל הפלייליסטים...">
 </div>
 
-<div class="sort-bar">
+<div class="sort-bar" id="sortBar" style="display:none">
   <label for="sortSelect">מיון:</label>
   <select id="sortSelect">
     <option value="default">לפי סדר הפלייליסט</option>
@@ -704,12 +730,16 @@
   <button id="shuffleBtn" class="shuffle-btn" type="button" title="נגן שיר אקראי">🎲 שיר אקראי</button>
 </div>
 
-<div class="tabs" id="tabs"></div>
+<div class="category-header" id="categoryHeader" style="display:none">
+  <button id="backToCategories" class="back-to-categories" type="button">→ כל הקטגוריות</button>
+  <span class="category-header-label" id="categoryHeaderLabel"></span>
+</div>
+<div class="tabs" id="tabs" style="display:none"></div>
 
-<div class="playlist-title" id="playlistTitle"></div>
-<div class="playlist-description" id="playlistDescription"></div>
+<div class="playlist-title" id="playlistTitle" style="display:none"></div>
+<div class="playlist-description" id="playlistDescription" style="display:none"></div>
 
-<div class="grid" id="grid"></div>
+<div class="grid" id="grid" style="display:none"></div>
 
 <footer>
   <div class="credit">פותח ע"י טל סלמן · <a href="tel:0505991972">050-599-1972</a> · <a href="mailto:tal.salman@gmail.com">tal.salman@gmail.com</a></div>
@@ -10006,7 +10036,6 @@ const PLAYLIST_CATEGORIES = {
   "family-music": "family",
 };
 const CATEGORY_LABELS = [
-  { key: "all", label: "הכל", icon: '<svg width="18" height="18" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13" stroke="#e11d48" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="#e11d48"/><circle cx="18" cy="16" r="3" fill="#e11d48"/></svg>' },
   { key: "prayers", label: "פרשיות ותפילות", icon: '<svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 6C10 4.5 7 4 4 4v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z" fill="#3b82f6"/></svg>' },
   { key: "study", label: "לימוד ותורה", icon: '<svg width="18" height="18" viewBox="0 0 24 24"><rect x="3" y="16" width="18" height="3" rx="1" fill="#f59e0b"/><rect x="4" y="11" width="16" height="3" rx="1" fill="#fbbf24"/><rect x="5" y="6" width="14" height="3" rx="1" fill="#fcd34d"/></svg>' },
   { key: "music", label: "שירה ופיוט", icon: '<svg width="18" height="18" viewBox="0 0 24 24"><path d="M9 17V4.5l10-2v12.5" stroke="#a855f7" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="17.5" r="2.8" fill="#a855f7"/><circle cx="16.5" cy="15" r="2.8" fill="#a855f7"/></svg>' },
@@ -10017,8 +10046,9 @@ function categoryOf(pl){
   return PLAYLIST_CATEGORIES[pl.id] || (pl.id.startsWith("guest-") ? "guests" : "study");
 }
 
-let currentCategory = "all";
-let currentPlaylistId = playlists[0].id;
+let currentCategory = null;
+let currentPlaylistId = null;
+let homeView = true;
 const PAGE_SIZE = 60;
 let visibleLimit = PAGE_SIZE;
 
@@ -10053,9 +10083,11 @@ function applyStateFromURL(){
 
   if(playlistParam === "favorites"){
     currentPlaylistId = FAVORITES_ID;
+    homeView = false;
   } else if(playlistParam && playlists.some(p => p.id === playlistParam)){
     currentPlaylistId = playlistParam;
     currentCategory = categoryOf(playlists.find(p => p.id === playlistParam));
+    homeView = false;
   }
 
   if(songParam){
@@ -10075,6 +10107,7 @@ function applyStateFromURL(){
         if(i !== -1){
           currentPlaylistId = p.id;
           currentCategory = categoryOf(p);
+          homeView = false;
           songs = p.songs.map(s => ({ ...s, channel: p.channel }));
           idx = i;
           break;
@@ -10163,6 +10196,20 @@ const sortEl = document.getElementById("sortSelect");
 const viewGridBtn = document.getElementById("viewGridBtn");
 const viewListBtn = document.getElementById("viewListBtn");
 const shuffleBtn = document.getElementById("shuffleBtn");
+const sortBarEl = document.getElementById("sortBar");
+const categoryHeaderEl = document.getElementById("categoryHeader");
+const categoryHeaderLabelEl = document.getElementById("categoryHeaderLabel");
+const backToCategoriesBtn = document.getElementById("backToCategories");
+backToCategoriesBtn.onclick = () => {
+  homeView = true;
+  currentPlaylistId = null;
+  searchEl.value = "";
+  renderFavRow();
+  renderCategories();
+  renderTabs();
+  renderGrid();
+  pushPlaylistURL();
+};
 
 const VIEW_KEY = "playlist-viewer-view";
 function loadView(){
@@ -10201,6 +10248,7 @@ shuffleBtn.onclick = () => {
     if(i !== -1){
       currentPlaylistId = p.id;
       currentCategory = categoryOf(p);
+      homeView = false;
       songs = p.songs.map(s => ({ ...s, channel: p.channel }));
       idx = i;
       break;
@@ -10243,16 +10291,15 @@ const categoriesEl = document.getElementById("categories");
 function renderCategories(){
   categoriesEl.innerHTML = "";
   CATEGORY_LABELS.forEach(cat => {
-    const count = cat.key === "all" ? playlists.length : playlists.filter(pl => categoryOf(pl) === cat.key).length;
+    const count = playlists.filter(pl => categoryOf(pl) === cat.key).length;
     const chip = document.createElement("button");
     chip.className = "category-chip" + (currentCategory === cat.key ? " active" : "");
     chip.innerHTML = `${cat.icon}<span>${cat.label} (${count})</span>`;
     chip.onclick = () => {
       currentCategory = cat.key;
-      const visible = playlists.filter(pl => currentCategory === "all" || categoryOf(pl) === currentCategory);
-      if(currentPlaylistId !== FAVORITES_ID && !visible.some(pl => pl.id === currentPlaylistId) && visible.length){
-        currentPlaylistId = visible[0].id;
-      }
+      const visible = playlists.filter(pl => categoryOf(pl) === currentCategory);
+      if(visible.length) currentPlaylistId = visible[0].id;
+      homeView = false;
       searchEl.value = "";
       visibleLimit = PAGE_SIZE;
       renderFavRow();
@@ -10271,7 +10318,7 @@ function renderFavRow(){
   const favBtn = document.createElement("button");
   favBtn.className = "fav-btn-standalone" + (!searching && currentPlaylistId === FAVORITES_ID ? " active" : "");
   favBtn.textContent = `⭐ מועדפים (${favorites.size})`;
-  favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; searchEl.value=""; visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); pushPlaylistURL(); };
+  favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; homeView = false; searchEl.value=""; visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); pushPlaylistURL(); };
   favRowEl.appendChild(favBtn);
 }
 
@@ -10290,6 +10337,7 @@ function renderContinueRow(){
       if(i !== -1){
         currentPlaylistId = p.id;
         currentCategory = categoryOf(p);
+        homeView = false;
         songs = p.songs.map(s => ({ ...s, channel: p.channel }));
         idx = i;
         break;
@@ -10311,15 +10359,33 @@ function renderContinueRow(){
 function renderTabs(){
   tabsEl.innerHTML = "";
   const searching = isSearching();
-  const visiblePlaylists = playlists.filter(pl => currentCategory === "all" || categoryOf(pl) === currentCategory);
+  const visiblePlaylists = currentCategory ? playlists.filter(pl => categoryOf(pl) === currentCategory) : [];
 
   visiblePlaylists.forEach(pl => {
     const btn = document.createElement("button");
     btn.className = "tab" + (!searching && pl.id === currentPlaylistId ? " active" : "");
     btn.textContent = `${pl.name} (${pl.songs.length})`;
-    btn.onclick = () => { currentPlaylistId = pl.id; searchEl.value=""; visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); pushPlaylistURL(); };
+    btn.onclick = () => { currentPlaylistId = pl.id; homeView = false; searchEl.value=""; visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); pushPlaylistURL(); };
     tabsEl.appendChild(btn);
   });
+
+  const cat = CATEGORY_LABELS.find(c => c.key === currentCategory);
+  categoryHeaderLabelEl.textContent = cat ? cat.label : "";
+
+  updateViewMode();
+}
+
+function updateViewMode(){
+  const searching = isSearching();
+  const showHome = homeView && !searching;
+  const showSubList = !homeView && !searching;
+  categoriesEl.style.display = showHome ? "" : "none";
+  categoryHeaderEl.style.display = showSubList ? "" : "none";
+  tabsEl.style.display = showSubList ? "" : "none";
+  sortBarEl.style.display = showHome ? "none" : "";
+  titleEl.style.display = showHome ? "none" : "";
+  descriptionEl.style.display = showHome ? "none" : "";
+  gridEl.style.display = showHome ? "none" : "";
 }
 
 function renderGrid(){
