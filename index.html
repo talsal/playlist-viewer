@@ -25,7 +25,9 @@
 <script>
   (function(){
     try{
-      if(localStorage.getItem("playlist-viewer-theme") === "light"){
+      const saved = localStorage.getItem("playlist-viewer-theme");
+      const prefersLight = window.matchMedia && !window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if(saved === "light" || (!saved && prefersLight)){
         document.documentElement.setAttribute("data-theme", "light");
       }
     } catch(e){}
@@ -49,9 +51,9 @@
     --card:#ffffff;
     --card-hover:#f1f2f5;
     --accent:#e11d48;
-    --accent2:#c2740a;
+    --accent2:#a06008;
     --text:#1a1c22;
-    --muted:#6b7280;
+    --muted:#646b78;
     --border:#e2e4ea;
   }
   *{box-sizing:border-box;}
@@ -558,14 +560,22 @@
   }
   .modal-header h3{margin:0;font-size:1rem;}
   .modal-close{
+    width:40px;
+    height:40px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     background:none;
     border:none;
+    border-radius:50%;
     color:var(--muted);
     font-size:1.4rem;
     cursor:pointer;
     line-height:1;
+    transition:background .15s ease, color .15s ease;
   }
-  .modal-close:hover{color:var(--text);}
+  .modal-close:hover{background:var(--card-hover); color:var(--text);}
   .video-frame-wrap{
     position:relative;
     width:100%;
@@ -807,16 +817,16 @@
   <div class="modal-box">
     <div class="modal-header">
       <h3 id="modalTitle"></h3>
-      <button class="modal-close" id="modalClose">&times;</button>
+      <button class="modal-close" id="modalClose" aria-label="סגור">&times;</button>
     </div>
     <div class="video-frame-wrap">
       <div id="modalFrame"></div>
     </div>
     <div class="modal-footer">
       <div class="modal-nav">
-        <button id="prevBtn" class="nav-btn">⏮ הקודם</button>
+        <button id="prevBtn" class="nav-btn">⏭ הקודם</button>
         <span id="autoplayStatus" class="autoplay-status"></span>
-        <button id="nextBtn" class="nav-btn">הבא ⏭</button>
+        <button id="nextBtn" class="nav-btn">הבא ⏮</button>
       </div>
       <div class="modal-links">
         <a id="modalLink" href="#" target="_blank" rel="noopener">פתח ביוטיוב ↗</a>
@@ -837,7 +847,7 @@
   <div class="article-box">
     <div class="article-header">
       <h3 id="articleModalTitle"></h3>
-      <button class="modal-close" id="articleClose">&times;</button>
+      <button class="modal-close" id="articleClose" aria-label="סגור">&times;</button>
     </div>
     <div class="article-body" id="articleModalBody"></div>
   </div>
@@ -11422,7 +11432,7 @@ function renderGrid(){
     card.innerHTML = `
       <div class="thumb-wrap">
         <img loading="lazy" src="https://img.youtube.com/vi/${song.videoId}/hqdefault.jpg" alt="${song.title}">
-        <button class="fav-btn${isFav ? " active" : ""}" title="הוסף/הסר ממועדפים">
+        <button class="fav-btn${isFav ? " active" : ""}" title="הוסף/הסר ממועדפים" aria-label="הוסף/הסר ממועדפים">
           <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6L12 2z"/></svg>
         </button>
         <div class="play-badge">
@@ -11623,6 +11633,7 @@ function applyTheme(theme){
   }
   themeToggleBtn.textContent = theme === "light" ? "🌙" : "☀️";
   themeToggleBtn.title = theme === "light" ? "עבור למצב כהה" : "עבור למצב בהיר";
+  themeToggleBtn.setAttribute("aria-label", themeToggleBtn.title);
 }
 
 let currentTheme = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
