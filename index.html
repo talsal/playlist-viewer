@@ -57,9 +57,12 @@
     --border:#e2e4ea;
   }
   *{box-sizing:border-box;}
+  @keyframes itemFadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
   body{
     margin:0;
-    font-family:"Segoe UI", Arial, sans-serif;
+    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:-0.01em;
     background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
     color:var(--text);
     min-height:100vh;
@@ -67,7 +70,7 @@
   }
   header{
     position:relative;
-    padding:64px 24px 16px;
+    padding:72px 24px 20px;
     text-align:center;
   }
   .theme-toggle{
@@ -89,23 +92,25 @@
   }
   .theme-toggle:hover{background:var(--card-hover); transform:scale(1.06);}
   header h1{
-    margin:0 0 6px;
-    font-size:2rem;
+    margin:0 0 10px;
+    font-size:2.3rem;
+    font-weight:750;
+    letter-spacing:-0.02em;
   }
-  header h1 .emoji-plain{font-size:1.7rem;}
+  header h1 .emoji-plain{font-size:1.9rem;}
   header h1 .gradient-text{
     background:linear-gradient(90deg,var(--accent),var(--accent2));
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
   }
-  header p{color:var(--muted);margin:0;}
+  header p{color:var(--muted);margin:0; font-size:1.02rem;}
   @media (max-width:480px){
     header{padding:60px 16px 16px;}
-    header h1{font-size:1.4rem;}
-    header h1 .emoji-plain{font-size:1.2rem;}
+    header h1{font-size:1.5rem;}
+    header h1 .emoji-plain{font-size:1.3rem;}
   }
-  header p.stats{margin-top:6px;font-size:.9rem;opacity:.85;}
+  header p.stats{margin-top:8px;font-size:.85rem;opacity:.75;letter-spacing:0;}
 
   .intro{
     max-width:640px;
@@ -147,18 +152,18 @@
     gap:8px;
     max-width:100%;
     background:var(--card);
-    border:2px solid var(--accent);
+    border:1.5px solid var(--accent);
     color:var(--accent);
     padding:9px 22px;
     border-radius:999px;
     cursor:pointer;
     font-size:0.95rem;
     font-weight:600;
-    transition:transform .1s ease, box-shadow .1s ease, background .15s ease;
-    box-shadow:0 3px 0 color-mix(in srgb, var(--accent) 60%, black), 0 4px 6px rgba(0,0,0,.15);
+    transition:transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s ease, background .15s ease;
+    box-shadow:0 1px 3px rgba(0,0,0,.08);
   }
-  .continue-btn:hover{background:var(--card-hover); transform:translateY(-1px); box-shadow:0 4px 0 color-mix(in srgb, var(--accent) 60%, black), 0 6px 8px rgba(0,0,0,.18);}
-  .continue-btn:active{transform:translateY(3px); box-shadow:0 0 0 color-mix(in srgb, var(--accent) 60%, black), 0 1px 2px rgba(0,0,0,.15);}
+  .continue-btn:hover{background:var(--card-hover); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.12);}
+  .continue-btn:active{transform:translateY(0); box-shadow:0 1px 2px rgba(0,0,0,.08);}
   .continue-btn .continue-title{
     max-width:280px;
     overflow:hidden;
@@ -175,22 +180,22 @@
   }
   .fav-btn-standalone{
     background:var(--card);
-    border:2px solid var(--accent2);
+    border:1.5px solid var(--accent2);
     color:var(--accent2);
     padding:9px 22px;
     border-radius:999px;
     cursor:pointer;
     font-size:0.95rem;
     font-weight:600;
-    transition:transform .1s ease, box-shadow .1s ease, background .15s ease, color .15s ease;
-    box-shadow:0 3px 0 color-mix(in srgb, var(--accent2) 60%, black), 0 4px 6px rgba(0,0,0,.15);
+    transition:transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s ease, background .15s ease, color .15s ease;
+    box-shadow:0 1px 3px rgba(0,0,0,.08);
   }
-  .fav-btn-standalone:hover{background:var(--card-hover); transform:translateY(-1px); box-shadow:0 4px 0 color-mix(in srgb, var(--accent2) 60%, black), 0 6px 8px rgba(0,0,0,.18);}
-  .fav-btn-standalone:active{transform:translateY(3px); box-shadow:0 0 0 color-mix(in srgb, var(--accent2) 60%, black), 0 1px 2px rgba(0,0,0,.15);}
+  .fav-btn-standalone:hover{background:var(--card-hover); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.12);}
+  .fav-btn-standalone:active{transform:translateY(0); box-shadow:0 1px 2px rgba(0,0,0,.08);}
   .fav-btn-standalone.active{
     background:var(--accent2);
     color:#fff;
-    box-shadow:0 3px 0 color-mix(in srgb, var(--accent2) 60%, black), 0 4px 6px rgba(0,0,0,.2);
+    box-shadow:0 4px 14px color-mix(in srgb, var(--accent2) 40%, transparent);
   }
 
   .categories{
@@ -205,26 +210,36 @@
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:10px;
+    gap:14px;
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:18px;
+    border-radius:20px;
     color:var(--text);
-    padding:28px 16px;
+    padding:30px 18px;
     cursor:pointer;
     font-size:1.05rem;
     font-weight:600;
     text-align:center;
     letter-spacing:.01em;
-    box-shadow:0 3px 0 var(--border), 0 4px 8px rgba(0,0,0,.15);
-    transition:transform .1s ease, box-shadow .1s ease, background .15s ease;
+    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    transition:transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s ease, background .15s ease;
+    animation:itemFadeIn .35s cubic-bezier(.2,.8,.2,1) both;
   }
-  .category-chip svg{flex-shrink:0; width:34px; height:34px;}
-  .category-chip:hover{background:var(--card-hover); transform:translateY(-2px); box-shadow:0 4px 0 var(--border), 0 6px 10px rgba(0,0,0,.18);}
-  .category-chip:active{transform:translateY(2px); box-shadow:0 1px 0 var(--border), 0 2px 4px rgba(0,0,0,.15);}
+  .category-chip .chip-icon{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    flex-shrink:0;
+  }
+  .category-chip svg{flex-shrink:0; width:28px; height:28px;}
+  .category-chip:hover{background:var(--card-hover); transform:translateY(-4px); box-shadow:0 16px 28px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);}
+  .category-chip:active{transform:translateY(-1px); box-shadow:0 6px 14px rgba(0,0,0,.1);}
   .category-chip.active{
     border-color:var(--accent2);
-    box-shadow:0 3px 0 var(--accent2), 0 4px 8px rgba(0,0,0,.2);
+    box-shadow:0 0 0 2px color-mix(in srgb, var(--accent2) 25%, transparent), 0 10px 22px rgba(0,0,0,.1);
   }
 
   .category-header{
@@ -268,13 +283,14 @@
     background:var(--card);
     border:1px solid var(--border);
     color:var(--text);
-    padding:14px 18px;
-    border-radius:12px;
+    padding:15px 18px;
+    border-radius:14px;
     cursor:pointer;
     font-size:0.95rem;
     text-align:right;
-    transition:transform .1s ease, box-shadow .1s ease, background .15s ease;
-    box-shadow:0 2px 0 var(--border), 0 3px 6px rgba(0,0,0,.12);
+    transition:transform .15s cubic-bezier(.2,.8,.2,1), box-shadow .15s ease, background .15s ease;
+    box-shadow:0 1px 2px rgba(0,0,0,.05);
+    animation:itemFadeIn .3s cubic-bezier(.2,.8,.2,1) both;
   }
   .tab-name{flex:1;}
   .tab-count{
@@ -286,17 +302,17 @@
     border-radius:999px;
     flex-shrink:0;
   }
-  .tab:hover{background:var(--card-hover); transform:translateX(-2px);}
-  .tab:active{transform:translateX(0); box-shadow:0 1px 0 var(--border), 0 1px 3px rgba(0,0,0,.1);}
+  .tab:hover{background:var(--card-hover); transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.1);}
+  .tab:active{transform:translateY(0); box-shadow:0 1px 2px rgba(0,0,0,.06);}
   .tab.active{
     background:var(--accent);
     border-color:var(--accent);
     font-weight:600;
-    box-shadow:0 2px 0 color-mix(in srgb, var(--accent) 60%, black), 0 3px 6px rgba(0,0,0,.18);
+    box-shadow:0 4px 14px color-mix(in srgb, var(--accent) 35%, transparent);
   }
   .tab.active .tab-count{background:rgba(255,255,255,.25); color:#fff;}
-  .tab.active:hover{transform:translateX(-2px);}
-  .tab.active:active{transform:translateX(0);}
+  .tab.active:hover{transform:translateY(-1px);}
+  .tab.active:active{transform:translateY(0);}
 
   .search-bar{
     max-width:480px;
@@ -452,12 +468,14 @@
     border-radius:14px;
     overflow:hidden;
     cursor:pointer;
-    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    box-shadow:0 1px 3px rgba(0,0,0,.06);
+    transition:transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s ease, background .15s ease;
+    animation:itemFadeIn .3s cubic-bezier(.2,.8,.2,1) both;
   }
   .song-card:hover{
     transform:translateY(-4px);
     background:var(--card-hover);
-    box-shadow:0 10px 24px rgba(0,0,0,.35);
+    box-shadow:0 14px 28px rgba(0,0,0,.16);
   }
   .thumb-wrap{
     position:relative;
@@ -543,7 +561,10 @@
     z-index:1000;
     padding:20px;
   }
-  .modal-overlay.open{display:flex;}
+  .modal-overlay.open{display:flex; animation:overlayFadeIn .18s ease;}
+  .modal-overlay.open .modal-box{animation:modalPopIn .22s cubic-bezier(.2,.8,.2,1);}
+  @keyframes overlayFadeIn{from{opacity:0;} to{opacity:1;}}
+  @keyframes modalPopIn{from{opacity:0; transform:scale(.96) translateY(8px);} to{opacity:1; transform:scale(1) translateY(0);}}
   .modal-box{
     width:100%;
     max-width:800px;
@@ -654,7 +675,8 @@
     z-index:1000;
     padding:20px;
   }
-  .article-overlay.open{display:flex;}
+  .article-overlay.open{display:flex; animation:overlayFadeIn .18s ease;}
+  .article-overlay.open .article-box{animation:modalPopIn .22s cubic-bezier(.2,.8,.2,1);}
   .article-box{
     width:100%;
     max-width:700px;
@@ -11018,12 +11040,12 @@ const PLAYLIST_CATEGORIES = {
   "family-music": "family",
 };
 const CATEGORY_LABELS = [
-  { key: "prayers", label: "פרשיות ותפילות", icon: '<svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 6C10 4.5 7 4 4 4v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z" fill="#3b82f6"/></svg>' },
-  { key: "study", label: "לימוד ותורה", icon: '<svg width="18" height="18" viewBox="0 0 24 24"><rect x="3" y="16" width="18" height="3" rx="1" fill="#f59e0b"/><rect x="4" y="11" width="16" height="3" rx="1" fill="#fbbf24"/><rect x="5" y="6" width="14" height="3" rx="1" fill="#fcd34d"/></svg>' },
-  { key: "music", label: "שירה ופיוט", icon: '<svg width="18" height="18" viewBox="0 0 24 24"><path d="M9 17V4.5l10-2v12.5" stroke="#a855f7" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="17.5" r="2.8" fill="#a855f7"/><circle cx="16.5" cy="15" r="2.8" fill="#a855f7"/></svg>' },
-  { key: "guests", label: "אורחים בערוץ", icon: '<svg width="18" height="18" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3" fill="#14b8a6"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="#14b8a6" stroke-width="2" fill="none" stroke-linecap="round"/></svg>' },
-  { key: "family", label: "משפחה", icon: '<svg width="18" height="18" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3" fill="#22c55e"/><circle cx="16" cy="8" r="3" fill="#22c55e"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M10 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#22c55e" stroke-width="2" fill="none" stroke-linecap="round"/></svg>' },
-  { key: "articles", label: "החזנות והפיוט בשבת וחגים אהרון קלה", icon: '<svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 4h11a2 2 0 0 1 2 2v13a1 1 0 0 1-1.5.87A4 4 0 0 0 14.5 19H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" stroke="#c084fc" stroke-width="1.6" fill="none" stroke-linejoin="round"/><path d="M6 8h9M6 11.5h9M6 15h6" stroke="#c084fc" stroke-width="1.6" stroke-linecap="round"/></svg>' },
+  { key: "prayers", label: "פרשיות ותפילות", color: "#3b82f6", icon: '<svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 6C10 4.5 7 4 4 4v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z" fill="#3b82f6"/></svg>' },
+  { key: "study", label: "לימוד ותורה", color: "#f59e0b", icon: '<svg width="26" height="26" viewBox="0 0 24 24"><rect x="3" y="16" width="18" height="3" rx="1" fill="#f59e0b"/><rect x="4" y="11" width="16" height="3" rx="1" fill="#fbbf24"/><rect x="5" y="6" width="14" height="3" rx="1" fill="#fcd34d"/></svg>' },
+  { key: "music", label: "שירה ופיוט", color: "#a855f7", icon: '<svg width="26" height="26" viewBox="0 0 24 24"><path d="M9 17V4.5l10-2v12.5" stroke="#a855f7" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="17.5" r="2.8" fill="#a855f7"/><circle cx="16.5" cy="15" r="2.8" fill="#a855f7"/></svg>' },
+  { key: "guests", label: "אורחים בערוץ", color: "#14b8a6", icon: '<svg width="26" height="26" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3" fill="#14b8a6"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="#14b8a6" stroke-width="2" fill="none" stroke-linecap="round"/></svg>' },
+  { key: "family", label: "משפחה", color: "#22c55e", icon: '<svg width="26" height="26" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3" fill="#22c55e"/><circle cx="16" cy="8" r="3" fill="#22c55e"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M10 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#22c55e" stroke-width="2" fill="none" stroke-linecap="round"/></svg>' },
+  { key: "articles", label: "החזנות והפיוט בשבת וחגים אהרון קלה", color: "#c084fc", icon: '<svg width="26" height="26" viewBox="0 0 24 24"><path d="M5 4h11a2 2 0 0 1 2 2v13a1 1 0 0 1-1.5.87A4 4 0 0 0 14.5 19H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" stroke="#c084fc" stroke-width="1.6" fill="none" stroke-linejoin="round"/><path d="M6 8h9M6 11.5h9M6 15h6" stroke="#c084fc" stroke-width="1.6" stroke-linecap="round"/></svg>' },
 ];
 function categoryOf(pl){
   return PLAYLIST_CATEGORIES[pl.id] || (pl.id.startsWith("guest-") ? "guests" : "study");
@@ -11277,7 +11299,7 @@ function renderCategories(){
     const count = cat.key === "articles" ? ARTICLES.length : playlists.filter(pl => categoryOf(pl) === cat.key).length;
     const chip = document.createElement("button");
     chip.className = "category-chip" + (currentCategory === cat.key ? " active" : "");
-    chip.innerHTML = `${cat.icon}<span>${cat.label} (${count})</span>`;
+    chip.innerHTML = `<span class="chip-icon" style="background:color-mix(in srgb, ${cat.color} 16%, transparent)">${cat.icon}</span><span>${cat.label} (${count})</span>`;
     chip.onclick = () => {
       currentCategory = cat.key;
       if(cat.key !== "articles"){
