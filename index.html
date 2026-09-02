@@ -58,6 +58,14 @@
   }
   *{box-sizing:border-box;}
   @keyframes itemFadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+  @media (prefers-reduced-motion: reduce){
+    *{
+      animation-duration:0.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
   body{
     margin:0;
     font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
@@ -812,8 +820,8 @@
     <option value="duration-desc">לפי אורך (מהארוך לקצר)</option>
   </select>
   <div class="view-toggle">
-    <button id="viewGridBtn" class="view-btn" title="תצוגת רשת">▦</button>
-    <button id="viewListBtn" class="view-btn" title="תצוגת רשימה">☰</button>
+    <button id="viewGridBtn" class="view-btn" title="תצוגת רשת" aria-label="תצוגת רשת">▦</button>
+    <button id="viewListBtn" class="view-btn" title="תצוגת רשימה" aria-label="תצוגת רשימה">☰</button>
   </div>
   <button id="shuffleBtn" class="shuffle-btn" type="button" title="נגן שיר אקראי">🎲 שיר אקראי</button>
 </div>
