@@ -811,6 +811,8 @@
   <input type="text" id="search" placeholder="חיפוש בכל הפלייליסטים...">
 </div>
 
+<div class="tabs" id="articleResults" style="display:none"></div>
+
 <div class="sort-bar" id="sortBar" style="display:none">
   <label for="sortSelect">מיון:</label>
   <select id="sortSelect">
@@ -11205,6 +11207,7 @@ const gridEl = document.getElementById("grid");
 const titleEl = document.getElementById("playlistTitle");
 const descriptionEl = document.getElementById("playlistDescription");
 const searchEl = document.getElementById("search");
+const articleResultsEl = document.getElementById("articleResults");
 const sortEl = document.getElementById("sortSelect");
 const viewGridBtn = document.getElementById("viewGridBtn");
 const viewListBtn = document.getElementById("viewListBtn");
@@ -11420,6 +11423,7 @@ function updateViewMode(){
 
 function renderGrid(){
   gridEl.innerHTML = "";
+  articleResultsEl.style.display = "none";
 
   const q = searchEl.value.trim();
   const searching = q.length > 0;
@@ -11427,7 +11431,21 @@ function renderGrid(){
   let songs;
   if(searching){
     songs = getAllSongs().filter(s => s.title.includes(q));
-    titleEl.textContent = `${songs.length} תוצאות עבור "${q}" · בכל הפלייליסטים`;
+    const matchingArticles = ARTICLES.filter(a => a.title.includes(q) || a.paragraphs.some(p => p.includes(q)));
+    if(matchingArticles.length){
+      articleResultsEl.innerHTML = "";
+      matchingArticles.forEach(article => {
+        const btn = document.createElement("button");
+        btn.className = "tab";
+        btn.innerHTML = `<span class="tab-name">${article.title}</span><span class="tab-count">מאמר</span>`;
+        btn.onclick = () => openArticleModal(article);
+        articleResultsEl.appendChild(btn);
+      });
+      articleResultsEl.style.display = "";
+    } else {
+      articleResultsEl.style.display = "none";
+    }
+    titleEl.textContent = `${songs.length} תוצאות שירים עבור "${q}" · בכל הפלייליסטים`;
     descriptionEl.textContent = "";
   } else if(currentPlaylistId === FAVORITES_ID){
     songs = getFavoriteSongs();
