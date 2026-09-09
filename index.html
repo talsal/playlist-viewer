@@ -275,6 +275,56 @@
     font-size:1.05rem;
   }
 
+  .book-promo{
+    max-width:700px;
+    margin:0 auto 14px;
+    padding:0 16px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    background:color-mix(in srgb, var(--accent2) 10%, var(--card));
+    border:1px solid color-mix(in srgb, var(--accent2) 35%, var(--border));
+    border-radius:14px;
+    padding:16px 18px;
+  }
+  .book-promo-text{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    flex:1;
+    min-width:220px;
+  }
+  .book-promo-text strong{font-size:0.98rem;}
+  .book-promo-text span{color:var(--muted); font-size:0.88rem;}
+  .book-promo-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .book-promo-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--accent2);
+    color:#fff;
+    text-decoration:none;
+    padding:9px 16px;
+    border-radius:999px;
+    font-size:0.85rem;
+    font-weight:600;
+    white-space:nowrap;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .book-promo-btn:hover{transform:translateY(-1px); opacity:0.92;}
+  .book-promo-btn.secondary{
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--text);
+    font-weight:500;
+  }
+
   .tabs{
     display:flex;
     flex-direction:column;
@@ -829,6 +879,16 @@
 <div class="category-header" id="categoryHeader" style="display:none">
   <button id="backToCategories" class="back-to-categories" type="button">→ כל הקטגוריות</button>
   <span class="category-header-label" id="categoryHeaderLabel"></span>
+</div>
+<div class="book-promo" id="bookPromo" style="display:none">
+  <div class="book-promo-text">
+    <strong>📖 רוצים את כל העלונים בספר אחד?</strong>
+    <span>הספר המלא של אהרן קלה זמין לרכישה במחיר 50 ₪</span>
+  </div>
+  <div class="book-promo-actions">
+    <a class="book-promo-btn" href="https://www.bitpay.co.il/app/me/64EF5C4F-17B9-D810-9AD6-2097BCDE8336C544" target="_blank" rel="noopener">💙 שלמו 50 ₪ בביט</a>
+    <a class="book-promo-btn secondary" href="mailto:tal.salman@gmail.com?subject=%D7%A8%D7%9B%D7%99%D7%A9%D7%AA%20%D7%94%D7%A1%D7%A4%D7%A8%20-%20%D7%A2%D7%9C%D7%95%D7%A0%D7%99%20%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94&body=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%A9%D7%99%D7%9C%D7%9E%D7%AA%D7%99%20%D7%91%D7%91%D7%99%D7%98%20%D7%95%D7%9E%D7%A6%D7%A8%D7%A3%2F%D7%94%20%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%20%D7%9C%D7%A7%D7%91%D7%9C%D7%AA%20%D7%94%D7%A1%D7%A4%D7%A8.">📧 שילחו אישור תשלום למייל</a>
+  </div>
 </div>
 <div class="tabs" id="tabs" style="display:none"></div>
 
@@ -11212,6 +11272,7 @@ const shuffleBtn = document.getElementById("shuffleBtn");
 const sortBarEl = document.getElementById("sortBar");
 const categoryHeaderEl = document.getElementById("categoryHeader");
 const categoryHeaderLabelEl = document.getElementById("categoryHeaderLabel");
+const bookPromoEl = document.getElementById("bookPromo");
 const backToCategoriesBtn = document.getElementById("backToCategories");
 backToCategoriesBtn.onclick = () => {
   homeView = true;
@@ -11419,6 +11480,7 @@ function updateViewMode(){
   const hidePlaylistUI = showHome || inArticles;
   categoriesEl.style.display = showHome ? "" : "none";
   categoryHeaderEl.style.display = showSubList ? "" : "none";
+  bookPromoEl.style.display = (showSubList && inArticles) ? "" : "none";
   tabsEl.style.display = showSubList ? "" : "none";
   sortBarEl.style.display = hidePlaylistUI ? "none" : "";
   titleEl.style.display = hidePlaylistUI ? "none" : "";
