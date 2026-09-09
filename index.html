@@ -11365,10 +11365,10 @@ const categoriesEl = document.getElementById("categories");
 function renderCategories(){
   categoriesEl.innerHTML = "";
   CATEGORY_LABELS.forEach(cat => {
-    const count = cat.key === "articles" ? ARTICLES.length : playlists.filter(pl => categoryOf(pl) === cat.key).length;
+    const count = cat.key === "articles" ? null : playlists.filter(pl => categoryOf(pl) === cat.key).length;
     const chip = document.createElement("button");
     chip.className = "category-chip" + (currentCategory === cat.key ? " active" : "");
-    chip.innerHTML = `<span class="chip-icon" style="background:color-mix(in srgb, ${cat.color} 16%, transparent)">${cat.icon}</span><span>${cat.label} (${count})</span>`;
+    chip.innerHTML = `<span class="chip-icon" style="background:color-mix(in srgb, ${cat.color} 16%, transparent)">${cat.icon}</span><span>${cat.label}${count === null ? "" : ` (${count})`}</span>`;
     chip.onclick = () => {
       currentCategory = cat.key;
       if(cat.key !== "articles"){
