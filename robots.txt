@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://talsal.github.io/playlist-viewer/sitemap.xml
