@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הצהרת נגישות - הפלייליסטים של חיים סלמן</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#181b22;
+    --accent:#e11d48;
+    --accent2:#f59e0b;
+    --text:#f1f1f3;
+    --muted:#9aa0ab;
+    --border:#262a33;
+  }
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg:#f7f7f9;
+      --card:#ffffff;
+      --accent2:#a06008;
+      --text:#1a1c22;
+      --muted:#646b78;
+      --border:#e2e4ea;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+  }
+  .skip-link{
+    position:absolute;
+    top:-999px;
+    right:8px;
+    z-index:10000;
+    background:var(--accent);
+    color:#fff;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+  }
+  .skip-link:focus{ top:8px; }
+  header{
+    text-align:center;
+    padding:32px 16px 16px;
+  }
+  header a{
+    color:var(--muted);
+    text-decoration:none;
+    font-size:0.9rem;
+  }
+  header a:hover{ text-decoration:underline; }
+  h1{
+    font-size:1.6rem;
+    margin:12px 0 4px;
+  }
+  main{
+    max-width:700px;
+    margin:0 auto;
+    padding:16px 20px 60px;
+  }
+  h2{
+    font-size:1.15rem;
+    color:var(--accent2);
+    margin-top:32px;
+  }
+  p{ color:var(--text); }
+  .muted{ color:var(--muted); font-size:0.92rem; }
+  ul{ padding-inline-start:22px; }
+  li{ margin-bottom:8px; }
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px 20px;
+    margin-top:16px;
+  }
+  a{ color:var(--accent2); }
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:0.85rem;
+    padding:20px 16px 40px;
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">דלג לתוכן הראשי</a>
+
+<header>
+  <a href="index.html">← חזרה לאתר הפלייליסטים</a>
+  <h1>הצהרת נגישות</h1>
+  <p class="muted">הפלייליסטים של חיים סלמן</p>
+</header>
+
+<main id="main-content">
+  <p>
+    אתר זה שואף לעמוד בדרישות תקן ישראלי ת"י 5568 ברמת AA (בהתבסס על הנחיות WCAG 2.1 הבינלאומיות),
+    ומיועד להנגיש את התוכן לכלל המשתמשים, כולל אנשים עם מוגבלויות המשתמשים בטכנולוגיות מסייעות
+    כגון קוראי מסך, ניווט מקלדת ותוכנות הגדלה.
+  </p>
+
+  <h2>ההתאמות שבוצעו באתר</h2>
+  <div class="card">
+    <ul>
+      <li>קישור "דילוג לתוכן הראשי" בתחילת כל עמוד, המאפשר עקיפת התפריט העליון עבור משתמשי מקלדת וקוראי מסך.</li>
+      <li>מבנה סמנטי תקין: אזור תוכן ראשי (main), כותרת עליונה (header) ותחתית (footer) מסומנים כראוי, והיררכיית כותרות רציפה (H1 → H2 → H3) ללא דילוג רמות.</li>
+      <li>טקסט חלופי (alt) לכל תמונות השירים, המתאר את שם השיר המוצג.</li>
+      <li>אייקונים ואימוג'ים דקורטיביים (כמו 🎵, ⭐, 💙) שאינם נושאים מידע נוסף מעבר לטקסט הסמוך להם מוסתרים מקוראי מסך (aria-hidden) כדי למנוע רעש מיותר בהקראה.</li>
+      <li>אזורי תוכן דינמי (כגון תוצאות חיפוש, רשימת מאמרים מסוננת, וסטטוס נגינה אוטומטית) מסומנים כ"אזורים חיים" (aria-live) כך שקוראי מסך מכריזים על שינויים בלי צורך לסרוק את העמוד מחדש.</li>
+      <li>כל שדות הטופס (תיבת החיפוש ותפריט המיון) מכילים תווית ברורה (label / aria-label).</li>
+      <li>ניגודיות צבעים נבדקה מול דרישות AA (יחס 4.5:1 לטקסט רגיל), כולל תיקון ניגודיות בכפתורים שבהם זוהתה בעיה במצב תצוגה כהה.</li>
+      <li>כרטיסי השירים ברשת נגישים לניווט מקלדת מלא (Tab להתמקדות, Enter או Space להפעלה), בנוסף לניווט עכבר/מגע.</li>
+      <li>כל האלמנטים האינטראקטיביים באתר (קישורים, כפתורים, שדות טופס) ניתנים להפעלה במקלדת, עם סימון פוקוס גלוי (מסגרת מיקוד) שלא הוסתר.</li>
+      <li>האתר מכבד את הגדרת המערכת "הפחתת אנימציה" (prefers-reduced-motion) ומצמצם אנימציות בהתאם.</li>
+    </ul>
+  </div>
+
+  <h2>מגבלות ידועות</h2>
+  <p>
+    למרות המאמצים שהושקעו, ייתכן שחלקים מסוימים באתר עדיין אינם נגישים באופן מלא — לדוגמה,
+    נגן הווידאו המוטמע (YouTube) פועל לפי רמת הנגישות שמספקת יוטיוב עצמה ואינה בשליטתנו המלאה.
+    אנו ממשיכים לעבוד על שיפור הנגישות באופן שוטף.
+  </p>
+
+  <h2>יצירת קשר בנושא נגישות</h2>
+  <p>
+    נתקלתם בבעיית נגישות באתר? נשמח שתדווחו לנו כדי שנוכל לטפל בכך:
+  </p>
+  <div class="card">
+    <p style="margin:0 0 8px">טל סלמן — מפעיל האתר</p>
+    <p style="margin:0 0 4px">📞 <a href="tel:0505991972">050-599-1972</a></p>
+    <p style="margin:0">📧 <a href="mailto:tal.salman@gmail.com">tal.salman@gmail.com</a></p>
+  </div>
+</main>
+
+<footer>
+  עודכן לאחרונה: ספטמבר 2026
+</footer>
+
+</body>
+</html>

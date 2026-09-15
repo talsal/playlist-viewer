@@ -44,6 +44,7 @@
     --text:#f1f1f3;
     --muted:#9aa0ab;
     --border:#262a33;
+    --accent2-contrast:#14161c;
   }
   :root[data-theme="light"]{
     --bg:#f7f7f9;
@@ -55,8 +56,24 @@
     --text:#1a1c22;
     --muted:#646b78;
     --border:#e2e4ea;
+    --accent2-contrast:#ffffff;
   }
   *{box-sizing:border-box;}
+  .skip-link{
+    position:absolute;
+    top:-999px;
+    right:8px;
+    z-index:10000;
+    background:var(--accent);
+    color:#fff;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+  }
+  .skip-link:focus{
+    top:8px;
+  }
   @keyframes itemFadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
   @media (prefers-reduced-motion: reduce){
     *{
@@ -202,7 +219,7 @@
   .fav-btn-standalone:active{transform:translateY(0); box-shadow:0 1px 2px rgba(0,0,0,.08);}
   .fav-btn-standalone.active{
     background:var(--accent2);
-    color:#fff;
+    color:var(--accent2-contrast);
     box-shadow:0 4px 14px color-mix(in srgb, var(--accent2) 40%, transparent);
   }
 
@@ -273,6 +290,7 @@
     font-weight:600;
     color:var(--accent2);
     font-size:1.05rem;
+    margin:0;
   }
 
   .book-promo{
@@ -308,7 +326,7 @@
     align-items:center;
     gap:6px;
     background:var(--accent2);
-    color:#fff;
+    color:var(--accent2-contrast);
     text-decoration:none;
     padding:9px 16px;
     border-radius:999px;
@@ -486,7 +504,8 @@
     text-align:center;
     color:var(--muted);
     font-size:0.95rem;
-    margin-bottom:4px;
+    font-weight:400;
+    margin:0 0 4px;
   }
   .playlist-description{
     text-align:center;
@@ -836,12 +855,16 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">דלג לתוכן הראשי</a>
+
 <header>
   <button id="themeToggle" class="theme-toggle" title="החלף מצב תצוגה"></button>
-  <h1><span class="emoji-plain">🎵</span> <span class="gradient-text">הפלייליסטים של חיים סלמן</span></h1>
+  <h1><span class="emoji-plain" aria-hidden="true">🎵</span> <span class="gradient-text">הפלייליסטים של חיים סלמן</span></h1>
   <p>כל השירים במקום אחד</p>
   <p class="stats" id="statsLine"></p>
 </header>
+
+<main id="main-content" tabindex="-1">
 
 <div class="intro">
   <p>
@@ -849,7 +872,7 @@
     קריאת פרשיות התורה, תפילות לחגים ולשבת, שיעורי תורה וקבלה, שירה ופיוט, ועוד.
     השתמשו בקטגוריות למטה כדי למצוא את מה שמחפשים, או חפשו שיר ספציפי בתיבת החיפוש.
   </p>
-  <a class="subscribe-btn" href="https://www.youtube.com/@newhazzan?sub_confirmation=1" target="_blank" rel="noopener">▶️ עקבו בערוץ היוטיוב</a>
+  <a class="subscribe-btn" href="https://www.youtube.com/@newhazzan?sub_confirmation=1" target="_blank" rel="noopener"><span aria-hidden="true">▶️</span> עקבו בערוץ היוטיוב</a>
 </div>
 
 <div class="continue-row" id="continueRow"></div>
@@ -858,7 +881,7 @@
 <div class="categories" id="categories"></div>
 
 <div class="search-bar">
-  <input type="text" id="search" placeholder="חיפוש בכל הפלייליסטים...">
+  <input type="text" id="search" aria-label="חיפוש בכל הפלייליסטים" placeholder="חיפוש בכל הפלייליסטים...">
 </div>
 
 <div class="sort-bar" id="sortBar" style="display:none">
@@ -873,35 +896,37 @@
     <button id="viewGridBtn" class="view-btn" title="תצוגת רשת" aria-label="תצוגת רשת">▦</button>
     <button id="viewListBtn" class="view-btn" title="תצוגת רשימה" aria-label="תצוגת רשימה">☰</button>
   </div>
-  <button id="shuffleBtn" class="shuffle-btn" type="button" title="נגן שיר אקראי">🎲 שיר אקראי</button>
+  <button id="shuffleBtn" class="shuffle-btn" type="button" title="נגן שיר אקראי"><span aria-hidden="true">🎲</span> שיר אקראי</button>
 </div>
 
 <div class="category-header" id="categoryHeader" style="display:none">
-  <button id="backToCategories" class="back-to-categories" type="button">→ כל הקטגוריות</button>
-  <span class="category-header-label" id="categoryHeaderLabel"></span>
+  <button id="backToCategories" class="back-to-categories" type="button"><span aria-hidden="true">→</span> כל הקטגוריות</button>
+  <h2 class="category-header-label" id="categoryHeaderLabel"></h2>
 </div>
 <div class="book-promo" id="bookPromo" style="display:none">
   <div class="book-promo-text">
-    <strong>📖 רוצים לקרוא את זה בשבת?</strong>
+    <strong><span aria-hidden="true">📖</span> רוצים לקרוא את זה בשבת?</strong>
     <span>כל התוכן כאן חינם באתר, אבל באתר אי אפשר לגלוש בשבת. קבלו קובץ מוכן להדפסה של הספר המלא — 37 עלונים, לשולחן השבת או לבית הכנסת — 50 ₪</span>
   </div>
   <div class="book-promo-actions">
-    <a class="book-promo-btn" href="https://www.bitpay.co.il/app/me/64EF5C4F-17B9-D810-9AD6-2097BCDE8336C544" target="_blank" rel="noopener">💙 שלמו 50 ₪ בביט</a>
-    <a class="book-promo-btn secondary" href="mailto:tal.salman@gmail.com?subject=%D7%A8%D7%9B%D7%99%D7%A9%D7%AA%20%D7%94%D7%A1%D7%A4%D7%A8%20-%20%D7%A2%D7%9C%D7%95%D7%A0%D7%99%20%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94&body=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%A9%D7%99%D7%9C%D7%9E%D7%AA%D7%99%20%D7%91%D7%91%D7%99%D7%98%20%D7%95%D7%9E%D7%A6%D7%A8%D7%A3%2F%D7%94%20%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%20%D7%9C%D7%A7%D7%91%D7%9C%D7%AA%20%D7%94%D7%A1%D7%A4%D7%A8.">📧 שילחו אישור תשלום למייל</a>
+    <a class="book-promo-btn" href="https://www.bitpay.co.il/app/me/64EF5C4F-17B9-D810-9AD6-2097BCDE8336C544" target="_blank" rel="noopener"><span aria-hidden="true">💙</span> שלמו 50 ₪ בביט</a>
+    <a class="book-promo-btn secondary" href="mailto:tal.salman@gmail.com?subject=%D7%A8%D7%9B%D7%99%D7%A9%D7%AA%20%D7%94%D7%A1%D7%A4%D7%A8%20-%20%D7%A2%D7%9C%D7%95%D7%A0%D7%99%20%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94&body=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%A9%D7%99%D7%9C%D7%9E%D7%AA%D7%99%20%D7%91%D7%91%D7%99%D7%98%20%D7%95%D7%9E%D7%A6%D7%A8%D7%A3%2F%D7%94%20%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%20%D7%9C%D7%A7%D7%91%D7%9C%D7%AA%20%D7%94%D7%A1%D7%A4%D7%A8."><span aria-hidden="true">📧</span> שילחו אישור תשלום למייל</a>
   </div>
 </div>
-<div class="tabs" id="tabs" style="display:none"></div>
+<div class="tabs" id="tabs" style="display:none" aria-live="polite"></div>
 
-<div class="playlist-title" id="playlistTitle" style="display:none"></div>
+<h2 class="playlist-title" id="playlistTitle" style="display:none" aria-live="polite"></h2>
 <div class="playlist-description" id="playlistDescription" style="display:none"></div>
 
 <div class="grid" id="grid" style="display:none"></div>
 
+</main>
+
 <footer>
-  <div class="credit">פותח ע"י טל סלמן · <a href="tel:0505991972">050-599-1972</a> · <a href="mailto:tal.salman@gmail.com">tal.salman@gmail.com</a></div>
+  <div class="credit">פותח ע"י טל סלמן · <a href="tel:0505991972">050-599-1972</a> · <a href="mailto:tal.salman@gmail.com">tal.salman@gmail.com</a> · <a href="accessibility.html">הצהרת נגישות</a></div>
 </footer>
 
-<a class="support-fab" href="https://www.bitpay.co.il/app/me/64EF5C4F-17B9-D810-9AD6-2097BCDE8336C544" target="_blank" rel="noopener" title="תרומה לפרויקט">💙 תרומה</a>
+<a class="support-fab" href="https://www.bitpay.co.il/app/me/64EF5C4F-17B9-D810-9AD6-2097BCDE8336C544" target="_blank" rel="noopener" title="תרומה לפרויקט"><span aria-hidden="true">💙</span> תרומה</a>
 
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
@@ -914,16 +939,16 @@
     </div>
     <div class="modal-footer">
       <div class="modal-nav">
-        <button id="prevBtn" class="nav-btn">⏭ הקודם</button>
-        <span id="autoplayStatus" class="autoplay-status"></span>
-        <button id="nextBtn" class="nav-btn">הבא ⏮</button>
+        <button id="prevBtn" class="nav-btn"><span aria-hidden="true">⏭</span> הקודם</button>
+        <span id="autoplayStatus" class="autoplay-status" aria-live="polite"></span>
+        <button id="nextBtn" class="nav-btn">הבא <span aria-hidden="true">⏮</span></button>
       </div>
       <div class="modal-links">
-        <a id="modalLink" href="#" target="_blank" rel="noopener">פתח ביוטיוב ↗</a>
+        <a id="modalLink" href="#" target="_blank" rel="noopener">פתח ביוטיוב <span aria-hidden="true">↗</span></a>
         <div class="modal-share-btns">
-          <button id="copyLinkBtn" class="copy-link-btn" type="button">🔗 העתק קישור לשיר</button>
+          <button id="copyLinkBtn" class="copy-link-btn" type="button"><span aria-hidden="true">🔗</span> העתק קישור לשיר</button>
           <a id="whatsappBtn" class="whatsapp-btn" href="#" target="_blank" rel="noopener">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.005c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0 0 12.04 2m0 1.67a8.2 8.2 0 0 1 5.83 2.42 8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.25-8.25 8.25a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.55 3.7-8.25 8.25-8.25M8.53 6.65c-.16 0-.43.06-.66.31s-.87.85-.87 2.07.89 2.4 1.01 2.57 1.75 2.8 4.32 3.93c2.14.94 2.58.75 3.04.71.46-.04 1.5-.61 1.71-1.2.21-.59.21-1.09.15-1.2s-.24-.17-.5-.3-1.5-.74-1.74-.82c-.23-.09-.4-.13-.58.13-.16.26-.65.82-.8 1-.15.17-.29.19-.55.06-.26-.13-1.08-.4-2.06-1.27-.76-.68-1.27-1.51-1.42-1.77-.15-.26-.02-.4.11-.53.11-.11.26-.29.38-.44.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45s-.58-1.4-.79-1.91c-.21-.5-.42-.43-.58-.44l-.5-.01"/></svg>
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.005c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0 0 12.04 2m0 1.67a8.2 8.2 0 0 1 5.83 2.42 8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.25-8.25 8.25a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.55 3.7-8.25 8.25-8.25M8.53 6.65c-.16 0-.43.06-.66.31s-.87.85-.87 2.07.89 2.4 1.01 2.57 1.75 2.8 4.32 3.93c2.14.94 2.58.75 3.04.71.46-.04 1.5-.61 1.71-1.2.21-.59.21-1.09.15-1.2s-.24-.17-.5-.3-1.5-.74-1.74-.82c-.23-.09-.4-.13-.58.13-.16.26-.65.82-.8 1-.15.17-.29.19-.55.06-.26-.13-1.08-.4-2.06-1.27-.76-.68-1.27-1.51-1.42-1.77-.15-.26-.02-.4.11-.53.11-.11.26-.29.38-.44.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45s-.58-1.4-.79-1.91c-.21-.5-.42-.43-.58-.44l-.5-.01"/></svg>
             שתף בוואטסאפ
           </a>
         </div>
@@ -11368,7 +11393,7 @@ function renderCategories(){
     const count = cat.key === "articles" ? null : playlists.filter(pl => categoryOf(pl) === cat.key).length;
     const chip = document.createElement("button");
     chip.className = "category-chip" + (currentCategory === cat.key ? " active" : "");
-    chip.innerHTML = `<span class="chip-icon" style="background:color-mix(in srgb, ${cat.color} 16%, transparent)">${cat.icon}</span><span>${cat.label}${count === null ? "" : ` (${count})`}</span>`;
+    chip.innerHTML = `<span class="chip-icon" aria-hidden="true" style="background:color-mix(in srgb, ${cat.color} 16%, transparent)">${cat.icon}</span><span>${cat.label}${count === null ? "" : ` (${count})`}</span>`;
     chip.onclick = () => {
       currentCategory = cat.key;
       if(cat.key !== "articles"){
@@ -11393,7 +11418,7 @@ function renderFavRow(){
   const searching = isSearching();
   const favBtn = document.createElement("button");
   favBtn.className = "fav-btn-standalone" + (!searching && currentPlaylistId === FAVORITES_ID ? " active" : "");
-  favBtn.textContent = `⭐ מועדפים (${favorites.size})`;
+  favBtn.innerHTML = `<span aria-hidden="true">⭐</span> מועדפים (${favorites.size})`;
   favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; homeView = false; searchEl.value=""; visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); pushPlaylistURL(); };
   favRowEl.appendChild(favBtn);
 }
@@ -11403,7 +11428,7 @@ function renderContinueRow(){
   if(!lastPlayed) return;
   const btn = document.createElement("button");
   btn.className = "continue-btn";
-  btn.innerHTML = `🎧 המשך האזנה: <span class="continue-title"></span>`;
+  btn.innerHTML = `<span aria-hidden="true">🎧</span> המשך האזנה: <span class="continue-title"></span>`;
   btn.querySelector(".continue-title").textContent = lastPlayed.title;
   btn.onclick = () => {
     let songs = [];
@@ -11530,14 +11555,24 @@ function renderGrid(){
     const isFav = favorites.has(song.videoId);
     const card = document.createElement("div");
     card.className = "song-card";
+    card.setAttribute("role", "button");
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("aria-label", `נגן את השיר ${song.title}`);
     card.onclick = () => openModal(song, idx, songs);
+    card.onkeydown = (e) => {
+      if(e.target !== card) return;
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        openModal(song, idx, songs);
+      }
+    };
     card.innerHTML = `
       <div class="thumb-wrap">
         <img loading="lazy" src="https://img.youtube.com/vi/${song.videoId}/hqdefault.jpg" alt="${song.title}">
         <button class="fav-btn${isFav ? " active" : ""}" title="הוסף/הסר ממועדפים" aria-label="הוסף/הסר ממועדפים">
-          <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6L12 2z"/></svg>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6L12 2z"/></svg>
         </button>
-        <div class="play-badge">
+        <div class="play-badge" aria-hidden="true">
           <svg viewBox="0 0 68 48"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#e11d48"></path><path d="M 45,24 27,14 27,34" fill="#fff"></path></svg>
         </div>
         <span class="duration">${song.duration || ""}</span>
