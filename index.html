@@ -166,6 +166,164 @@
     transition:background .15s ease, transform .1s ease;
   }
   .subscribe-btn:hover{background:#a30000; transform:translateY(-1px);}
+
+  .ad-banner{
+    max-width:640px;
+    margin:20px auto 0;
+    padding:0 24px;
+    position:relative;
+  }
+  .ad-banner-inner{
+    position:relative;
+    min-height:104px;
+    background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, var(--card)), color-mix(in srgb, var(--accent2) 10%, var(--card)));
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 1px 3px rgba(0,0,0,.06);
+  }
+  .ad-slide{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    padding:22px 18px 14px;
+    text-decoration:none;
+    color:inherit;
+    opacity:0;
+    transform:translateY(6px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+  }
+  .ad-slide.active{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
+  .ad-sponsored-label{
+    position:absolute;
+    top:8px;
+    left:12px;
+    font-size:0.68rem;
+    color:var(--muted);
+    letter-spacing:.02em;
+    font-weight:600;
+  }
+  .ad-slide-main{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+    flex:1;
+  }
+  .ad-icon-badge{
+    flex-shrink:0;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.2rem;
+  }
+  .ad-slide-text{
+    display:flex;
+    flex-direction:column;
+    gap:1px;
+    min-width:0;
+  }
+  .ad-name{
+    font-weight:700;
+    font-size:0.95rem;
+    color:var(--text);
+  }
+  .ad-category{
+    font-size:0.75rem;
+    color:var(--muted);
+    font-weight:600;
+  }
+  .ad-desc{
+    font-size:0.82rem;
+    color:var(--muted);
+    overflow:hidden;
+    display:-webkit-box;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical;
+  }
+  .ad-cta{
+    flex-shrink:0;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    background:var(--accent);
+    color:#fff;
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:0.82rem;
+    font-weight:600;
+    white-space:nowrap;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .ad-slide:hover .ad-cta{transform:translateY(-1px); opacity:0.92;}
+  .ad-banner-controls{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-top:10px;
+  }
+  .ad-dots{
+    display:flex;
+    gap:6px;
+  }
+  .ad-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    border:none;
+    background:var(--border);
+    cursor:pointer;
+    padding:0;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .ad-dot.active{
+    background:var(--accent);
+    transform:scale(1.25);
+  }
+  .ad-pause-btn{
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--muted);
+    font-size:0.65rem;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+  }
+  .ad-pause-btn:hover{background:var(--card-hover);}
+  @media (max-width:480px){
+    .ad-banner{padding:0 16px; margin-top:16px;}
+    .ad-banner-inner{min-height:120px;}
+    .ad-slide{
+      flex-wrap:wrap;
+      align-items:flex-start;
+      padding:20px 14px 12px;
+      gap:8px;
+    }
+    .ad-slide-main{width:100%;}
+    .ad-cta{
+      width:100%;
+      justify-content:center;
+      padding:8px 12px;
+    }
+  }
+
   .continue-row{
     display:flex;
     justify-content:center;
@@ -874,6 +1032,14 @@
   </p>
   <a class="subscribe-btn" href="https://www.youtube.com/@newhazzan?sub_confirmation=1" target="_blank" rel="noopener"><span aria-hidden="true">▶️</span> עקבו בערוץ היוטיוב</a>
 </div>
+
+<section class="ad-banner" id="adBanner" aria-label="פרסומות מקומיות">
+  <div class="ad-banner-inner" id="adBannerInner"></div>
+  <div class="ad-banner-controls">
+    <div class="ad-dots" id="adDots"></div>
+    <button type="button" class="ad-pause-btn" id="adPauseBtn" aria-label="השהה סבב מודעות" title="השהה סבב מודעות">⏸</button>
+  </div>
+</section>
 
 <div class="continue-row" id="continueRow"></div>
 
@@ -11390,10 +11556,9 @@ const categoriesEl = document.getElementById("categories");
 function renderCategories(){
   categoriesEl.innerHTML = "";
   CATEGORY_LABELS.forEach(cat => {
-    const count = cat.key === "articles" ? null : playlists.filter(pl => categoryOf(pl) === cat.key).length;
     const chip = document.createElement("button");
     chip.className = "category-chip" + (currentCategory === cat.key ? " active" : "");
-    chip.innerHTML = `<span class="chip-icon" aria-hidden="true" style="background:color-mix(in srgb, ${cat.color} 16%, transparent)">${cat.icon}</span><span>${cat.label}${count === null ? "" : ` (${count})`}</span>`;
+    chip.innerHTML = `<span class="chip-icon" aria-hidden="true" style="background:color-mix(in srgb, ${cat.color} 16%, transparent)">${cat.icon}</span><span>${cat.label}</span>`;
     chip.onclick = () => {
       currentCategory = cat.key;
       if(cat.key !== "articles"){
@@ -11418,7 +11583,7 @@ function renderFavRow(){
   const searching = isSearching();
   const favBtn = document.createElement("button");
   favBtn.className = "fav-btn-standalone" + (!searching && currentPlaylistId === FAVORITES_ID ? " active" : "");
-  favBtn.innerHTML = `<span aria-hidden="true">⭐</span> מועדפים (${favorites.size})`;
+  favBtn.innerHTML = `<span aria-hidden="true">⭐</span> מועדפים`;
   favBtn.onclick = () => { currentPlaylistId = FAVORITES_ID; homeView = false; searchEl.value=""; visibleLimit = PAGE_SIZE; renderFavRow(); renderTabs(); renderGrid(); pushPlaylistURL(); };
   favRowEl.appendChild(favBtn);
 }
@@ -11782,6 +11947,124 @@ themeToggleBtn.onclick = () => {
   try { localStorage.setItem(THEME_KEY, currentTheme); } catch(e){}
 };
 
+// ---- Local business ad banner ----
+// This slot is real ad inventory, currently self-promoting itself to attract advertisers.
+// Replace with real local-business entries as they sign up.
+const localAds = [
+  {
+    name: "יש לכם עסק מקומי?",
+    category: "פרסמו כאן",
+    description: "פנו אלינו ותוכלו לפרסם את העסק שלכם כאן, מול אלפי צופים בכל חודש.",
+    url: "mailto:tal.salman@gmail.com?subject=%D7%A4%D7%A8%D7%A1%D7%95%D7%9D%20%D7%9E%D7%95%D7%93%D7%A2%D7%94%20%D7%91%D7%90%D7%AA%D7%A8%20%D7%94%D7%A4%D7%9C%D7%99%D7%99%D7%9C%D7%99%D7%A1%D7%98%D7%99%D7%9D&body=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%A4%D7%A8%D7%A1%D7%95%D7%9D%20%D7%9E%D7%95%D7%93%D7%A2%D7%94%20%D7%91%D7%90%D7%AA%D7%A8.",
+    icon: "📣",
+    color: "#14b8a6"
+  }
+];
+const AD_ROTATE_MS = 4000;
+let adRotateTimer = null;
+let adCurrentIndex = 0;
+let adPaused = false;
+
+const adBannerEl = document.getElementById("adBanner");
+const adBannerInnerEl = document.getElementById("adBannerInner");
+const adDotsEl = document.getElementById("adDots");
+const adPauseBtn = document.getElementById("adPauseBtn");
+
+function prefersReducedMotion(){
+  return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function goToAd(index){
+  const slides = adBannerInnerEl.querySelectorAll(".ad-slide");
+  const dots = adDotsEl.querySelectorAll(".ad-dot");
+  slides.forEach((slide, i) => {
+    const isActive = i === index;
+    slide.classList.toggle("active", isActive);
+    slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+    slide.tabIndex = isActive ? 0 : -1;
+  });
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === index);
+    dot.setAttribute("aria-current", i === index ? "true" : "false");
+  });
+  adCurrentIndex = index;
+}
+function nextAd(){
+  goToAd((adCurrentIndex + 1) % localAds.length);
+}
+function startAdRotation(){
+  clearInterval(adRotateTimer);
+  adRotateTimer = setInterval(nextAd, AD_ROTATE_MS);
+}
+function pauseAdRotation(){
+  clearInterval(adRotateTimer);
+}
+function resumeAdRotation(){
+  if(localAds.length > 1 && !adPaused && !prefersReducedMotion()) startAdRotation();
+}
+function restartAdRotation(){
+  if(!adPaused){ pauseAdRotation(); resumeAdRotation(); }
+}
+function toggleAdPause(){
+  adPaused = !adPaused;
+  adPauseBtn.textContent = adPaused ? "▶" : "⏸";
+  adPauseBtn.setAttribute("aria-label", adPaused ? "המשך סבב מודעות" : "השהה סבב מודעות");
+  adPauseBtn.title = adPauseBtn.getAttribute("aria-label");
+  if(adPaused) pauseAdRotation(); else resumeAdRotation();
+}
+
+function renderAdBanner(){
+  if(!localAds.length){
+    adBannerEl.style.display = "none";
+    return;
+  }
+  adBannerInnerEl.innerHTML = localAds.map((ad, i) => `
+    <a class="ad-slide${i === 0 ? " active" : ""}" href="${ad.url}" target="_blank" rel="noopener sponsored"
+       data-ad-index="${i}" data-ad-name="${escapeHtml(ad.name)}"
+       tabindex="${i === 0 ? "0" : "-1"}" aria-hidden="${i === 0 ? "false" : "true"}">
+      <span class="ad-sponsored-label">פרסומת</span>
+      <div class="ad-slide-main">
+        <span class="ad-icon-badge" aria-hidden="true" style="background:color-mix(in srgb, ${ad.color} 18%, transparent); color:${ad.color}">${ad.icon}</span>
+        <div class="ad-slide-text">
+          <span class="ad-name">${escapeHtml(ad.name)}</span>
+          <span class="ad-category">${escapeHtml(ad.category)}</span>
+          <span class="ad-desc">${escapeHtml(ad.description)}</span>
+        </div>
+      </div>
+      <span class="ad-cta">לפרטים <span aria-hidden="true">↗</span></span>
+    </a>
+  `).join("");
+
+  adDotsEl.innerHTML = localAds.length > 1 ? localAds.map((ad, i) => `
+    <button type="button" class="ad-dot${i === 0 ? " active" : ""}" data-ad-index="${i}"
+      aria-label="פרסומת ${i + 1} מתוך ${localAds.length}: ${escapeHtml(ad.name)}"
+      aria-current="${i === 0 ? "true" : "false"}"></button>
+  `).join("") : "";
+  adDotsEl.style.display = localAds.length > 1 ? "flex" : "none";
+  adPauseBtn.style.display = localAds.length > 1 ? "flex" : "none";
+
+  adBannerInnerEl.querySelectorAll(".ad-slide").forEach(slide => {
+    slide.addEventListener("click", () => {
+      if(typeof gtag === "function") gtag("event", "ad_click", { business_name: slide.dataset.adName });
+    });
+  });
+  adDotsEl.querySelectorAll(".ad-dot").forEach(dot => {
+    dot.addEventListener("click", () => {
+      goToAd(parseInt(dot.dataset.adIndex, 10));
+      restartAdRotation();
+    });
+  });
+
+  if(localAds.length > 1){
+    adPauseBtn.addEventListener("click", toggleAdPause);
+    adBannerEl.addEventListener("mouseenter", pauseAdRotation);
+    adBannerEl.addEventListener("mouseleave", resumeAdRotation);
+    adBannerEl.addEventListener("focusin", pauseAdRotation);
+    adBannerEl.addEventListener("focusout", resumeAdRotation);
+    resumeAdRotation();
+  }
+}
+
 function renderStats(){
   const totalSongs = playlists.reduce((sum, pl) => sum + pl.songs.length, 0);
   document.getElementById("statsLine").textContent =
@@ -11803,6 +12086,7 @@ renderCategories();
 renderTabs();
 renderGrid();
 renderStats();
+renderAdBanner();
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
 
