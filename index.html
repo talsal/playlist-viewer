@@ -167,6 +167,97 @@
   }
   .subscribe-btn:hover{background:#a30000; transform:translateY(-1px);}
 
+  .kippur-banner{
+    max-width:640px;
+    margin:20px auto 0;
+    padding:0 24px;
+    position:relative;
+  }
+  .kippur-banner-inner{
+    position:relative;
+    background:color-mix(in srgb, var(--accent) 8%, var(--card));
+    border:1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+    border-radius:16px;
+    padding:16px 18px 16px 44px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .kippur-close{
+    position:absolute;
+    top:10px;
+    left:10px;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--muted);
+    font-size:0.75rem;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+  }
+  .kippur-close:hover{background:var(--card-hover);}
+  .kippur-content{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+    flex:1;
+  }
+  .kippur-text{display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .kippur-text strong{font-size:0.95rem;}
+  .kippur-text span{color:var(--muted); font-size:0.85rem;}
+  .kippur-actions{display:flex; gap:8px; flex-wrap:wrap;}
+  .kippur-sound-btn, .kippur-open-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:0.85rem;
+    font-weight:600;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:transform .15s ease, opacity .15s ease, background .15s ease;
+    border:none;
+  }
+  .kippur-sound-btn{
+    background:var(--accent);
+    color:#fff;
+  }
+  .kippur-sound-btn[aria-pressed="true"]{
+    background:color-mix(in srgb, var(--accent) 65%, var(--card));
+  }
+  .kippur-sound-btn:hover{transform:translateY(-1px); opacity:0.92;}
+  .kippur-open-btn{
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--text);
+    font-weight:500;
+  }
+  .kippur-open-btn:hover{background:var(--card-hover);}
+  .kippur-frame{
+    flex-shrink:0;
+    width:56px;
+    height:56px;
+    border-radius:12px;
+    overflow:hidden;
+    background:#000;
+    pointer-events:none;
+  }
+  @media (max-width:480px){
+    .kippur-banner{padding:0 16px; margin-top:16px;}
+    .kippur-banner-inner{padding:14px 14px 14px 40px;}
+    .kippur-actions{width:100%;}
+    .kippur-sound-btn, .kippur-open-btn{flex:1; justify-content:center;}
+  }
+
   .ad-banner{
     max-width:640px;
     margin:20px auto 0;
@@ -1032,6 +1123,23 @@
   </p>
   <a class="subscribe-btn" href="https://www.youtube.com/@newhazzan?sub_confirmation=1" target="_blank" rel="noopener"><span aria-hidden="true">▶️</span> עקבו בערוץ היוטיוב</a>
 </div>
+
+<section class="kippur-banner" id="kippurBanner" aria-label="פיוט מיוחד ליום כיפור">
+  <div class="kippur-banner-inner">
+    <button type="button" class="kippur-close" id="kippurClose" aria-label="סגירת ההודעה">✕</button>
+    <div class="kippur-content">
+      <div id="kippurFrame" class="kippur-frame" aria-hidden="true"></div>
+      <div class="kippur-text">
+        <strong>לקראת יום כיפור: שמע קולי</strong>
+        <span>פתיחה לתפילת ערבית של יום כיפור בנעימת יהודי עיראק, בביצוע חיים סלמן</span>
+      </div>
+    </div>
+    <div class="kippur-actions">
+      <button type="button" class="kippur-sound-btn" id="kippurSoundBtn" aria-pressed="false">🔇 הפעילו קול</button>
+      <button type="button" class="kippur-open-btn" id="kippurOpenBtn">פתחו בנגן <span aria-hidden="true">↗</span></button>
+    </div>
+  </div>
+</section>
 
 <section class="ad-banner" id="adBanner" aria-label="פרסומות מקומיות">
   <div class="ad-banner-inner" id="adBannerInner"></div>
@@ -11820,6 +11928,7 @@ function onYouTubeIframeAPIReady(){
       }
     }
   });
+  if(kippurBannerActive()) createKippurPlayer();
 }
 
 function loadVideo(videoId){
@@ -12065,6 +12174,76 @@ function renderAdBanner(){
   }
 }
 
+// ---- Seasonal Yom Kippur piyut banner ----
+const KIPPUR_SONG = { title: "שמע קולי-פתיחה לתפילת ערבית של יום כיפור בנעימת יהודי עירק בביצוע חיים סלמן", videoId: "sOqxvckVU6s" };
+const KIPPUR_BANNER_END = new Date(2026, 8, 22, 0, 0, 0).getTime();
+const KIPPUR_DISMISS_KEY = "playlist-viewer-kippur-dismissed";
+
+const kippurBannerEl = document.getElementById("kippurBanner");
+const kippurSoundBtn = document.getElementById("kippurSoundBtn");
+const kippurOpenBtn = document.getElementById("kippurOpenBtn");
+const kippurCloseBtn = document.getElementById("kippurClose");
+
+let kippurPlayer = null;
+let kippurPlayerReady = false;
+let kippurMuted = true;
+
+function kippurBannerActive(){
+  let dismissed = false;
+  try{ dismissed = sessionStorage.getItem(KIPPUR_DISMISS_KEY) === "1"; } catch(e){}
+  return Date.now() < KIPPUR_BANNER_END && !dismissed;
+}
+
+function createKippurPlayer(){
+  kippurPlayer = new YT.Player("kippurFrame", {
+    height: "56",
+    width: "56",
+    videoId: KIPPUR_SONG.videoId,
+    playerVars: { autoplay: 1, mute: 1, rel: 0, controls: 0 },
+    events: {
+      onReady: () => {
+        kippurPlayerReady = true;
+        kippurPlayer.playVideo();
+      }
+    }
+  });
+}
+
+function initKippurBanner(){
+  if(!kippurBannerActive()){
+    kippurBannerEl.style.display = "none";
+  }
+}
+
+kippurSoundBtn.addEventListener("click", () => {
+  if(!kippurPlayerReady || !kippurPlayer) return;
+  // Autoplay may have been blocked by the browser entirely (common for muted
+  // autoplay in strict autoplay-policy browsers) — a real click always works,
+  // so treat "not currently playing" as "start it now, with sound".
+  if(kippurPlayer.getPlayerState() !== 1 || kippurMuted){
+    kippurPlayer.unMute();
+    kippurPlayer.setVolume(100);
+    kippurPlayer.playVideo();
+    kippurMuted = false;
+    kippurSoundBtn.textContent = "🔊 השתיקו";
+    kippurSoundBtn.setAttribute("aria-pressed", "true");
+  } else {
+    kippurPlayer.mute();
+    kippurMuted = true;
+    kippurSoundBtn.textContent = "🔇 הפעילו קול";
+    kippurSoundBtn.setAttribute("aria-pressed", "false");
+  }
+});
+kippurOpenBtn.addEventListener("click", () => {
+  if(kippurPlayer && kippurPlayer.pauseVideo) kippurPlayer.pauseVideo();
+  openModal(KIPPUR_SONG, 0, [KIPPUR_SONG]);
+});
+kippurCloseBtn.addEventListener("click", () => {
+  if(kippurPlayer && kippurPlayer.stopVideo) kippurPlayer.stopVideo();
+  try{ sessionStorage.setItem(KIPPUR_DISMISS_KEY, "1"); } catch(e){}
+  kippurBannerEl.style.display = "none";
+});
+
 function renderStats(){
   const totalSongs = playlists.reduce((sum, pl) => sum + pl.songs.length, 0);
   document.getElementById("statsLine").textContent =
@@ -12087,6 +12266,7 @@ renderTabs();
 renderGrid();
 renderStats();
 renderAdBanner();
+initKippurBanner();
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
 
